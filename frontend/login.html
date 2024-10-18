@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="./images/favicon.png" type="">
+  <title>Login VetLife</title>
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
+  <link href="./css/style.css" rel="stylesheet" />
+  <link href="./css/responsive.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/stylelogin.css">
+  <link rel="stylesheet" type="text/css" href="slide navbar style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+
+
+<body>
+
+	<header>
+	  <a href="index.html">
+		<img src="./images/vetlifelogin.png" alt="Logo VetLife" />
+	  </a>
+	</header>
+	
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+		
+			<div class="signup">
+				<form id="signup">
+					<label for="chk" aria-hidden="true">Registro</label>
+					<input type="text" name="txt" placeholder="Usuario" required="" id="name">
+					<input type="email" name="email" placeholder="Email" required="" id="emails">
+					<input type="password" name="pswd" placeholder="Contraseña" required="" id="pass">
+					<a class="nav-link" href="indexAdmin.html"> <button type="submit">Registrate</button> </a>
+				</form>
+				<script src="../js/backend/singup.js"></script>
+			</div>
+
+			<div class="login">
+				<form id="loginForm">
+					<label for="chk" aria-hidden="true">Log In </label>
+					<input type="email" id="email" name="email" placeholder="Email" required="">
+					<input type="password" id="pswd" name="pswd" placeholder="Contraseña" required="">
+					<button type="submit">Ingresa</button>
+				</form>
+			</div>
+			<script src="../js/backend/login.js">
+			</script>
+			
+	</div>
+</body>
+</html>
+
+
