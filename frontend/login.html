@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="shortcut icon" href="./images/favicon.png" type="">
-  <title>Login VetLife</title>
+  <title>Login PETCARE</title>
   <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
   <link href="./css/style.css" rel="stylesheet" />
   <link href="./css/responsive.css" rel="stylesheet" />
@@ -17,8 +17,8 @@
 <body>
 
 	<header>
-	  <a href="index.html">
-		<img src="./images/vetlifelogin.png" alt="Logo VetLife" />
+	  <a href="/">
+		<img src="./images/vetlifelogin.png" alt="Logo PETCARE" />
 	  </a>
 	</header>
 	
@@ -37,16 +37,13 @@
 			</div>
 
 			<div class="login">
-				<form id="loginForm">
+				<form id="loginForm" action="/login" method="post">
 					<label for="chk" aria-hidden="true">Log In </label>
 					<input type="email" id="email" name="email" placeholder="Email" required="">
-					<input type="password" id="pswd" name="pswd" placeholder="Contraseña" required="">
+					<input type="password" id="pswd" name="password" placeholder="Contraseña" required="">
 					<button type="submit">Ingresa</button>
 				</form>
 			</div>
-			<script src="../js/backend/login.js">
-			</script>
-			
 	</div>
 </body>
 </html>
