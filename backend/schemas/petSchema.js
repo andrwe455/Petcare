@@ -7,7 +7,7 @@ const petSchema = new mongoose.Schema({
   breed: { type: String, required: true },
   weight: { type: Number, required: true },
   age: { type: Number, required: true },
-  image: { type: String, required: true },
+  image: { type: String },
   vaccinationRecords: 
   [
     {

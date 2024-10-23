@@ -8,7 +8,7 @@ async function login(req,res) {
       signIn(auth,email,password).then((user) => {
           usersSchema.findOne({email: email}).then((user) => {
               req.session.user = user;
-              res.redirect('/showOwnerPets');
+              res.redirect('/home/owner/showOwnerPets');
               //res.status(200).json(user);     
           }).catch((error) => {
               res.json(error);
