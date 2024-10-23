@@ -28,7 +28,19 @@
   <script src="../../js/modules/tableModel.js"></script>
   <script>
     window.onload = function (){
-      dataTable('getAllPets','pettsTableBody', '/getPetsByOwner');
+      const url = window.location.href;
+      const urlArray = url.split('/');
+      const username = urlArray[urlArray.length - 2];
+      switch (username) {
+        case 'owner':
+          dataTable('getAllPets','pettsTableBody', '/getPetsByOwner');
+          break;
+        case 'veterinary':
+          dataTable('getAllPets','pettsTableBody', '/getAllPets');
+          break;
+        default:
+          break;
+      }
     }
   </script>
   
@@ -171,6 +183,7 @@
                         <th>Age</th>
                         <th>Weight</th>
                         <th>Breed</th>
+                        <th>Type</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -186,38 +199,40 @@
   </div>
   <div class="modal fade" id="modal-default">
     <div class="modal-dialog">
-        <form action="/updatePet" method="put">
+        <form action="/updatePet" method="post">
           <div class="modal-content">
             <div class="modal-header modal-primary">
-                <h2 class="modal-title">Update Pet</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+              <h2 class="modal-title">Update Pet</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
             <div class="modal-body">
               <div class="form-group">
                 <label for="name">Name</label>
-                 <input type="text" id="name" class="form-control">
+                <input type="text" id="name" class="form-control" name="name">
               </div>
               <div class="form-group">
-                <label for="description">Description</label>
-                <input type="text" id="description" class="form-control">
+                <label for="age">Age</label>
+                <input type="number" id="age" class="form-control" name="age">
               </div>
               <div class="form-group">
-                <label for="semester">Semester</label>
-                <input type="text" id="semester" class="form-control">
+                <label for="weight">Weight</label>
+                <input type="number" id="weight" class="form-control" name="weight">
               </div>
               <div class="form-group">
-                <label for="preRequirement">Pre Requirement</label>
-                <input type="text" id="preRequirement" class="form-control">
+                <label for="breed">Breed</label>
+                <input type="text" id="breed" class="form-control" name="breed">
               </div>
               <div class="form-group">
-                <label for="credits">Credits</label>
-                <input type="number" id="credits" class="form-control">
+                <label for="type">type</label>
+                <input type="text" id="type" class="form-control" name="type">
               </div>
+              <input type="hidden" id="id" name="id">
             </div>
+            
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="updateSubject">Update</button>
+              <button type="submit" class="btn btn-primary" id="updateSubject">Update</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -241,6 +256,22 @@
 <script src="../../js/jquerys/dataTables.bootstrap4.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../js/jquerys/adminlte.js"></script>
-
+<script>
+  $('#modal-default').on('show.bs.modal',function (event){
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var name = button.data('name')
+    var age = Number(button.data('age'))
+    var weight = Number(button.data('weight'))
+    var breed = button.data('breed')
+    var modal = $(this)
+    modal.find('.modal-body #id').val(id)
+    modal.find('.modal-body #name').val(name)
+    modal.find('.modal-body #age').val(age)
+    modal.find('.modal-body #weight').val(weight)
+    modal.find('.modal-body #breed').val(breed)
+    modal.find('.modal-body #type').val(type)
+  })
+</script>
 </body>
 </html>

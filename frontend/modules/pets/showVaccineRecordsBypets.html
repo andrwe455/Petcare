@@ -182,38 +182,36 @@
   </div>
   <div class="modal fade" id="modal-default">
     <div class="modal-dialog">
-        <form action="/updatePet" method="put">
+        <form action="/updateVaccineRecord" method="post">
           <div class="modal-content">
             <div class="modal-header modal-primary">
-                <h2 class="modal-title">Update Pet</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+              <h2 class="modal-title">Update Pet</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
             <div class="modal-body">
               <div class="form-group">
                 <label for="name">Name</label>
-                 <input type="text" id="name" class="form-control">
+                <input type="text" id="name" class="form-control" name="name">
               </div>
               <div class="form-group">
-                <label for="description">Description</label>
-                <input type="text" id="description" class="form-control">
+                <label for="applicationDate">Age</label>
+                <input type="number" id="applicationDate" class="form-control" name="age">
               </div>
               <div class="form-group">
-                <label for="semester">Semester</label>
-                <input type="text" id="semester" class="form-control">
+                <label for="nextAppointment">Weight</label>
+                <input type="date" id="nextAppointment" class="form-control" name="weight">
               </div>
               <div class="form-group">
-                <label for="preRequirement">Pre Requirement</label>
-                <input type="text" id="preRequirement" class="form-control">
+                <label for="vaccine">Breed</label>
+                <input type="text" id="vaccine" class="form-control" name="breed">
               </div>
-              <div class="form-group">
-                <label for="credits">Credits</label>
-                <input type="number" id="credits" class="form-control">
-              </div>
+
             </div>
+            <input type="hidden" id="id" name="id">
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="updateSubject">Update</button>
+              <button type="submit" class="btn btn-primary" id="updateSubject">Update</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -240,8 +238,7 @@
 <script src="/js/jquerys/adminlte.js"></script>
 <script>
   window.onload = async function (){
-    petName = await dataTable('getVaccineRecord','petVaccineHistory', '/getPetsById');
-    
+    petName = await dataTable('getVaccineRecord','petVaccineHistory', '/getPets');
   }
 </script>
 </body>
