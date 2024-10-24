@@ -1,0 +1,30 @@
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .image-wrapper {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    background-image: url('../img/logo.png'); 
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5; 
+    z-index: -1; 
+  }
+  
+  .content-header {
+    position: relative;
+    z-index: 1; 
+  }
+  
+  .dark-text {
+    color: #000000; 
+  }
+  
+  .dark-text-p {
+    color: #000000; /
+  }
+  
