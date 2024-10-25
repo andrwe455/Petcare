@@ -20,6 +20,10 @@ function createMedicine(req, res){
   res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','inventoryManagement','addMedicine.html'));
 }
 
+function modifyMedicine(req, res){
+  const proyectPath = path.resolve(__dirname, '../..');
+  res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','inventoryManagement','modifyMedicine.html'));
+
 function showAppointment(req, res) {
   const proyectPath = path.resolve(__dirname, '../..');
   res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','adminAppointments', 'adminEditAppointment.html'));
@@ -35,6 +39,7 @@ module.exports = {
   showVaccineRecords,
   addUser,
   createMedicine,
+  modifyMedicine,
   showAppointment,
   showAppointmentCrt
 };
