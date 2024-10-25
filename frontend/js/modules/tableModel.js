@@ -30,36 +30,46 @@ async function getVaccineRecord(table,url){
           <td>${i}</td>
           <td>${element.vaccine}</td>
           <td>${element.date}</td>
-          <td>${element.nextDate ?? 'Not Apply'}</td>
+          <td>${element.nextAppointment ?? 'Not Apply'}</td>
           <td><a class="fas fa-edit" data-toggle="modal" data-target="#modal-default"></a></td>
         </tr>`;
         i++;
       });
+      document.getElementById('id').value = data._id;
+      petsName('pet-name',data.name);    
     }
+    
     $(function () {
       $("#example1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
       })
     });
-    petsName('pet-name',data.name);    
+    
   });
 }
 
 function getAllPets(table,url){
   fetch(url).then(response => response.json()).then(data => {
     let i = 1;
-    data.forEach(element => {
+      data.forEach(element => {
+        document.getElementById(table).innerHTML += `
+        <tr>
+          <td>${i}</td>
+          <td>${element.name}</td>
+          <td>${element.age} years</td>
+          <td>${element.weight} Kg</td>
+          <td>${element.breed}</td>
+          <td>${element.type}</td>
+          <td>
+            <a class="fas fa-eye" href="/home/owner/vaccineRecords/${element._id}"></a>
+            <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-name="${element.name}" 
+            data-age="${element.age}" data-weigth="${element.weight}" data-breed="${element.breed}" 
+            data-id="${element._id}" data-type="${element.type}"></a>
+          </td>
+        </tr>`;
+        i++;
+      });      
 
-      document.getElementById(table).innerHTML += `
-      <tr>
-        <td>${i}</td>
-        <td>${element.name}</td>
-        <td>${element.age} years</td>
-        <td>${element.weight} Kg</td>
-        <td>${element.breed}</td>
-      </tr>`;
-      i++;
-    });
     $(function () {
       $("#example1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -69,20 +79,34 @@ function getAllPets(table,url){
 }
 
 function getAllAppointments(table,url){
-
-  fetch(url).then(response => response.json()).then(data =>{
+  fetch(url).then(response => response.json()).then(data => {
     let i = 1;
-    data.forEach(element => {
-      document.getElementById(table).innerHTML += `
-      <tr>
-      <td>${i}</td>
-      <td>${element.name}</td>
-      <td>${element.pet}</td>
-      <td>${element.veterinarian}</td>
-      <td>${element.date}</td>
-      <td><a class="fas fa-edit" data-toggle="modal" data-target="#modal-default"></a></td>
-      </tr>`
-      i++;
+    if(!data){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Not!',
       });
+    }else{
+      data.forEach(element => {
+        document.getElementById(table).innerHTML += `
+        <tr>
+        <td>${i}</td>
+        <td>${element.name}</td>
+        <td>${element.pet}</td>
+        <td>${element.veterinarian}</td>
+        <td>${element.date}
+        </td>
+          <td>
+            <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-id="${element._id}"></a></td>
+        </tr>`
+        i++;
+        });
+      }
+        $(function () {
+          $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+          })
+        });
   })
 }

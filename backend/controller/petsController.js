@@ -75,11 +75,51 @@ async function getPetsById(req, res) {
   }
 }
 
+async function updateVaccineRecord(req, res) {
+  try {
+    const petId = req.body.id;
+    const pet = await Pet.findById(petId);
+    if (!pet) {
+      return res.status(404).json({ message: 'Pet not found' });
+    }
+
+    pet.vaccinationRecords.forEach((record) => {
+      if (record.vaccine == req.body.vaccine) {
+        record.vaccine = req.body.vaccine;
+        record.date = req.body.date;
+        record.nextAppointment = req.body.nextAppointment;
+      }
+    });
+    
+    await pet.save();
+    res.redirect(`/home/owner/vaccineRecords/${petId}`);
+
+  }catch(error){
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+async function updatePet(req, res) {
+  try {
+    const petId = req.body.id;
+    const pet = await Pet.findByIdAndUpdate(petId, req.body);
+    if (!pet) {
+      return res.status(404).json({ message: 'Pet not found' });
+    }
+    res.redirect('/home/owner/showOwnerPets');
+  }
+  catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
 module.exports = { 
   getPetVaccinationRecords,
   getVaccinationRecords,
   getAllPets,
   getPetsByOwner,
   crtPet,
-  getPetsById
+  getPetsById,
+  updateVaccineRecord,
+  updatePet
 };
