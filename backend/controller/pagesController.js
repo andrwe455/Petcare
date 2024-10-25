@@ -23,6 +23,5 @@ function createMedicine(req, res){
 module.exports = { 
   showPets,
   showVaccineRecords,
-  showNotFound,
   createMedicine
 };
