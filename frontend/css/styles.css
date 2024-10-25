@@ -1,10 +1,5 @@
-@font-face {
-  font-family: 'SF Collegiate Solid';
-  src: url('../Fonts/SF_Collegiate_Solid.ttf') format('truetype');
-}
-
 body {
-  font-family: 'SF Collegiate Solid', sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .ellipsis-text {
@@ -33,8 +28,6 @@ body {
   z-index: 1000;
 }
 
-
-
 .close-btn {
   float: right;
 }
@@ -48,37 +41,6 @@ body {
   transform: scale(1.5);
 }
 
-.to-do-placeholder{
-  opacity: 50%;
-}
-
-.todo-list>li .text{
-  font-weight: 100;
-  min-width: 80%;
-  max-width: 80%;
-}
-
-.todo-list>li {
-  border-radius: 2px;
-  background-color: #f8f9fa;
-  border-left: 2px solid #e9ecef;
-  display: flex;
-  align-items: center;
-  color: #495057;
-  margin-bottom: 2px;
-  padding: 10px;
-}
-
-.todo-list>li:hover .tools{
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
-
-.todo-list .handle{
-  white-space: nowrap;
-}
-
 .fixed-table{
   table-layout: fixed;
   max-width: 100%;
@@ -88,123 +50,10 @@ body {
   font-weight: 100;
 }
 
-.teacher-name-table-header {
-  width: 15%;
-  max-width: 25%;
-}
-
-.teacher-name-table {
-  width: 15%; 
-  max-width: 25%; 
-}
-
-.teacher-pfp-table-header{
-  width: 12%;
-  max-width: 12%;
-}
-
-.pfp-table{
-  width: 15%;
-  max-width: 15%;
-}
-
-.table-avatar{
-  margin-left: 15%;
-}
-
-.subject-table-header{
-  width: 15%;
-  max-width: 15%;
-}
-
-.grade-table-header{
-  width: 10%;
-  max-width: 10%;
-}
-
-.grade-table-text{
-  font-size: large;
-}
-
-.options-table-header{
-  width: 14%;
-  max-width: 20%;
-}
-
 .table-text{
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-}
-
-.notification-pop-up-warning{
-  position: absolute; top: 4rem; right: 2rem;
-  opacity: 1.0;
-  background-color: #ffc107;
-}
-
-.notification-pop-up-danger{
-  position: absolute; top: 4rem; right: 2rem;
-  opacity: 1.0;
-  background-color: #dc3545;
-}
-
-.student-name{
-  display: -webkit-box; /* Fallback for older browsers */
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* Limit the text to 2 lines */
-  line-clamp: 2;
-  overflow: hidden; /* Hide the overflowing text */
-  text-overflow: ellipsis;
-}
-
-.card-manager-profile{
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-.card-manager-info{
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-@media(max-width: 654px){
-  .alert{
-    padding: 0%;
-    font-size: larger;
-  }
-}
-
-@media(max-width: 539px){
-  .teacher-name-table-header{
-    display: none;
-  }
-
-  .teacher-name-table{
-    display: none;
-  }
-
-  .table td, .table th {
-    padding: 0.25rem;
-  }
-}
-
-@media(max-width: 400px){
-  .enrollments-card{
-    box-shadow: none;
-  }
-  
-  .enrollments-content-wrapper{
-    background-color: transparent;
-  }
-
-  .enrollments-card-header, .enrollments-main-header{
-    border-bottom: none;
-  }
-
-  .enrollments-main-footer{
-    border-top: none;
-  }
 }
