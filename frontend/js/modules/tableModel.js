@@ -9,6 +9,8 @@ function dataTable(metodo,table,url){
     url = url +'/'+ urlSplit[urlSplit.length - 1];
 
     getVaccineRecord(table,url);
+  } else if(metodo == 'getAllAppointments'){
+    getAllAppointments(table,url);
   }
 }
 
@@ -95,15 +97,7 @@ async function getVaccineRecord(table,url){
 function getAllPets(table,url){
   fetch(url).then(response => response.json()).then(data => {
     let i = 1;
-    if(!data){
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'No vaccination records found!',
-      });
-    }else{
       data.forEach(element => {
-
         document.getElementById(table).innerHTML += `
         <tr>
           <td>${i}</td>
@@ -121,11 +115,44 @@ function getAllPets(table,url){
         </tr>`;
         i++;
       });      
-    }
+
     $(function () {
       $("#example1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
       })
     });
   });
+}
+
+function getAllAppointments(table,url){
+  fetch(url).then(response => response.json()).then(data => {
+    let i = 1;
+    if(!data){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Not!',
+      });
+    }else{
+      data.forEach(element => {
+        document.getElementById(table).innerHTML += `
+        <tr>
+        <td>${i}</td>
+        <td>${element.name}</td>
+        <td>${element.pet}</td>
+        <td>${element.veterinarian}</td>
+        <td>${element.date}
+        </td>
+          <td>
+            <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-id="${element._id}"></a></td>
+        </tr>`
+        i++;
+        });
+      }
+        $(function () {
+          $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+          })
+        });
+  })
 }
