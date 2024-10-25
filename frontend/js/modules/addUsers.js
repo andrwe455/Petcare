@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const selectedRole = userRoleSelect.value;
         let formData = {};
 
+        let url
+
         if (selectedRole === "doctor") {
             formData = {
                 role: "doctor",
@@ -41,17 +43,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 lastName: document.getElementById("doctorLastName").value,
                 address: document.getElementById("doctorAddress").value,
                 phone: document.getElementById("doctorPhone").value,
-                email: document.getElementById("doctorEmail").value,
+                email: document.getElementById("doctorEmail").value
             };
+            url = '/crtUser'
         } else if (selectedRole === "owner") {
             formData = {
                 role: "owner",
                 name: document.getElementById("ownerName").value,
                 lastName: document.getElementById("ownerLastName").value,
                 address: document.getElementById("ownerAddress").value,
-                phone: document.getElementById("ownerAddress").value,
-                email: document.getElementById("ownerEmail").value,
+                phone: document.getElementById("ownerPhone").value,
+                email: document.getElementById("ownerEmail").value
             };
+            url = '/crtUser'
         } else if (selectedRole === "pet") {
             formData = {
                 role: "pet",
@@ -59,17 +63,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 type: document.getElementById("petType").value,
                 breed: document.getElementById("petBreed").value,
                 weight: document.getElementById("petWeight").value,
-                age: document.getElementById("petAge").value,
+                age: document.getElementById("petAge").value
             };
+            url = '/crtPet'
         }
         // Verificar si hay campos vacíos
         if (validateFields(formData)) {
-            showAlert("The user has been added successfully", "success");
-
-            // Aquí puedes hacer la conexión con el backend usando fetch o Axios.
-            console.log("Form data:", formData);
-        } else {
-            showAlert("Please complete all fields", "error");
+            fetch(url,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(formData)
+            }).then(response => response.json()).then(data => {
+                alert('Create')
+            })
         }
 
     });

@@ -4,6 +4,7 @@ const petOwnerController = require('../controller/petOwnerController');
 const petController = require('../controller/petsController');
 const loginController = require('../controller/loginController');
 const pagesController = require('../controller/pagesController');
+const userController = require('../controller/userController')
 
 
 router.get('/home/owner/showOwnerPets', pagesController.showPets);
@@ -12,6 +13,8 @@ router.get('/home/owner/vaccineRecords/:id', pagesController.showVaccineRecords)
 router.get('/home/veterinary/showPets', pagesController.showPets);
 router.get('/home/veterinary/vaccineRecords/:id', pagesController.showVaccineRecords);
 
+router.get('/home/admin/addUser', pagesController.addUser)
+router.post('/crtUser', userController.addUser)
 
 
 router.get('/getAllPets', petController.getAllPets);
