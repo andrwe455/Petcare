@@ -10,13 +10,19 @@ function showVaccineRecords(req, res) {
   res.sendFile(path.join(proyectPath,'frontend','modules','pets','showVaccineRecordsBypets.html'));
 }
 
-function showNotFound(req, res) {
+function createMedicine(req, res){
   const proyectPath = path.resolve(__dirname, '../..');
-  res.sendFile(path.join(proyectPath,'frontend','modules','error','404.html'));
+  res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','inventoryManagement','addMedicine.html'));
+}
+
+function createMedicine(req, res){
+  const proyectPath = path.resolve(__dirname, '../..');
+  res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','inventoryManagement','addMedicine.html'));
 }
 
 module.exports = { 
   showPets,
   showVaccineRecords,
-  showNotFound
+  showNotFound,
+  createMedicine
 };
