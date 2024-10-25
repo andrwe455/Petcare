@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Jost', sans-serif;
+    background: linear-gradient(to bottom, #4A00E0, #8E2DE2);
+  }
+  
+  header {
+    background-color: #062184;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .profile-picture {
+    width: 90px;
+    height: 90px;
+    object-fit: cover; /* This property ensures the image fully covers the container while preserving its aspect ratio */
+  }
+
+  .main {
+    width: 90%;
+    max-width: 400px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 50px 0;
+  }
+  
+  label {
+    color: #000000;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  input,
+  button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.3s;
+    box-sizing: border-box;
+  }
+  
+  input:focus,
+  button:focus {
+    border-color: #8E2DE2;
+  }
+
+  #cancelarbutton {
+    background-color: #062184 ;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+ 
+  #cancelarbutton:hover{
+    background-color: rgb(233, 24, 24);
+  }
+
+  button {
+    background-color: #062184;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #8E2DE2;
+  }

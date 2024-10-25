@@ -52,7 +52,7 @@ async function getVaccineRecord(table,url){
           const url = window.location.href;
           const urlSplit = url.split('/');
 
-          const role = urlSplit[urlSplit.length - 1];
+          const role = urlSplit[4];
       
 
           const date= new Date(element.date).toLocaleString('en-GB', { hour12: true });
