@@ -1,0 +1,69 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.ellipsis-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logo:hover{
+  filter: brightness(120%);
+  cursor: pointer;
+}
+
+.input-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px); 
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.close-btn {
+  float: right;
+}
+
+.close-icon{
+  transition: transform .2s;
+  cursor: pointer;
+}
+
+.close-icon:hover{
+  transform: scale(1.5);
+}
+
+.fixed-table{
+  table-layout: fixed;
+  max-width: 100%;
+}
+
+.table>th{
+  font-weight: 100;
+}
+
+.table-text{
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.required::after{
+  content: "*";
+  color: red;
+}
+
+.required-text{
+  font-size: small;
+  color: red;
+}
