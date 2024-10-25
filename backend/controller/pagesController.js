@@ -30,7 +30,6 @@ function showAppointmentCrt(req, res) {
   res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','adminAppointments', 'adminCreateAppointment.html'));
 }
 
-
 module.exports = { 
   showPets,
   showVaccineRecords,
