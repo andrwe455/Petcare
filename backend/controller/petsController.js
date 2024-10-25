@@ -11,7 +11,7 @@ async function getPetVaccinationRecords(req, res) {
       return res.status(200).json(vaccinationRecords);
     }
     catch (error) {
-      return res.status(500).json({ message: error.message });
+      return res.status(500).json({ message: 'missing id' });
     }
 }
 
@@ -26,7 +26,7 @@ async function getVaccinationRecords(petId) {
     return res.status(200).json(vaccinationRecords);
   }
   catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: 'missing id' });
   }
 }
 
@@ -71,7 +71,7 @@ async function getPetsById(req, res) {
     return res.status(200).json(pet);
   }
   catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: 'missing id' });
   }
 }
 

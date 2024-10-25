@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Add Users</title>
+
+    <link rel="shortcut icon" href="../../images/favicon.png" type="">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/48b7f93703.js" crossorigin="anonymous"></script>
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="../../css/bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../../css/icheck-bootstrap.min.css">
+    <!-- calendar -->
+    <link rel="stylesheet" href="../../css/tempusdominus-bootstrap-4.min.css">
+
+    <link rel="stylesheet" href="../../css/daterangepicker.css">
+    <link rel="stylesheet" href="../../css/summernote-bs4.min.css">
+    <link rel="stylesheet" href="../../css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../css/toastr.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../css/adminlte.min.css">
+    <script src="../../js/modules/tableModel.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="../../images/slider-img.png" alt="PETCARE-LOGO">
+        </div>
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="" class="nav-link">Home</a>
+                </li>
+            </ul>
+        </nav>
+
+
+
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="" class="brand-link">
+                <img src="../../images/slider-img.png" alt="PETCARE-LOGO" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
+                <span class="brand-text font-weight-light">PETCARE</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="../../images/team2.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block" id="username">Administrador 1</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                    with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fas fa-id-badge"></i>
+                                <p>
+                                    AddUsers
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Show pets</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/home/owner">Home</a></li>
+                                <li class="breadcrumb-item active">Add users</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-5">
+                <h2>Add new user</h2>
+                <form id="userForm">
+                    <div class="mb-3">
+                        <label for="userRole" class="form-label">Select role</label>
+                        <select class="form-select" id="userRole" required>
+                            <option value=""></option>
+                            <option value="doctor">Doctor</option>
+                            <option value="owner">Owner</option>
+                            <option value="pet">Pet</option>
+                        </select>
+                    </div>
+        
+                    <!-- Doctor -->
+                    <div id="doctorForm" class="d-none">
+                        <div class="mb-3">
+                            <label for="doctorName" class="form-label">Doctor Name</label>
+                            <input type="text" class="form-control" id="doctorName" placeholder="Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="doctorLastName" class="form-label">Doctor Last Name</label>
+                            <input type="text" class="form-control" id="doctorLastName" placeholder="Last Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="doctorAddress" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="doctorAddress" placeholder="Address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="doctorPhone" class="form-label">Phone</label>
+                            <input type="number" class="form-control" id="doctorPhone" placeholder="Number Phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="doctorEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="doctorEmail" placeholder="Email">
+                        </div>
+                    </div>
+        
+                    <!-- Owner -->
+                    <div id="ownerForm" class="d-none">
+                        <div class="mb-3">
+                            <label for="ownerName" class="form-label">Owner Name</label>
+                            <input type="text" class="form-control" id="ownerName" placeholder="Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ownerLastName" class="form-label">Owner Last Name</label>
+                            <input type="text" class="form-control" id="ownerLastName" placeholder="Last Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ownerAddress" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="ownerAddress" placeholder="Address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ownerPhone" class="form-label">Phone</label>
+                            <input type="number" class="form-control" id="ownerPhone" placeholder="Number Phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ownerEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="ownerEmail" placeholder="Email">
+                        </div>
+                    </div>
+        
+                    <!-- Pet -->
+                    <div id="petForm" class="d-none">
+                        <div class="mb-3">
+                            <label for="petName" class="form-label">Name pet</label>
+                            <input type="text" class="form-control" id="petName" placeholder="Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="petType" class="form-label">Type</label>
+                            <input type="text" class="form-control" id="petType" placeholder="Type pet">
+                        </div>
+                        <div class="mb-3">
+                            <label for="petBreed" class="form-label">Breed</label>
+                            <input type="text" class="form-control" id="petBreed" placeholder="Breed pet">
+                        </div>
+                        <div class="mb-3">
+                            <label for="petWeight" class="form-label">Weight</label>
+                            <input type="number" class="form-control" id="petWeight" placeholder="Weight" step="0.01">
+                        </div>
+                        <div class="mb-3">
+                            <label for="petAge" class="form-label">Age</label>
+                            <input type="number" class="form-control" id="petAge" placeholder="Age">
+                        </div>
+                    </div>
+        
+                    <button type="submit" class="btn btn-primary">Add user</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="../../js/jquerys/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="../../js/jquerys/jquery-ui.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../js/jquerys/bootstrap.bundle.min.js"></script>
+    <script src="../../js/jquerys/jquery.dataTables.min.js"></script>
+    <script src="../../js/jquerys/dataTables.bootstrap4.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../js/jquerys/adminlte.js"></script>
+    <script src="../../js/modules/addUsers.js"></script>
+</body>
+
+</html>
