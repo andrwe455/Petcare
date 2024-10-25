@@ -7,9 +7,11 @@ const pagesController = require('../controller/pagesController');
 
 
 router.get('/home/owner/showOwnerPets', pagesController.showPets);
+router.get('/home/owner/vaccineRecords', pagesController.showVaccineRecords);
 router.get('/home/owner/vaccineRecords/:id', pagesController.showVaccineRecords);
 
 router.get('/home/veterinary/showPets', pagesController.showPets);
+router.get('/home/veterinary/vaccineRecords', pagesController.showVaccineRecords);
 router.get('/home/veterinary/vaccineRecords/:id', pagesController.showVaccineRecords);
 
 
