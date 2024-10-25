@@ -57,13 +57,3 @@ body {
   text-overflow: ellipsis;
   max-width: 100%;
 }
-
-.required::after{
-  content: "*";
-  color: red;
-}
-
-.required-text{
-  font-size: small;
-  color: red;
-}
