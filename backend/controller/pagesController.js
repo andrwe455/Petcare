@@ -7,7 +7,7 @@ function showPets(req, res) {
 
 function showVaccineRecords(req, res) {
   const proyectPath = path.resolve(__dirname, '../..');
-  res.sendFile(path.join(proyectPath,'frontend','modules','pets','showVaccineRecords.html'));
+  res.sendFile(path.join(proyectPath,'frontend','modules','pets','showVaccineRecordsBypets.html'));
 }
 
 function addUser(req, res){
@@ -23,6 +23,7 @@ function createMedicine(req, res){
 function modifyMedicine(req, res){
   const proyectPath = path.resolve(__dirname, '../..');
   res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','inventoryManagement','modifyMedicine.html'));
+}
 
 function showAppointment(req, res) {
   const proyectPath = path.resolve(__dirname, '../..');
