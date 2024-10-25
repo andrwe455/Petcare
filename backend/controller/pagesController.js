@@ -31,7 +31,7 @@ function showAppointmentCrt(req, res) {
 }
 
 
-module.exports = { 
+module.exports  = { 
   showPets,
   showVaccineRecords,
   addUser,
