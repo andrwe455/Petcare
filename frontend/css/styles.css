@@ -57,3 +57,18 @@ body {
   text-overflow: ellipsis;
   max-width: 100%;
 }
+
+.required::after {
+  content: "*";
+  color: red;
+  margin-left: 2px;
+}
+
+.required-text{
+  color: red;
+  font-size: small;
+}
+
+.form-control:disabled{
+  cursor: not-allowed;
+}

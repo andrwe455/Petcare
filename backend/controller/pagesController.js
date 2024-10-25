@@ -15,8 +15,14 @@ function createMedicine(req, res){
   res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','inventoryManagement','addMedicine.html'));
 }
 
+function modifyMedicine(req, res){
+  const proyectPath = path.resolve(__dirname, '../..');
+  res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','inventoryManagement','modifyMedicine.html'));
+}
+
 module.exports = { 
   showPets,
   showVaccineRecords,
-  createMedicine
+  createMedicine,
+  modifyMedicine
 };

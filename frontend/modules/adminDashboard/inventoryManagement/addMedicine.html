@@ -132,28 +132,28 @@
                         <div class="col-3">
                           <div class="form-group ">
                             <label class="required" for="medCommercialName">Commercial name</label>
-                            <input type="text" id="medCommercialName" class="form-control" name="commercial_name" placeholder="Commercial medicine name" required>
+                            <input type="text" id="medCommercialName" class="form-control" name="commercial_name" placeholder="Commercial medicine name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
                           </div>
                         </div>
 
                         <div class="col-3">
                           <div class="form-group">
                             <label class="required" for="medGenericName">Generic name</label>
-                            <input type="text" id="medGenericName" class="form-control" name="generic_name" placeholder="Generic medicine name" required>
+                            <input type="text" id="medGenericName" class="form-control" name="generic_name" placeholder="Generic medicine name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
                           </div>
                         </div>
 
                         <div class="col-3">
                           <div class="form-group">
                             <label class="required" for="medDescription">Description</label>
-                            <input type="text" id="medDescription" class="form-control" name="description" placeholder="Medicine used for..." required>
+                            <input type="text" id="medDescription" class="form-control" name="description" placeholder="Medicine used for..." required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
                           </div>
                         </div>
 
                         <div class="col-3">
                           <div class="form-group">
                             <label class="required">Expiration date</label>
-                            <input type="date" id="medExpDate" class="form-control" name="expiration_date" required>
+                            <input type="date" id="medExpDate" class="form-control" name="expiration_date" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
                           </div>
                         </div>
                       </div>
@@ -162,21 +162,21 @@
                         <div class="col-3">
                           <div class="form-group">
                             <label class="required" for="medCategory">Category</label>
-                            <input type="text" id="medCategory" class="form-control" name="category" placeholder="Medicine category" required>
+                            <input type="text" id="medCategory" class="form-control" name="category" placeholder="Medicine category" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
                           </div>
                         </div>
 
                         <div class="col-3">
                           <div class="form-group">
                             <label class="required" for="medStock">Quantity in stock</label>
-                            <input type="number" min="0" id="medStock" class="form-control" name="stock" placeholder="Available existences in stock" required>
+                            <input type="number" min="0" id="medStock" class="form-control" name="stock" placeholder="Available existences in stock" required oninvalid="this.setCustomValidity('Please enter a value greater or equal to 0')" oninput="setCustomValidity('')">
                           </div>
                         </div>
 
                         <div class="col-3">
                           <div class="form-group">
                             <label class="required" for="medPrice">Price</label>
-                            <input type="number" min="0" id="medPrice" class="form-control" name="price" placeholder="Enter the price of the medicine (COP)" required>
+                            <input type="number" min="0" id="medPrice" class="form-control" name="price" placeholder="Enter the price of the medicine (COP)" required oninvalid="this.setCustomValidity('Please enter a value greater or equal to 0')" oninput="setCustomValidity('')">
                           </div>
                         </div>
 

@@ -13,11 +13,14 @@ router.get('/home/veterinary/showPets', pagesController.showPets);
 router.get('/home/veterinary/vaccineRecords/:id', pagesController.showVaccineRecords);
 
 router.get('/home/admin/createMedicine', pagesController.createMedicine);
+router.get('/home/admin/modifyMedicine', pagesController.modifyMedicine);
 
 router.get('/getAllPets', petController.getAllPets);
 router.get('/getPetVaccinationRecords',petController.getPetVaccinationRecords);
 router.get('/getPetsByOwner',petOwnerController.getOwnerId,petController.getPetsByOwner);
 router.get('/getPetsById/:id',petController.getPetsById);
+router.get('/searchMedicine', medicinesController.searchMedicine);
+router.get('/checkIdExists', medicinesController.checkIdExists);
 
 router.post('/login', loginController.login);
 router.post('/crtOwner', petOwnerController.crtOwner);
@@ -27,5 +30,6 @@ router.post('/updateVaccineRecord', petController.updateVaccineRecord);
 router.post('/updatePet', petController.updatePet);
 
 router.post('/createMedicine', medicinesController.createMedicine);
+router.post('/modifyMedicine', medicinesController.modifyMedicine);
 
 module.exports = router;
