@@ -155,11 +155,21 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="card card-primary">
+            <div class="card card-primary card-outline">
               <div class="card-header">
                 <h3 class="card-title" id="pet-name"></h3>
               </div>
               <div class="card-body">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="petName">Pet's Name</label>
+                      <select name="id" id="selectPetid" class="form-control" onchange="petID()">
+                        <option value="">Select a pet</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
                 <table id="example1" class="table table-bordered table-striped table-hover">
                     <thead>
                       <tr>
@@ -238,7 +248,14 @@
 <script src="/js/jquerys/adminlte.js"></script>
 <script>
   window.onload = async function (){
-    petName = await dataTable('getVaccineRecord','petVaccineHistory', '/getPets');
+    await dataTable('getVaccineRecord','petVaccineHistory', '/getPetsById');
+  }
+
+  function petID(){
+    let id = document.getElementById('selectPetid').value;
+    let url = '/getPetsById'+'/'+id;
+
+    getVaccineRecord('petVaccineHistory',url);
   }
 </script>
 </body>
