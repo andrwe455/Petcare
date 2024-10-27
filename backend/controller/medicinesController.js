@@ -35,10 +35,10 @@ async function createMedicine(req, res){
 
 async function searchMedicine(req, res){
 
-  const { searchQuery } = req.query; // Get the search query from the frontend
+  const { searchQuery } = req.query; 
 
   try {
-    // Search by commercial_name or generic_name
+
     const medicine = await medicineSchema.findOne({
       $or: [
         { commercial_name: { $regex: new RegExp(searchQuery, 'i') } },
@@ -47,7 +47,7 @@ async function searchMedicine(req, res){
     });
 
     if (medicine) {
-      res.status(200).json(medicine); // Return the found medicine
+      res.status(200).json(medicine); 
     } else {
       res.status(404).json({ message: 'Medicine not found' });
     }
@@ -60,22 +60,20 @@ async function modifyMedicine(req, res) {
   const { medId, originalId, commercial_name, generic_name, description, expiration_date, category, stock, price } = req.body;
 
   try {
-    // Find the existing medicine using the original ID
+
     const medicine = await medicineSchema.findOne({ medId: originalId });
 
     if (!medicine) {
       return res.status(404).json({ message: 'Medicine not found' });
     }
 
-    // Check if the new ID conflicts with existing records
     const existingMedicineWithNewId = await medicineSchema.findOne({ medId });
 
     if (existingMedicineWithNewId && existingMedicineWithNewId.medId !== originalId) {
       return res.status(400).json({ message: 'A medicine with the new ID already exists.' });
     }
 
-    // Update fields
-    medicine.medId = medId; // Update to new ID if it has changed
+    medicine.medId = medId; 
     medicine.commercial_name = commercial_name;
     medicine.generic_name = generic_name;
     medicine.description = description;
@@ -84,7 +82,6 @@ async function modifyMedicine(req, res) {
     medicine.stock = stock;
     medicine.price = price;
 
-    // Save the changes
     await medicine.save();
 
     return res.status(201).json({ message: 'Modified successfully' });
@@ -94,18 +91,21 @@ async function modifyMedicine(req, res) {
   }
 }
 
+async function removeMedicine(req, res){
 
+}
 
 async function checkIdExists(req, res){
 
   const { id } = req.query;
   const medicine = await medicineSchema.findOne({ medId: id });
-  res.json(!!medicine); // Returns true if the ID exists, false otherwise
+  res.json(!!medicine); 
 }
 
 module.exports = {
   createMedicine,
   searchMedicine,
   modifyMedicine,
+  removeMedicine,
   checkIdExists
 };
