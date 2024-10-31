@@ -33,28 +33,30 @@ async function createMedicine(req, res){
   }
 }
 
-async function searchMedicine(req, res){
-
-  const { searchQuery } = req.query; 
+async function searchMedicine(req, res) {
+  
+  const { searchQuery } = req.query;
 
   try {
-
-    const medicine = await medicineSchema.findOne({
+    // Search by commercial_name or generic_name and return an array of results
+    const medicines = await medicineSchema.find({
       $or: [
         { commercial_name: { $regex: new RegExp(searchQuery, 'i') } },
         { generic_name: { $regex: new RegExp(searchQuery, 'i') } }
       ]
     });
 
-    if (medicine) {
-      res.status(200).json(medicine); 
+    if (medicines.length > 0) {
+      res.status(200).json(medicines); // Return all matching medicines
     } else {
       res.status(404).json({ message: 'Medicine not found' });
     }
   } catch (error) {
+    console.error("Error fetching medicine data:", error);
     res.status(500).json({ message: 'Error fetching medicine data', error });
   }
 }
+
 
 async function modifyMedicine(req, res) {
   const { medId, originalId, commercial_name, generic_name, description, expiration_date, category, stock, price } = req.body;

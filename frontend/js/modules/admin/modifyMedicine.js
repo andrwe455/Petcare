@@ -15,62 +15,137 @@ $(document).ready(function() {
   let originalBaseId = '';
 
   function performSearch() {
-    
     const searchQuery = $('#searchMedicine').val().trim();
+    const deleteButton = $('#deleteButton');
+    const searchResultsDiv = $('#searchResults');
 
+    $(document).on('click', function(event) {
+
+      if (!$(event.target).closest('#searchResults').length && !$(event.target).closest('#searchMedicine').length) {
+        searchResultsDiv.hide();
+      }
+    });
+  
     if (searchQuery) {
-      
       $.ajax({
         url: '/searchMedicine',
         method: 'GET',
         data: { searchQuery: searchQuery },
         success: function(response) {
 
-          $('#medCommercialName').val(response.commercial_name).prop("disabled", false);
-          $('#medGenericName').val(response.generic_name).prop("disabled", false);
-          $('#medDescription').val(response.description).prop("disabled", false);
-          $('#medCategory').val(response.category).prop("disabled", false);
-          $('#medStock').val(response.stock).prop("disabled", false);
-          $('#medPrice').val(response.price).prop("disabled", false);
+          if (response.length > 1) {
+            searchResultsDiv.empty().show();
+  
+            response.forEach(medicine => {
+              const resultItem = $(`
+                <div class="result-item" data-id="${medicine.medId}">
+                  ${medicine.commercial_name} (${medicine.generic_name})
+                </div>
+              `);
+              
+              resultItem.on('click', function() {
+                
+                $('#medCommercialName').val(medicine.commercial_name).prop("disabled", false);
+                $('#medGenericName').val(medicine.generic_name).prop("disabled", false);
+                $('#medDescription').val(medicine.description).prop("disabled", false);
+                $('#medCategory').val(medicine.category).prop("disabled", false);
+                $('#medStock').val(medicine.stock).prop("disabled", false);
+                $('#medPrice').val(medicine.price).prop("disabled", false);
+                if (medicine.expiration_date) {
+                  const expirationDate = new Date(medicine.expiration_date);
+                  const formattedDate = expirationDate.toISOString().split('T')[0];
+                  $('#medExpDate').val(formattedDate).prop("disabled", false);
+                }
+                $('#medId').val(medicine.medId).prop("disabled", false);
 
-          if (response.expiration_date) {
-            const expirationDate = new Date(response.expiration_date);
-            const formattedDate = expirationDate.toISOString().split('T')[0]; 
-            $('#medExpDate').val(formattedDate).prop("disabled", false);
+                originalId = medicine.medId;
+                originalCommercialName = medicine.commercial_name;
+                originalGenericName = medicine.generic_name;
+
+                searchResultsDiv.hide(); 
+                deleteButton.css('display', 'inline');
+              });
+  
+              searchResultsDiv.append(resultItem); 
+            });
+          } else if (response.length === 1) {
+            
+            const medicine = response[0];
+            populateMedicineFields(medicine, deleteButton);
           }
-
-          $('#medId').val(response.medId).prop("disabled", false);
-
-          originalId = response.medId;
-          originalCommercialName = response.commercial_name;
-          originalGenericName = response.generic_name;
         },
         error: function(error) {
           if (error.status === 404) {
-            Swal.fire({
-              title: 'Not Found!',
-              text: 'Medicine not found',
-              icon: 'warning',
-              confirmButtonText: 'Okay'
-            });
+            handleNotFound(deleteButton);
+            searchResultsDiv.hide(); 
           } else {
-            Swal.fire({
-              title: 'Error!',
-              text: 'An error occurred while fetching medicine data.',
-              icon: 'error',
-              confirmButtonText: 'Accept'
-            });
+            handleError(deleteButton);
+            searchResultsDiv.hide(); 
           }
         }
       });
     } else {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Please enter a search term.',
-        icon: 'warning',
-        confirmButtonText: 'Okay'
-      });
+      handleNothingTyped();
+      searchResultsDiv.hide(); 
     }
+  }
+  
+  function populateMedicineFields(medicine, deleteButton, searchResultsDiv) {
+
+    $('#medCommercialName').val(medicine.commercial_name).prop("disabled", false);
+    $('#medGenericName').val(medicine.generic_name).prop("disabled", false);
+    $('#medDescription').val(medicine.description).prop("disabled", false);
+    $('#medCategory').val(medicine.category).prop("disabled", false);
+    $('#medStock').val(medicine.stock).prop("disabled", false);
+    $('#medPrice').val(medicine.price).prop("disabled", false);
+    if (medicine.expiration_date) {
+      const expirationDate = new Date(medicine.expiration_date);
+      const formattedDate = expirationDate.toISOString().split('T')[0];
+      $('#medExpDate').val(formattedDate).prop("disabled", false);
+    }
+    $('#medId').val(medicine.medId).prop("disabled", false);
+
+    originalId = medicine.medId;
+    originalCommercialName = medicine.commercial_name;
+    originalGenericName = medicine.generic_name;
+
+    searchResultsDiv.hide(); 
+    deleteButton.css('display', 'inline');
+  }
+
+  function handleNotFound(deleteButton) {
+
+    Swal.fire({
+      title: 'Not Found!',
+      text: 'Medicine not found',
+      icon: 'warning',
+      confirmButtonText: 'Okay'
+    });
+
+    $('#medicineForm')[0].reset(); 
+    deleteButton.css('display', 'none');
+  }
+
+  function handleError(deleteButton){
+
+    Swal.fire({
+      title: 'Error!',
+      text: 'An error occurred while fetching medicine data.',
+      icon: 'error',
+      confirmButtonText: 'Accept'
+    });
+
+    $('#medicineForm')[0].reset(); 
+    deleteButton.css('display', 'none');
+  }
+
+  function handleNothingTyped(){
+    Swal.fire({
+      title: 'Error!',
+      text: 'Please enter a search term.',
+      icon: 'warning',
+      confirmButtonText: 'Okay'
+    });
   }
 
   $('#searchButton').on('click', performSearch);
@@ -116,7 +191,7 @@ $(document).ready(function() {
         
         newId = originalId;
         $('#medId').val(newId); 
-    }
+      }
     }
 
     const medicineData = {

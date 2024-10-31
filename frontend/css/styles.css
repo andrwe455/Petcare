@@ -72,3 +72,26 @@ body {
 .form-control:disabled{
   cursor: not-allowed;
 }
+
+.search-results {
+  display: none; 
+  position: absolute;
+  background-color: #fafafa;
+  width: inherit;
+  max-height: 200px;
+  overflow-y: auto;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border-top-left-radius: 0.5rem;
+  z-index: 1000; 
+  box-shadow: -1px 39px 65px -15px rgba(77,77,77,0.66);
+}
+
+.search-results .result-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-results .result-item:hover {
+  background-color: rgb(209, 209, 209);
+}
