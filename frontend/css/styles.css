@@ -95,3 +95,7 @@ body {
 .search-results .result-item:hover {
   background-color: rgb(209, 209, 209);
 }
+
+.modify-button{
+  display: none;
+}

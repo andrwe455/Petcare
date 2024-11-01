@@ -17,6 +17,7 @@ $(document).ready(function() {
   function performSearch() {
     const searchQuery = $('#searchMedicine').val().trim();
     const deleteButton = $('#deleteButton');
+    const modifyButton = $('#modifyButton');
     const searchResultsDiv = $('#searchResults');
 
     $(document).on('click', function(event) {
@@ -63,7 +64,7 @@ $(document).ready(function() {
                 originalGenericName = medicine.generic_name;
 
                 searchResultsDiv.hide(); 
-                deleteButton.css('display', 'inline');
+                deleteButton.show();
               });
   
               searchResultsDiv.append(resultItem); 
@@ -71,15 +72,17 @@ $(document).ready(function() {
           } else if (response.length === 1) {
             
             const medicine = response[0];
-            populateMedicineFields(medicine, deleteButton);
+            populateMedicineFields(medicine, deleteButton, searchResultsDiv, modifyButton);
           }
         },
         error: function(error) {
           if (error.status === 404) {
-            handleNotFound(deleteButton);
+            handleNotFound(deleteButton, modifyButton);
+            disableFields();
             searchResultsDiv.hide(); 
           } else {
-            handleError(deleteButton);
+            handleError(deleteButton,modifyButton);
+            disableFields();
             searchResultsDiv.hide(); 
           }
         }
@@ -90,7 +93,7 @@ $(document).ready(function() {
     }
   }
   
-  function populateMedicineFields(medicine, deleteButton, searchResultsDiv) {
+  function populateMedicineFields(medicine, deleteButton, searchResultsDiv, modifyButton) {
 
     $('#medCommercialName').val(medicine.commercial_name).prop("disabled", false);
     $('#medGenericName').val(medicine.generic_name).prop("disabled", false);
@@ -109,11 +112,20 @@ $(document).ready(function() {
     originalCommercialName = medicine.commercial_name;
     originalGenericName = medicine.generic_name;
 
-    searchResultsDiv.hide(); 
-    deleteButton.css('display', 'inline');
+    if (searchResultsDiv) {
+      searchResultsDiv.hide();
+    }
+    
+    deleteButton.show();
+    modifyButton.show();
   }
 
-  function handleNotFound(deleteButton) {
+  function disableFields() {
+    $('#medCommercialName, #medGenericName, #medDescription, #medCategory, #medStock, #medPrice, #medExpDate, #medId')   
+      .prop("disabled", true);  
+  }
+
+  function handleNotFound(deleteButton, modifyButton) {
 
     Swal.fire({
       title: 'Not Found!',
@@ -123,10 +135,11 @@ $(document).ready(function() {
     });
 
     $('#medicineForm')[0].reset(); 
-    deleteButton.css('display', 'none');
+    deleteButton.hide();
+    modifyButton.hide();
   }
 
-  function handleError(deleteButton){
+  function handleError(deleteButton, modifyButton){
 
     Swal.fire({
       title: 'Error!',
@@ -136,7 +149,8 @@ $(document).ready(function() {
     });
 
     $('#medicineForm')[0].reset(); 
-    deleteButton.css('display', 'none');
+    deleteButton.hide();
+    modifyButton.hide();
   }
 
   function handleNothingTyped(){

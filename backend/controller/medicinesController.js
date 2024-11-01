@@ -38,7 +38,7 @@ async function searchMedicine(req, res) {
   const { searchQuery } = req.query;
 
   try {
-    // Search by commercial_name or generic_name and return an array of results
+    
     const medicines = await medicineSchema.find({
       $or: [
         { commercial_name: { $regex: new RegExp(searchQuery, 'i') } },
@@ -47,7 +47,7 @@ async function searchMedicine(req, res) {
     });
 
     if (medicines.length > 0) {
-      res.status(200).json(medicines); // Return all matching medicines
+      res.status(200).json(medicines); 
     } else {
       res.status(404).json({ message: 'Medicine not found' });
     }
@@ -94,7 +94,20 @@ async function modifyMedicine(req, res) {
 }
 
 async function removeMedicine(req, res){
+  
+  const  medId  = req.query.id;
 
+  try {
+    const deletedMedicine = await medicineSchema.findOneAndDelete({ medId });
+    if (!deletedMedicine) {
+      return res.status(404).json({ message: 'Medicine not found' });
+    }
+
+    return res.status(200).json({ message: 'Medicine deleted successfully' });
+  } catch (error) {
+    console.error("Error deleting medicine:", error);
+    return res.status(500).json({ message: 'Error deleting medicine' });
+  }
 }
 
 async function checkIdExists(req, res){
