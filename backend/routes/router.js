@@ -44,5 +44,6 @@ router.post('/updatePet', petController.updatePet);
 
 router.post('/createMedicine', medicinesController.createMedicine);
 router.post('/modifyMedicine', medicinesController.modifyMedicine);
+router.delete('/removeMedicine', medicinesController.removeMedicine);
 
 module.exports = router;

@@ -7,7 +7,7 @@ function showPets(req, res) {
 
 function showVaccineRecords(req, res) {
   const proyectPath = path.resolve(__dirname, '../..');
-  res.sendFile(path.join(proyectPath,'frontend','modules','pets','showVaccineRecordsBypets.html'));
+  res.sendFile(path.join(proyectPath,'frontend','modules','pets','showVaccineRecords.html'));
 }
 
 function addUser(req, res){
