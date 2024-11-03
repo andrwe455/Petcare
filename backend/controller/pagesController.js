@@ -11,7 +11,7 @@ function showPets(req, res) {
 function showVaccineRecords(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   const proyectPath = path.resolve(__dirname, '../..');
-  res.sendFile(path.join(proyectPath,'frontend','modules','pets','showVaccineRecordsBypets.html'));
+  res.sendFile(path.join(proyectPath,'frontend','modules','pets','showVaccineRecords.html'));
 }
 
 function addUser(req, res){
