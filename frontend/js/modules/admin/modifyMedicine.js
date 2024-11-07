@@ -1,13 +1,22 @@
 let today = new Date();
 let year = today.getFullYear();
-let month = today.getMonth() + 1;
-let date = today.getDate();
-let dateStr = `${year}-${month}-${date}`;
+let month = String(today.getMonth() + 1).padStart(2, '0'); 
+let date = String(today.getDate()).padStart(2, '0'); 
+let dateStr = `${year}-${month}-${date}`; 
 let input = document.querySelector('[name=expiration_date]');
 
-input.setAttribute('min', dateStr);
+input.setAttribute('min', dateStr); 
 
 $(document).ready(function() {
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const medId = urlParams.get('medId');
+
+  console.log(medId);
+
+  if (medId) {
+    performSearchById(medId);
+  }
 
   let originalId = '';
   let originalCommercialName = '';
@@ -92,6 +101,24 @@ $(document).ready(function() {
       searchResultsDiv.hide(); 
     }
   }
+
+  function performSearchById(medId) {
+    $.ajax({
+      url: '/searchMedicine',
+      method: 'GET',
+      data: { medId: medId },
+      success: function(response) {
+        if (response && response.length === 1) {
+          populateMedicineFields(response[0], $('#deleteButton'), $('#searchResults'), $('#modifyButton'));
+        } else {
+          Swal.fire('Error', 'Medicine not found or multiple results returned.', 'warning');
+        }
+      },
+      error: function() {
+        Swal.fire('Error', 'An error occurred while retrieving medicine data.', 'error');
+      }
+    });
+  }
   
   function populateMedicineFields(medicine, deleteButton, searchResultsDiv, modifyButton) {
 
@@ -118,6 +145,7 @@ $(document).ready(function() {
     
     deleteButton.show();
     modifyButton.show();
+    hidePlaceholder();
   }
 
   function disableFields() {
@@ -244,4 +272,10 @@ $(document).ready(function() {
     originalId = newId; 
   });
 });
+
+function hidePlaceholder() {
+  const medCategorySelect = document.getElementById('medCategory');
+  const placeholderOption = medCategorySelect.querySelector('option[value=""]');
+  placeholderOption.style.display = 'none';
+}
 
