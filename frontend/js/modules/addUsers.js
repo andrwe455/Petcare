@@ -76,13 +76,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body:JSON.stringify(formData)
             }).then(response => response.json()).then(data => {
+                if(data.message){
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.message,
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                    return;
+                }
                 Swal.fire({
                     title: 'Usuario creado',
                     text: 'El usuario ha sido creado exitosamente',
                     icon: 'success',
                     confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    window.location.reload();
                 });
-            })
+            }).catch(error => {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Ha ocurrido un error al crear el usuario',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    window.location.reload();
+                });
+            });
         }
 
     });
