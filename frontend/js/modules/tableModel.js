@@ -124,35 +124,37 @@ function getAllPets(table,url){
   });
 }
 
-function getAllAppointments(table,url){
+function getAllAppointments(table, url) {
   fetch(url).then(response => response.json()).then(data => {
     let i = 1;
-    if(!data){
+
+    if (!data || data.length === 0) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Not!',
+        text: 'No appointments found!',
       });
-    }else{
+    } else {
       data.forEach(element => {
         document.getElementById(table).innerHTML += `
         <tr>
-        <td>${i}</td>
-        <td>${element.name}</td>
-        <td>${element.pet}</td>
-        <td>${element.veterinarian}</td>
-        <td>${element.date}
-        </td>
+          <td>${i}</td>
+          <td>${element.name}</td>
+          <td>${element.pet}</td>
+          <td>${element.veterinarian}</td>
+          <td>${element.date}</td>
           <td>
-            <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-id="${element._id}"></a></td>
-        </tr>`
+            <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-id="${element._id}"></a>
+          </td>
+        </tr>`;
         i++;
-        });
-      }
-        $(function () {
-          $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-          })
-        });
-  })
+      });
+    }
+
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+      });
+    });
+  });
 }
