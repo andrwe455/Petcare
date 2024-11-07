@@ -76,7 +76,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body:JSON.stringify(formData)
             }).then(response => response.json()).then(data => {
-                alert('Create')
+                Swal.fire({
+                    title: 'Usuario creado',
+                    text: 'El usuario ha sido creado exitosamente',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
             })
         }
 

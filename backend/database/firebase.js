@@ -19,6 +19,7 @@ const signIn = signInWithEmailAndPassword;
 const logout = signOut;
 const signup = createUserWithEmailAndPassword
 
+
 module.exports = { 
     auth,
     signIn,
