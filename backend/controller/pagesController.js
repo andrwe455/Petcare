@@ -32,6 +32,11 @@ function modifyMedicine(req, res){
   res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','inventoryManagement','modifyMedicine.html'));
 }
 
+function seeAllMedicines(req, res){
+  const proyectPath = path.resolve(__dirname, '../..');
+  res.sendFile(path.join(proyectPath,'frontend','modules','adminDashboard','inventoryManagement','seeAllMedicines.html'));
+}
+
 function showAppointment(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   const proyectPath = path.resolve(__dirname, '../..');
@@ -56,6 +61,7 @@ module.exports = {
   addUser,
   createMedicine,
   modifyMedicine,
+  seeAllMedicines,
   showAppointment,
   showAppointmentCrt,
   login

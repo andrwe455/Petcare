@@ -37,6 +37,39 @@ $('#deleteButton').on('click', async function() {
   });
 });
 
+$(document).on('click', '.deleteButton', async function(event) {
+  event.preventDefault(); 
+
+  const medId = $(this).data('id'); 
+
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: 'This will permanently delete the medicine record.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, delete it'
+  });
+
+  if (result.isConfirmed) {
+    try {
+      const response = await fetch(`/removeMedicine?id=${medId}`, { method: 'DELETE' });
+
+      if (response.ok) {
+        Swal.fire('Deleted!', 'The medicine record has been deleted.', 'success')
+          .then(() => location.reload()); 
+      } else {
+        Swal.fire('Error', 'Could not delete the medicine record.', 'error');
+      }
+    } catch (error) {
+      console.error("Error deleting medicine:", error);
+      Swal.fire('Error', 'An error occurred while deleting the medicine.', 'error');
+    }
+  }
+});
+
+
 
 function disableFields() {
   $('#medCommercialName, #medGenericName, #medDescription, #medCategory, #medStock, #medPrice, #medExpDate, #medId')   

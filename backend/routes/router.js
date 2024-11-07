@@ -25,6 +25,8 @@ router.get('/home/admin/addUser',sess.getUserId, pagesController.addUser)
 router.post('/crtUser', userController.addUser)
 router.get('/home/admin/createMedicine',sess.getUserId, pagesController.createMedicine);
 router.get('/home/admin/modifyMedicine',sess.getUserId, pagesController.modifyMedicine);
+router.get('/home/admin/seeAllMedicines', pagesController.seeAllMedicines);
+router.get('/getAllMedicines', medicinesController.getAllMedicines);
 
 router.get('/getAllPets', petController.getAllPets);
 router.get('/getPetVaccinationRecords',petController.getPetVaccinationRecords);

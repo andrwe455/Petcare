@@ -99,3 +99,8 @@ body {
 .modify-button{
   display: none;
 }
+
+.expired {
+  color: red; 
+  content: "(EXPIRED)";
+}

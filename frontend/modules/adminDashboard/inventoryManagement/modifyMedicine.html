@@ -88,10 +88,18 @@
                       <p>Add medicines</p>
                     </a>
                   </li>
+
                   <li class="nav-item">
                     <a href="" class="nav-link active">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Modify medicines</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="/home/admin/seeAllMedicines" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>See all medicines</p>
                     </a>
                   </li>
                 </ul>
@@ -168,7 +176,12 @@
                         <div class="col-3">
                           <div class="form-group">
                             <label class="required" for="medCategory">Category</label>
-                            <input type="text" id="medCategory" class="form-control" name="category" placeholder="Medicine category" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')" disabled>
+                            <select name="category" id="medCategory" class="form-control" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')" disabled>
+                              <option value="" disabled selected>Medicine category</option>
+                              <option>Antibiotic</option>
+                              <option>Vaccine</option>
+                              <option>Antiparasitic</option>
+                            </select>
                           </div>
                         </div>
 
@@ -212,7 +225,7 @@
       <footer class="main-footer">
         <strong>
           Copyright &copy; 2024
-          <a href="/index">PetCare</a>.
+          <a href="/ ">PetCare</a>.
         </strong>
       </footer>
     </div>

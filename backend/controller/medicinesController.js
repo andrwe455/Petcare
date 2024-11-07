@@ -35,25 +35,38 @@ async function createMedicine(req, res){
 
 async function searchMedicine(req, res) {
   
-  const { searchQuery } = req.query;
+  const { medId, searchQuery } = req.query;
 
-  try {
+  if (medId) {
+
+    const medicines = await medicineSchema.find({ medId });
     
-    const medicines = await medicineSchema.find({
-      $or: [
-        { commercial_name: { $regex: new RegExp(searchQuery, 'i') } },
-        { generic_name: { $regex: new RegExp(searchQuery, 'i') } }
-      ]
-    });
-
     if (medicines.length > 0) {
       res.status(200).json(medicines); 
     } else {
       res.status(404).json({ message: 'Medicine not found' });
     }
-  } catch (error) {
-    console.error("Error fetching medicine data:", error);
-    res.status(500).json({ message: 'Error fetching medicine data', error });
+  } 
+  else if (searchQuery) {
+    
+    try {
+      
+      const medicines = await medicineSchema.find({
+        $or: [
+          { commercial_name: { $regex: new RegExp(searchQuery, 'i') } },
+          { generic_name: { $regex: new RegExp(searchQuery, 'i') } }
+        ]
+      });
+
+      if (medicines.length > 0) {
+        res.status(200).json(medicines); 
+      } else {
+        res.status(404).json({ message: 'Medicine not found' });
+      }
+    } catch (error) {
+      console.error("Error fetching medicine data:", error);
+      res.status(500).json({ message: 'Error fetching medicine data', error });
+    }
   }
 }
 
@@ -110,6 +123,16 @@ async function removeMedicine(req, res){
   }
 }
 
+async function getAllMedicines(req, res) {
+  try {
+    const medicines = await medicineSchema .find();
+    res.status(200).json(medicines);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 async function checkIdExists(req, res){
 
   const { id } = req.query;
@@ -122,5 +145,6 @@ module.exports = {
   searchMedicine,
   modifyMedicine,
   removeMedicine,
+  getAllMedicines,
   checkIdExists
 };
