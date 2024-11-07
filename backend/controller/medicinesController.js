@@ -33,49 +33,62 @@ async function createMedicine(req, res){
   }
 }
 
-async function searchMedicine(req, res){
+async function searchMedicine(req, res) {
+  
+  const { medId, searchQuery } = req.query;
 
-  const { searchQuery } = req.query; // Get the search query from the frontend
+  if (medId) {
 
-  try {
-    // Search by commercial_name or generic_name
-    const medicine = await medicineSchema.findOne({
-      $or: [
-        { commercial_name: { $regex: new RegExp(searchQuery, 'i') } },
-        { generic_name: { $regex: new RegExp(searchQuery, 'i') } }
-      ]
-    });
-
-    if (medicine) {
-      res.status(200).json(medicine); // Return the found medicine
+    const medicines = await medicineSchema.find({ medId });
+    
+    if (medicines.length > 0) {
+      res.status(200).json(medicines); 
     } else {
       res.status(404).json({ message: 'Medicine not found' });
     }
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching medicine data', error });
+  } 
+  else if (searchQuery) {
+    
+    try {
+      
+      const medicines = await medicineSchema.find({
+        $or: [
+          { commercial_name: { $regex: new RegExp(searchQuery, 'i') } },
+          { generic_name: { $regex: new RegExp(searchQuery, 'i') } }
+        ]
+      });
+
+      if (medicines.length > 0) {
+        res.status(200).json(medicines); 
+      } else {
+        res.status(404).json({ message: 'Medicine not found' });
+      }
+    } catch (error) {
+      console.error("Error fetching medicine data:", error);
+      res.status(500).json({ message: 'Error fetching medicine data', error });
+    }
   }
 }
+
 
 async function modifyMedicine(req, res) {
   const { medId, originalId, commercial_name, generic_name, description, expiration_date, category, stock, price } = req.body;
 
   try {
-    // Find the existing medicine using the original ID
+
     const medicine = await medicineSchema.findOne({ medId: originalId });
 
     if (!medicine) {
       return res.status(404).json({ message: 'Medicine not found' });
     }
 
-    // Check if the new ID conflicts with existing records
     const existingMedicineWithNewId = await medicineSchema.findOne({ medId });
 
     if (existingMedicineWithNewId && existingMedicineWithNewId.medId !== originalId) {
       return res.status(400).json({ message: 'A medicine with the new ID already exists.' });
     }
 
-    // Update fields
-    medicine.medId = medId; // Update to new ID if it has changed
+    medicine.medId = medId; 
     medicine.commercial_name = commercial_name;
     medicine.generic_name = generic_name;
     medicine.description = description;
@@ -84,7 +97,6 @@ async function modifyMedicine(req, res) {
     medicine.stock = stock;
     medicine.price = price;
 
-    // Save the changes
     await medicine.save();
 
     return res.status(201).json({ message: 'Modified successfully' });
@@ -94,18 +106,45 @@ async function modifyMedicine(req, res) {
   }
 }
 
+async function removeMedicine(req, res){
+  
+  const  medId  = req.query.id;
 
+  try {
+    const deletedMedicine = await medicineSchema.findOneAndDelete({ medId });
+    if (!deletedMedicine) {
+      return res.status(404).json({ message: 'Medicine not found' });
+    }
+
+    return res.status(200).json({ message: 'Medicine deleted successfully' });
+  } catch (error) {
+    console.error("Error deleting medicine:", error);
+    return res.status(500).json({ message: 'Error deleting medicine' });
+  }
+}
+
+async function getAllMedicines(req, res) {
+  try {
+    const medicines = await medicineSchema .find();
+    res.status(200).json(medicines);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 async function checkIdExists(req, res){
 
   const { id } = req.query;
   const medicine = await medicineSchema.findOne({ medId: id });
-  res.json(!!medicine); // Returns true if the ID exists, false otherwise
+  res.json(!!medicine); 
 }
 
 module.exports = {
   createMedicine,
   searchMedicine,
   modifyMedicine,
+  removeMedicine,
+  getAllMedicines,
   checkIdExists
 };

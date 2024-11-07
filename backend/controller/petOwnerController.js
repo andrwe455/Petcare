@@ -1,8 +1,7 @@
-const Owner = require('../schemas/ownerSchema');
+const Owner = require('../schemas/userSchema');
 
 async function getOwnerId(req, res, next) {
   try {
-    
     const ownerId = req.session.user._id;
     const owner = await Owner.findById(ownerId);
     if (!owner) {

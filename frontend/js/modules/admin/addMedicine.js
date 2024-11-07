@@ -1,11 +1,11 @@
 let today = new Date();
 let year = today.getFullYear();
-let month = today.getMonth() + 1;
-let date = today.getDate();
-let dateStr = `${year}-${month}-${date}`;
+let month = String(today.getMonth() + 1).padStart(2, '0'); 
+let date = String(today.getDate()).padStart(2, '0'); 
+let dateStr = `${year}-${month}-${date}`; 
 let input = document.querySelector('[name=expiration_date]');
 
-input.setAttribute('min', dateStr);
+input.setAttribute('min', dateStr); 
 
 $(document).ready(function() {
   
@@ -53,6 +53,14 @@ $(document).ready(function() {
       });
     });
   });
+
+  hidePlaceholder();
 });
+
+function hidePlaceholder() {
+  const medCategorySelect = document.getElementById('medCategory');
+  const placeholderOption = medCategorySelect.querySelector('option[value=""]');
+  placeholderOption.style.display = 'none';
+}
 
 

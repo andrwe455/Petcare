@@ -7,7 +7,7 @@ const medicineSchema = new mongoose.Schema({
   generic_name: {type: String, required: true},
   description: {type: String, required: true},
   expiration_date: {type: Date, required: true},
-  category: {type: String, required: true},
+  category: {type: String, enum:['Antibiotic', 'Vaccine', 'Antiparasitic'], required: true},
   stock: {type: Number, required: true},
   price: {type: Number, required: true}
 })
