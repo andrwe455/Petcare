@@ -30,14 +30,19 @@ router.get('/getPetsById/:id',petController.getPetsById);
 router.get('/searchMedicine', medicinesController.searchMedicine);
 router.get('/checkIdExists', medicinesController.checkIdExists);
 router.get('/getappointment',appointmentController.getappointment);
+
+
 router.get('/home/admin/appointments/Edit', pagesController.showAppointment);
 router.get('/home/admin/appointments/Crt', pagesController.showAppointmentCrt);
+router.get('/home/admin/appointments/Dlt', pagesController.showAppointmentDlt);
 
 router.post('/login', loginController.login);
 router.post('/crtOwner', petOwnerController.crtOwner);
 router.post('/crtPet', petController.crtPet);
+
 router.post('/crtappointment',appointmentController.crtappointment);
-router.put('/updateappointment',appointmentController.updateappointment)
+router.put('/updateappointment',appointmentController.updateappointment);
+router.post('/deleteappointment',appointmentController.deleteappointment);
 
 router.post('/updateVaccineRecord', petController.updateVaccineRecord);
 router.post('/updatePet', petController.updatePet);
