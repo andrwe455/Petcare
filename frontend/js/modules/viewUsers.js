@@ -15,6 +15,8 @@ function changes(metodo, table, url) {
     const selectedTable = tables[tableFilter.value];
     if (selectedTable) {
         selectedTable.style.display = "block";
+        let table =selectedTable.getElementsByTagName("table")
+        table[0].setAttribute("id", "example1");
     }
 
     dataTable(metodo, table, url);

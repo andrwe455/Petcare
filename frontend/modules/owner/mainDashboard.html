@@ -28,7 +28,7 @@
   <script src="../../js/modules/tableModel.js"></script>
   <script>
     window.onload = function (){
-      fetch('/getOwnerData').then(response => response.json()).then(data => {
+      fetch('/getUserData').then(response => response.json()).then(data => {
         document.getElementById('username').innerHTML = data.name;
       });
       fetch('/getPetsByOwner').then(response => response.json()).then(data => {
@@ -152,7 +152,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Owner dashboar</h1>
+            <h1 class="m-0">Owner Dashboard</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -175,7 +175,7 @@
               <div class="icon">
                 <i class="fas fa-paw"></i>
               </div>
-              <a href="/home/veterinarian/showPets" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/home/owner/showOwnerPets" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-4 col 6">

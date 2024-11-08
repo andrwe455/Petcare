@@ -63,42 +63,98 @@
 
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        
-              <li class="nav-item">
-                <a href="/ " class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
-                </a>
-              </li>
-
+              <!-- Add icons to the links using the .nav-icon class
+                   with font-awesome or any other icon font library -->
               <li class="nav-item">
                 <a href="" class="nav-link active">
-                  <i class="fa-solid fa-archive"></i>
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="fa-solid fa-archive nav-icon"></i>
                   <p>Inventory</p>
                   <i class="fas fa-angle-left right"></i>
                 </a>
-
                 <ul class="nav-treeview">
                   <li class="nav-item">
-                    <a href="/home/admin/createMedicine" class="nav-link">
+                    <a href="/home/admin/appointments/Crt" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Add medicines</p>
                     </a>
                   </li>
-
+    
                   <li class="nav-item">
                     <a href="/home/admin/modifyMedicine" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Modify medicines</p>
                     </a>
                   </li>
-
+    
                   <li class="nav-item">
-                    <a href="" class="nav-link active">
+                    <a href="/home/admin/seeAllMedicines" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>See all medicines</p>
                     </a>
                   </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="nav-icon fas fa-calendar"></i>
+                  <p>
+                    Appointments
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/home/admin/appointments/Crt" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>create appointment</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/home/admin/appointments/Edit" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>modify appointment</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="fa-solid fa-archive nav-icon"></i>
+                    <p>
+                        Users
+                    </p>
+                    <i class="fas fa-angle-left right"></i>
+                </a>
+    
+                <ul class="nav-treeview">
+                    <li class="nav-item">
+                        <a href="/home/admin/addUser" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add users</p>
+                        </a>
+                    </li>
+    
+                    <li class="nav-item">
+                        <a href="/home/admin/modifyUser" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Modify users</p>
+                        </a>
+                    </li>
+    
+                    <li class="nav-item">
+                      <a href="/home/admin/showUsers" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>View users</p>
+                      </a>
+                    </li>
                 </ul>
               </li>
             </ul>
