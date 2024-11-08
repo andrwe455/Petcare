@@ -11,7 +11,7 @@ function showPets(req, res) {
 function showVaccineRecords(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   const proyectPath = path.resolve(__dirname, '../..');
-  res.sendFile(path.join(proyectPath,'frontend','modules','pets','showVaccineRecords.html'));
+  res.sendFile(path.join(proyectPath,'frontend','modules','pets','showVaccineRecordsBypets.html'));
 }
 
 function addUser(req, res){
@@ -77,7 +77,7 @@ function admin(req,res){
 function showUsers(req,res){
   res.setHeader('Cache-Control', 'no-store');
   const proyectPath = path.resolve(__dirname, '../..');
-  res.sendFile(path.join(proyectPath,'frontend','modules','admin','showUsers.html'));
+  res.sendFile(path.join(proyectPath,'frontend','modules','admin','viewUsers.html'));
 }
 
 module.exports = { 

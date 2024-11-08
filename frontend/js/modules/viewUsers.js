@@ -1,3 +1,4 @@
+
 function changes(metodo, table, url) {
     const tableFilter = document.getElementById("tableFilter");
     const tables = {
@@ -19,7 +20,7 @@ function changes(metodo, table, url) {
         table[0].setAttribute("id", "example1");
     }
 
-    dataTable(metodo, table, url);
+    dataTable(metodo, table, url,'admin');
 }
 
 function getAllPets(table,url){
