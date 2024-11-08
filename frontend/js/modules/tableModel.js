@@ -133,6 +133,7 @@ function getAllAppointments(table, url, action) {
     .then(data => {
       let i = 1;
 
+
       if (!data || data.length === 0) {
         Swal.fire({
           icon: 'error',
@@ -166,6 +167,35 @@ function getAllAppointments(table, url, action) {
             "responsive": true, "lengthChange": false, "autoWidth": false,
           })
         });
+    if (!data || data.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No appointments found!',
+      });
+    } else {
+      data.forEach(element => {
+        document.getElementById(table).innerHTML += `
+        <tr>
+          <td>${i}</td>
+          <td>${element.name}</td>
+          <td>${element.pet}</td>
+          <td>${element.veterinarian}</td>
+          <td>${element.date}</td>
+          <td>
+            <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-id="${element._id}"></a>
+          </td>
+        </tr>`;
+        i++;
+      });
+    }
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+      })
+    });
+  });
+}       
 
 function getAllMedicines(table, url){
 
@@ -210,4 +240,9 @@ function getAllMedicines(table, url){
         });
       });
     });
+
 }
+
+  });
+}
+     

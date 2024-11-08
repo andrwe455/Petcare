@@ -35,7 +35,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="" alt="PETCARE-LOGO" >
+    <img class="animation__shake" src="../../../images/slider-img.png" alt="PETCARE-LOGO" >
   </div>
 
   <!-- Navbar -->
@@ -52,6 +52,13 @@
         <a href="#" class="nav-link">Contact</a>
       </li>
     </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a href="/logout" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </li>
+    </ul>
   </nav>
 
 
@@ -59,7 +66,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
-      <img src="" alt="PETCARE-LOGO" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="../../../images/slider-img.png" alt="PETCARE-LOGO" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">PETCARE</span>
     </a>
 
@@ -93,7 +100,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="" class="nav-link" id="home">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -110,13 +117,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/home/owner/showOwnerPets" class="nav-link">
+                <a href="/home/owner/showOwnerPets" class="nav-link" id="allpets">
                 <i class="far fa-circle nav-icon"></i>
                 <p>See all Pets</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/home/owner/vaccineRecords" class="nav-link active">
+                <a href="/home/owner/vaccineRecords" class="nav-link active" id="vaccine">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Show vaccine history</p>
                 </a>
@@ -149,9 +156,6 @@
       </div><!-- /.container-fluid -->  
     </div>
     <section class="content">
-      <div class="image-wrapper">
-
-      </div>
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -202,20 +206,20 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" class="form-control" name="name">
+                <label for="name">Name <b style="clear: red;">*</b></label>
+                <input type="text" id="name" class="form-control" name="name" required>
               </div>
               <div class="form-group">
                 <label for="applicationDate">Age</label>
-                <input type="number" id="applicationDate" class="form-control" name="age">
+                <input type="number" id="applicationDate" class="form-control" name="age" required>
               </div>
               <div class="form-group">
                 <label for="nextAppointment">Weight</label>
-                <input type="date" id="nextAppointment" class="form-control" name="weight">
+                <input type="date" id="nextAppointment" class="form-control" name="weight" required>
               </div>
               <div class="form-group">
                 <label for="vaccine">Breed</label>
-                <input type="text" id="vaccine" class="form-control" name="breed">
+                <input type="text" id="vaccine" class="form-control" name="breed" required>
               </div>
             </div>
             <input type="hidden" id="id" name="id">
@@ -243,11 +247,26 @@
 <script src="/js/jquerys/jquery.dataTables.min.js"></script>
 <script src="/js/jquerys/dataTables.bootstrap4.min.js"></script>
 <script src="/js/jquerys/sweetalert2.min.js"></script>
+<script src="/js/jquerys/dataTables.responsive.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/js/jquerys/adminlte.js"></script>
 <script>
   window.onload = async function (){
+    fetch('/getUserData').then(response => response.json()).then(data => {
+      document.getElementById('username').innerHTML = data.name;
+    });
     await dataTable('getVaccineRecord','petVaccineHistory', '/getPetsById');
+    let url = window.location.href;
+
+    if(url.includes('veterinarian')){
+      document.getElementById('allpets').href = '/home/veterinarian/showOwnerPets';
+      document.getElementById('vaccine').href = '/home/veterinarian/vaccineRecords';
+      document.getElementById('home').href = '/home/veterinarian';
+    }else{
+      document.getElementById('allpets').href = '/home/owner/showOwnerPets';
+      document.getElementById('vaccine').href = '/home/owner/vaccineRecords';
+      document.getElementById('home').href = '/home/owner';
+    }
   }
 
   function petID(){
