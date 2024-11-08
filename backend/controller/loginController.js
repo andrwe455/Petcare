@@ -13,8 +13,7 @@ async function login(req,res) {
               res.json(error);
           });
       }).catch((error) => {
-          console.log(error);
-          res.status(400).json(error);
+          res.redirect('/login?error='+error.message);
       });
   }catch(error){
     res.status(500).json({message: error.message});

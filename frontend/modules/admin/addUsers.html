@@ -17,14 +17,12 @@
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
 
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="../../images/slider-img.png" alt="PETCARE-LOGO">
         </div>
-
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -44,9 +42,6 @@
                 </li>
             </ul>
         </nav>
-
-
-
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="" class="brand-link">
@@ -69,63 +64,97 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-
-                        <li class="nav-item">
-                            <a href="/home/admin" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                </p>
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                      <!-- Add icons to the links using the .nav-icon class
+                           with font-awesome or any other icon font library -->
+                      <li class="nav-item">
+                        <a href="" class="nav-link active">
+                          <i class="nav-icon fas fa-tachometer-alt"></i>
+                          <p>
+                            Dashboard
+                          </p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="" class="nav-link">
+                          <i class="fa-solid fa-archive nav-icon"></i>
+                          <p>Inventory</p>
+                          <i class="fas fa-angle-left right"></i>
+                        </a>
+                        <ul class="nav-treeview">
+                          <li class="nav-item">
+                            <a href="" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Add medicines</p>
                             </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="" class="nav-link active">
-                                <i class="fa-solid fa-archive"></i>
-                                <p>
-                                    Users
-                                </p>
-                                <i class="fas fa-angle-left right"></i>
+                          </li>
+            
+                          <li class="nav-item">
+                            <a href="/home/admin/modifyMedicine" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Modify medicines</p>
                             </a>
-
-                            <ul class="nav-treeview menu-open">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add users</p>
-                                    </a>
-                                </li>
-<!-- 
-                                <li class="nav-item">
-                                    <a href="" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Modify users</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Delete users</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View users</p>
-                                    </a>
-                                </li>
-                                -->
-                            </ul>
-                        </li>
+                          </li>
+            
+                          <li class="nav-item">
+                            <a href="/home/admin/seeAllMedicines" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>See all medicines</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="nav-item">
+                        <a href="/home/admin/appointments/Crt" class="nav-link">
+                          <i class="nav-icon fas fa-calendar"></i>
+                          <p>
+                            Appointments
+                            <i class="right fas fa-angle-left"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="/home/admin/appointments/Crt" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>create appointment</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="/home/admin/appointments/Edit" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>modify appointment</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="fa-solid fa-archive nav-icon"></i>
+                            <p>
+                                Users
+                            </p>
+                            <i class="fas fa-angle-left right"></i>
+                        </a>
+            
+                        <ul class="nav-treeview">
+                            <li class="nav-item">
+                                <a href="/home/admin/addUser" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add users</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="/home/admin/showUsers" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>View users</p>
+                              </a>
+                            </li>
+                        </ul>
+                      </li>
                     </ul>
-                </nav>
+                  </nav>
             </div>
         </aside>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <div class="content-header">
@@ -144,14 +173,14 @@
                 </div>
             </div>
             <section class="content">
-                <div class="container fluid">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h2>Add new user</h2>
-                                </div>
-                                <form id="userForm">
+                            <form id="userForm">
+                                <div class="card card-primary card-outline">
+                                    <div class="card-header">
+                                        <h2>Add new user</h2>
+                                    </div>
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="userRole" class="form-label">Select role</label>
@@ -162,8 +191,6 @@
                                                 <option value="pet">Pet</option>
                                             </select>
                                         </div>
-                            
-                                        <!-- Veterinarian -->
                                         <div id="veterinarianForm" class="d-none">
                                             <div class="mb-3">
                                                 <label for="veterinarianName" class="form-label required">Veterinarian Name</label>
@@ -237,19 +264,13 @@
                                             </div>
                                             <p class="required-text">* Indicates a required field</p>
                                         </div>
-
                                         <button type="submit" class="btn btn-primary">Add user</button>
                                     </div>
 
-            
-                                </form>
-
-                            </div>
-
+                                </div>
+                            </form>
                         </div>
-
                     </div>
-
                 </div>
             </section>
         </div>

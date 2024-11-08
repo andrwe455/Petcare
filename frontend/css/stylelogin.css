@@ -67,7 +67,7 @@ input{
 	outline: none;
 	border-radius: 5px;
 }
-button{
+.login button, .signup button{
 	width: 60%;
 	height: 40px;
 	margin: 10px auto;
@@ -84,7 +84,7 @@ button{
 	transition: .2s ease-in;
 	cursor: pointer;
 }
-button:hover{
+.login button:hover, .signup button:hover{
 	background: #1543da;
 }
 .login{
