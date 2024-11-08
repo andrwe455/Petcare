@@ -1,6 +1,6 @@
-function dataTable(metodo,table,url){
+function dataTable(metodo,table,url,role){
   if(metodo == 'getAllPets'){
-    getAllPets(table,url);
+    getAllPets(table,url,role);
   }else if (metodo == 'getVaccineRecord'){
 
     const geturl = window.location.href;
@@ -27,7 +27,7 @@ async function getVaccineRecord(table,url){
         text: 'No id provided!',
       });
       let url2 
-      if(window.location.href.includes('veterinary')){
+      if(window.location.href.includes('veterinarian')){
         url2 = '/getAllPets';
       }else{
         url2 = '/getPetsByOwner';
@@ -38,6 +38,17 @@ async function getVaccineRecord(table,url){
         })
       });
     }else{
+      let url2 
+      if(window.location.href.includes('veterinarian')){
+        url2 = '/getAllPets';
+      }else{
+        url2 = '/getPetsByOwner';
+      }
+      fetch(url2).then(response => response.json()).then(data => {
+        data.forEach(element =>{
+          document.getElementById('selectPetid').innerHTML += `<option value="${element._id}">${element.name}</option>`;
+        })
+      });
       document.getElementById('id').value = data._id;
         petsName('pet-name',data.name); 
         if ($.fn.DataTable.isDataTable('#example1')) {
@@ -56,12 +67,10 @@ async function getVaccineRecord(table,url){
           const urlSplit = url.split('/');
 
           const role = urlSplit[4];
-      
-
           const date= new Date(element.date).toLocaleString('en-GB', { hour12: true });
           const nextAppointment = new Date(element.nextAppointment).toLocaleString('en-GB', { hour12: true });
 
-          if(role == 'veterinary'){
+          if(role == 'veterinarian'){
 
             document.getElementById(table).innerHTML += `
             <tr>
@@ -97,27 +106,28 @@ async function getVaccineRecord(table,url){
   });
 }
 
-function getAllPets(table,url){
+function getAllPets(table,url,role){
   fetch(url).then(response => response.json()).then(data => {
     let i = 1;
-      data.forEach(element => {
-        document.getElementById(table).innerHTML += `
-        <tr>
-          <td>${i}</td>
-          <td>${element.name}</td>
-          <td>${element.age} years</td>
-          <td>${element.weight} Kg</td>
-          <td>${element.breed}</td>
-          <td>${element.type}</td>
-          <td>
-            <a class="fas fa-eye" href="/home/owner/vaccineRecords/${element._id}"></a>
-            <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-name="${element.name}" 
-            data-age="${element.age}" data-weigth="${element.weight}" data-breed="${element.breed}" 
-            data-id="${element._id}" data-type="${element.type}"></a>
-          </td>
-        </tr>`;
-        i++;
-      });      
+
+    data.forEach(element => {
+      document.getElementById(table).innerHTML += `
+      <tr>
+        <td>${i}</td>
+        <td>${element.name}</td>
+        <td>${element.age} years</td>
+        <td>${element.weight} Kg</td>
+        <td>${element.breed}</td>
+        <td>${element.type}</td>
+        <td>
+          <a class="fas fa-eye" href="/home/${role}/vaccineRecords/${element._id}"></a>
+          <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-name="${element.name}" 
+          data-age="${element.age}" data-weigth="${element.weight}" data-breed="${element.breed}" 
+          data-id="${element._id}" data-type="${element.type}"></a>
+        </td>
+      </tr>`;
+      i++;
+    });      
 
     $(function () {
       $("#example1").DataTable({

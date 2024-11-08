@@ -37,13 +37,13 @@
       });
       switch (username) {
         case 'owner':
-          dataTable('getAllPets','pettsTableBody', '/getPetsByOwner');
+          dataTable('getAllPets','pettsTableBody', '/getPetsByOwner','owner');
           document.getElementById('allpets').href = '/home/owner/showOwnerPets';
           document.getElementById('vaccine').href = '/home/owner/vaccineRecords';
           document.getElementById('home').href = '/home/owner';
           break;
         case 'veterinarian':
-          dataTable('getAllPets','pettsTableBody', '/getAllPets');
+          dataTable('getAllPets','pettsTableBody', '/getAllPets','veterinarian');
           document.getElementById('allpets').href = '/home/veterinarian/showOwnerPets';
           document.getElementById('vaccine').href = '/home/veterinarian/vaccineRecords';
           document.getElementById('home').href = '/home/veterinarian';
