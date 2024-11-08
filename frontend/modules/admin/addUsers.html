@@ -6,29 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Add Users</title>
 
-    <link rel="shortcut icon" href="../../images/favicon.png" type="">
-    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/48b7f93703.js" crossorigin="anonymous"></script>
-    <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="../../css/bootstrap-4.min.css">
-    <!-- iCheck -->
     <link rel="stylesheet" href="../../css/icheck-bootstrap.min.css">
-    <!-- calendar -->
     <link rel="stylesheet" href="../../css/tempusdominus-bootstrap-4.min.css">
-
-    <link rel="stylesheet" href="../../css/daterangepicker.css">
-    <link rel="stylesheet" href="../../css/summernote-bs4.min.css">
-    <link rel="stylesheet" href="../../css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../css/toastr.min.css">
-    <!-- Theme style -->
     <link rel="stylesheet" href="../../css/adminlte.min.css">
-    <script src="../../js/modules/tableModel.js"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
 
 <body>
@@ -48,6 +34,13 @@
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="" class="nav-link">Home</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -78,15 +71,55 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                    with font-awesome or any other icon font library -->
+
                         <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fas fa-id-badge"></i>
+                            <a href="/home/admin" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    AddUsers
+                                    Dashboard
                                 </p>
                             </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link active">
+                                <i class="fa-solid fa-archive"></i>
+                                <p>
+                                    Users
+                                </p>
+                                <i class="fas fa-angle-left right"></i>
+                            </a>
+
+                            <ul class="nav-treeview menu-open">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add users</p>
+                                    </a>
+                                </li>
+<!-- 
+                                <li class="nav-item">
+                                    <a href="" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Modify users</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Delete users</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View users</p>
+                                    </a>
+                                </li>
+                                -->
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -95,124 +128,139 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Show pets</h1>
+                            <h1 class="m-0"></h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/home/owner">Home</a></li>
+                                <li class="breadcrumb-item active">admin</li>
                                 <li class="breadcrumb-item active">Add users</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container mt-5">
-                <h2>Add new user</h2>
-                <form id="userForm">
-                    <div class="mb-3">
-                        <label for="userRole" class="form-label">Select role</label>
-                        <select class="form-select" id="userRole" required>
-                            <option value=""></option>
-                            <option value="doctor">Doctor</option>
-                            <option value="owner">Owner</option>
-                            <option value="pet">Pet</option>
-                        </select>
-                    </div>
-        
-                    <!-- Doctor -->
-                    <div id="doctorForm" class="d-none">
-                        <div class="mb-3">
-                            <label for="doctorName" class="form-label">Doctor Name</label>
-                            <input type="text" class="form-control" id="doctorName" placeholder="Name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="doctorLastName" class="form-label">Doctor Last Name</label>
-                            <input type="text" class="form-control" id="doctorLastName" placeholder="Last Name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="doctorAddress" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="doctorAddress" placeholder="Address">
-                        </div>
-                        <div class="mb-3">
-                            <label for="doctorPhone" class="form-label">Phone</label>
-                            <input type="number" class="form-control" id="doctorPhone" placeholder="Number Phone">
-                        </div>
-                        <div class="mb-3">
-                            <label for="doctorEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="doctorEmail" placeholder="Email">
-                        </div>
-                    </div>
-        
-                    <!-- Owner -->
-                    <div id="ownerForm" class="d-none">
-                        <div class="mb-3">
-                            <label for="ownerName" class="form-label">Owner Name</label>
-                            <input type="text" class="form-control" id="ownerName" placeholder="Name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="ownerLastName" class="form-label">Owner Last Name</label>
-                            <input type="text" class="form-control" id="ownerLastName" placeholder="Last Name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="ownerAddress" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="ownerAddress" placeholder="Address">
-                        </div>
-                        <div class="mb-3">
-                            <label for="ownerPhone" class="form-label">Phone</label>
-                            <input type="number" class="form-control" id="ownerPhone" placeholder="Number Phone">
-                        </div>
-                        <div class="mb-3">
-                            <label for="ownerEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="ownerEmail" placeholder="Email">
-                        </div>
-                    </div>
-        
-                    <!-- Pet -->
-                    <div id="petForm" class="d-none">
-                        <div class="mb-3">
-                            <label for="petName" class="form-label">Name pet</label>
-                            <input type="text" class="form-control" id="petName" placeholder="Name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="petType" class="form-label">Type</label>
-                            <input type="text" class="form-control" id="petType" placeholder="Type pet">
-                        </div>
-                        <div class="mb-3">
-                            <label for="petBreed" class="form-label">Breed</label>
-                            <input type="text" class="form-control" id="petBreed" placeholder="Breed pet">
-                        </div>
-                        <div class="mb-3">
-                            <label for="petWeight" class="form-label">Weight</label>
-                            <input type="number" class="form-control" id="petWeight" placeholder="Weight" step="0.01">
-                        </div>
-                        <div class="mb-3">
-                            <label for="petAge" class="form-label">Age</label>
-                            <input type="number" class="form-control" id="petAge" placeholder="Age">
-                        </div>
-                    </div>
-        
-                    <button type="submit" class="btn btn-primary">Add user</button>
-                </form>
-            </div>
-        </div>
+            <section class="content">
+                <div class="container fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h2>Add new user</h2>
+                                </div>
+                                <form id="userForm">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="userRole" class="form-label">Select role</label>
+                                            <select class="form-control" id="userRole" required>
+                                                <option value=""></option>
+                                                <option value="veterinarian">Veterinarian</option>
+                                                <option value="owner">Owner</option>
+                                                <option value="pet">Pet</option>
+                                            </select>
+                                        </div>
+                            
+                                        <!-- Veterinarian -->
+                                        <div id="veterinarianForm" class="d-none">
+                                            <div class="mb-3">
+                                                <label for="veterinarianName" class="form-label required">Veterinarian Name</label>
+                                                <input type="text" class="form-control" id="veterinarianName" placeholder="Name" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="veterinarianName" class="form-label required">Veterinarian Last Name</label>
+                                                <input type="text" class="form-control" id="veterinarianLastName" placeholder="Last Name" required >
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="veterinarianAddress" class="form-label required">Address</label>
+                                                <input type="text" class="form-control" id="veterinarianAddress" placeholder="Address" required >
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="veterinarianPhone" class="form-label required">Phone</label>
+                                                <input type="number" class="form-control" id="veterinarianPhone" placeholder="Number Phone" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="veterinarianEmail" class="form-label required">Email</label>
+                                                <input type="email" class="form-control" id="veterinarianEmail" placeholder="Email" required>
+                                            </div>
+                                            <p class="required-text">* Indicates a required field</p>
+                                        </div>
+                            
+                                        <!-- Owner -->
+                                        <div id="ownerForm" class="d-none">
+                                            <div class="mb-3">
+                                                <label for="ownerName" class="form-label required">Owner Name</label>
+                                                <input type="text" class="form-control" id="ownerName" placeholder="Name" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="ownerLastName" class="form-label required">Owner Last Name</label>
+                                                <input type="text" class="form-control" id="ownerLastName" placeholder="Last Name" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="ownerAddress" class="form-label required">Address</label>
+                                                <input type="text" class="form-control" id="ownerAddress" placeholder="Address" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="ownerPhone" class="form-label required">Phone</label>
+                                                <input type="number" class="form-control" id="ownerPhone" placeholder="Number Phone" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="ownerEmail" class="form-label required">Email</label>
+                                                <input type="email" class="form-control" id="ownerEmail" placeholder="Email" required>
+                                            </div>
+                                            <p class="required-text">* Indicates a required field</p>
+                                        </div>
+                            
+                                        <!-- Pet -->
+                                        <div id="petForm" class="d-none">
+                                            <div class="mb-3">
+                                                <label for="petName" class="form-label required">Name pet</label>
+                                                <input type="text" class="form-control" id="petName" placeholder="Name"required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="petType" class="form-label required">Type</label>
+                                                <input type="text" class="form-control" id="petType" placeholder="Type pet"required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="petBreed" class="form-label required">Breed</label>
+                                                <input type="text" class="form-control" id="petBreed" placeholder="Breed pet"required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="petWeight" class="form-label required">Weight</label>
+                                                <input type="number" class="form-control" id="petWeight" placeholder="Weight" step="0.01" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="petAge" class="form-label required">Age</label>
+                                                <input type="number" class="form-control" id="petAge" placeholder="Age" required >
+                                            </div>
+                                            <p class="required-text">* Indicates a required field</p>
+                                        </div>
 
+                                        <button type="submit" class="btn btn-primary">Add user</button>
+                                    </div>
+
+            
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        </div>
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
+
+    <script src="https://kit.fontawesome.com/48b7f93703.js" crossorigin="anonymous"></script>
     <script src="../../js/jquerys/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
     <script src="../../js/jquerys/jquery-ui.min.js"></script>
-    <!-- Bootstrap 4 -->
     <script src="../../js/jquerys/bootstrap.bundle.min.js"></script>
-    <script src="../../js/jquerys/jquery.dataTables.min.js"></script>
-    <script src="../../js/jquerys/dataTables.bootstrap4.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="../../js/jquerys/adminlte.js"></script>
+    <script src="../../js/jquerys/sweetalert2.min.js"></script>
     <script src="../../js/modules/addUsers.js"></script>
 </body>
 

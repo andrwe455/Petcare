@@ -8,6 +8,7 @@ const pagesController = require('../controller/pagesController');
 const userController = require('../controller/userController')
 const appointmentController = require('../controller/appointmentController');
 const sess = require('../controller/sessionController');
+const registerController = require('../controller/registerController');
 
 
 router.get('/login', pagesController.login);
@@ -22,7 +23,7 @@ router.get('/home/veterinary/vaccineRecords',sess.getUserId, pagesController.sho
 router.get('/home/veterinary/vaccineRecords/:id',sess.getUserId, pagesController.showVaccineRecords);
 
 router.get('/home/admin/addUser',sess.getUserId, pagesController.addUser)
-router.post('/crtUser', userController.addUser)
+router.post('/crtUser',registerController.register,userController.addUser)
 router.get('/home/admin/createMedicine',sess.getUserId, pagesController.createMedicine);
 router.get('/home/admin/modifyMedicine',sess.getUserId, pagesController.modifyMedicine);
 router.get('/home/admin/seeAllMedicines', pagesController.seeAllMedicines);

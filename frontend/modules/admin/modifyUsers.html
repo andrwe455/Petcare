@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Modify Users</title>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap-4.min.css">
+    <link rel="stylesheet" href="../../css/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="../../css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../css/adminlte.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="../../images/slider-img.png" alt="PETCARE-LOGO">
+        </div>
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="" class="nav-link">Home</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
+
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="" class="brand-link">
+                <img src="../../images/slider-img.png" alt="PETCARE-LOGO" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
+                <span class="brand-text font-weight-light">PETCARE</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="../../images/team2.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block" id="username">Administrador 1</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+
+                        <li class="nav-item">
+                            <a href="/home/admin" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link active">
+                                <i class="fa-solid fa-archive"></i>
+                                <p>
+                                    Users
+                                </p>
+                                <i class="fas fa-angle-left right"></i>
+                            </a>
+
+                            <ul class="nav-treeview menu-open">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add users</p>
+                                    </a>
+                                </li>
+ 
+                                <li class="nav-item">
+                                    <a href="" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Modify users</p>
+                                    </a>
+                                </li>
+<!--
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View users</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Delete users</p>
+                                    </a>
+                                </li>
+                                -->
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0"></h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item active">admin</li>
+                                <li class="breadcrumb-item active">Modify users</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="content">
+                <div class="container fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h2>Modify user</h2>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/48b7f93703.js" crossorigin="anonymous"></script>
+    <script src="../../js/jquerys/jquery.min.js"></script>
+    <script src="../../js/jquerys/jquery-ui.min.js"></script>
+    <script src="../../js/jquerys/bootstrap.bundle.min.js"></script>
+    <script src="../../js/jquerys/adminlte.js"></script>
+    <script src="../../js/jquerys/sweetalert2.min.js"></script>
+
+</body>
+
+</html>
