@@ -55,6 +55,12 @@ function login(req,res){
   res.sendFile(path.join(proyectPath,'frontend','login.html'));
 }
 
+function owner(req,res){
+  res.setHeader('Cache-Control', 'no-store');
+  const proyectPath = path.resolve(__dirname, '../..');
+  res.sendFile(path.join(proyectPath,'frontend','modules','owner','mainDashboard.html'));
+}
+
 module.exports = { 
   showPets,
   showVaccineRecords,
@@ -64,5 +70,6 @@ module.exports = {
   seeAllMedicines,
   showAppointment,
   showAppointmentCrt,
-  login
+  login,
+  owner
 };

@@ -28,20 +28,12 @@
   <script src="../../js/modules/tableModel.js"></script>
   <script>
     window.onload = function (){
-      
-      const url = window.location.href;
-      const urlArray = url.split('/');
-      const username = urlArray[urlArray.length - 2];
-      switch (username) {
-        case 'owner':
-          dataTable('getAllPets','pettsTableBody', '/getPetsByOwner');
-          break;
-        case 'veterinary':
-          dataTable('getAllPets','pettsTableBody', '/getAllPets');
-          break;
-        default:
-          break;
-      }    
+      fetch('/getOwnerData').then(response => response.json()).then(data => {
+        document.getElementById('username').innerHTML = data.name;
+      });
+      fetch('/getPetsByOwner').then(response => response.json()).then(data => {
+        document.getElementById('petsCount').innerHTML = data.length;
+      });
     }
   </script>
   
@@ -66,6 +58,13 @@
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a href="/logout" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
       </li>
     </ul>
   </nav>
@@ -109,15 +108,15 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item">
+            <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-chart-pie "></i>
               <p>
                 Pets
@@ -126,7 +125,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/home/owner/showOwnerPets" class="nav-link active">
+                <a href="/home/owner/showOwnerPets" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>See all Pets</p>
                 </a>
@@ -153,92 +152,47 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Show pets</h1>
+            <h1 class="m-0">Owner dashboar</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/home/owner">Home</a></li>
-              <li class="breadcrumb-item active">Show pets</li>
+              <li class="breadcrumb-item active">Owner dashboar</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->  
     </div>
     <section class="content">
-      <div class="image-wrapper">
-
-      </div>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">My pets</h3>
+          <div class="col-lg-4 col-6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3 id="petsCount">0</h3>
+                <p >My pets registered</p>
               </div>
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped table-hover">
-                    <thead>
-                      <tr>
-                        <th>Pet's Id</th>
-                        <th>Pet's Name</th>
-                        <th>Age</th>
-                        <th>Weight</th>
-                        <th>Breed</th>
-                        <th>Type</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="pettsTableBody">
-                    </tbody>
-                </table>
+              <div class="icon">
+                <i class="fas fa-paw"></i>
+              </div>
+              <a href="/home/veterinarian/showPets" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col 6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3 id="pendingAppointments">0</h3>
+
+                <p >Pending appointment's</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-calendar"></i>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </section>
-    
-  </div>
-  <div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
-        <form action="/updatePet" method="post">
-          <div class="modal-content">
-            <div class="modal-header modal-primary">
-              <h2 class="modal-title">Update Pet</h2>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" class="form-control" name="name">
-              </div>
-              <div class="form-group">
-                <label for="age">Age</label>
-                <input type="number" id="age" class="form-control" name="age">
-              </div>
-              <div class="form-group">
-                <label for="weight">Weight</label>
-                <input type="number" id="weight" class="form-control" name="weight">
-              </div>
-              <div class="form-group">
-                <label for="breed">Breed</label>
-                <input type="text" id="breed" class="form-control" name="breed">
-              </div>
-              <div class="form-group">
-                <label for="type">type</label>
-                <input type="text" id="type" class="form-control" name="type">
-              </div>
-              <input type="hidden" id="id" name="id">
-            </div>
-            
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" id="updateSubject">Update</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </form>
-    </div>
   </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
@@ -253,28 +207,9 @@
 <script src="../../js/jquerys/jquery-ui.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../js/jquerys/bootstrap.bundle.min.js"></script>
-<script src="../../js/jquerys/jquery.dataTables.min.js"></script>
-<script src="../../js/jquerys/dataTables.bootstrap4.min.js"></script>
-<script src="../../js/jquerys/dataTables.responsive.min.js"></script>
+
 <!-- AdminLTE App -->
 <script src="../../js/jquerys/adminlte.js"></script>
-<script>
-  $('#modal-default').on('show.bs.modal',function (event){
-    var button = $(event.relatedTarget)
-    var id = button.data('id')
-    var name = button.data('name')
-    var age = Number(button.data('age'))
-    var weight = Number(button.data('weigth'))
-    var breed = button.data('breed')
-    var type = button.data('type')
-    var modal = $(this)
-    modal.find('.modal-body #id').val(id)
-    modal.find('.modal-body #name').val(name)
-    modal.find('.modal-body #age').val(age)
-    modal.find('.modal-body #weight').val(weight)
-    modal.find('.modal-body #breed').val(breed)
-    modal.find('.modal-body #type').val(type)
-  })
-</script>
+
 </body>
 </html>

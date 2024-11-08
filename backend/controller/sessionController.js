@@ -14,7 +14,6 @@ function getUserId(req,res, next) {
 
 function roleValidator(req,res,next){
     let session = req.session.user;
-    console.log(session);
     if(session){
         let path = req.path;
         let role = session.role;
@@ -30,6 +29,15 @@ function roleValidator(req,res,next){
     }
 }
 
+function getSession(req,res){
+    let session = req.session.user;
+    if(session){
+        res.json(session);
+    }else{
+        res.status(404).json({message: 'Session not found'});
+    }
+}
 
-module.exports = { getUserId, roleValidator };
+
+module.exports = { getUserId, roleValidator, getSession };
 

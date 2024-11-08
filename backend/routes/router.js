@@ -13,13 +13,15 @@ const sess = require('../controller/sessionController');
 router.get('/login', pagesController.login);
 
 
+router.get('/home/owner',sess.getUserId,sess.roleValidator, pagesController.owner);
 router.get('/home/owner/showOwnerPets',sess.getUserId,sess.roleValidator ,pagesController.showPets);
 router.get('/home/owner/vaccineRecords',sess.getUserId, pagesController.showVaccineRecords);
 router.get('/home/owner/vaccineRecords/:id',sess.getUserId, pagesController.showVaccineRecords);
+router.get('/getOwnerData',sess.getSession);
 
-router.get('/home/veterinary/showPets',sess.getUserId,sess.roleValidator, pagesController.showPets);
-router.get('/home/veterinary/vaccineRecords',sess.getUserId, pagesController.showVaccineRecords);
-router.get('/home/veterinary/vaccineRecords/:id',sess.getUserId, pagesController.showVaccineRecords);
+router.get('/home/veterinarian/showPets',sess.getUserId,sess.roleValidator, pagesController.showPets);
+router.get('/home/veterinarian/vaccineRecords',sess.getUserId, pagesController.showVaccineRecords);
+router.get('/home/veterinarian/vaccineRecords/:id',sess.getUserId, pagesController.showVaccineRecords);
 
 router.get('/home/admin/addUser',sess.getUserId, pagesController.addUser)
 router.post('/crtUser', userController.addUser)
