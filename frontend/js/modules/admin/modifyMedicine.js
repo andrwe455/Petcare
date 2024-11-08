@@ -74,6 +74,7 @@ $(document).ready(function() {
 
                 searchResultsDiv.hide(); 
                 deleteButton.show();
+                modifyButton.show();
               });
   
               searchResultsDiv.append(resultItem); 
