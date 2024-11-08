@@ -2,14 +2,13 @@ function getUserId(req,res, next) {
    let session = req.session.user   
   
    if (session) {
-    //   req.user = {};
-    //   req.user.role = session.role;
-    //   req.user.id = session._id;
+      req.user = {};
+      req.user.role = session.role;
+      req.user.id = session._id;
       next();
    }
    else {
-    //    res.redirect('/login');
-    next();
+      res.redirect('/login');
    }
 }
 
