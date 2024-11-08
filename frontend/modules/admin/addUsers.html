@@ -157,33 +157,33 @@
                                             <label for="userRole" class="form-label">Select role</label>
                                             <select class="form-control" id="userRole" required>
                                                 <option value=""></option>
-                                                <option value="doctor">Doctor</option>
+                                                <option value="veterinarian">Veterinarian</option>
                                                 <option value="owner">Owner</option>
                                                 <option value="pet">Pet</option>
                                             </select>
                                         </div>
                             
-                                        <!-- Doctor -->
-                                        <div id="doctorForm" class="d-none">
+                                        <!-- Veterinarian -->
+                                        <div id="veterinarianForm" class="d-none">
                                             <div class="mb-3">
-                                                <label for="doctorName" class="form-label required">Doctor Name</label>
-                                                <input type="text" class="form-control" id="doctorName" placeholder="Name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <label for="veterinarianName" class="form-label required">Veterinarian Name</label>
+                                                <input type="text" class="form-control" id="veterinarianName" placeholder="Name" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="doctorLastName" class="form-label required">Doctor Last Name</label>
-                                                <input type="text" class="form-control" id="doctorLastName" placeholder="Last Name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <label for="veterinarianName" class="form-label required">Veterinarian Last Name</label>
+                                                <input type="text" class="form-control" id="veterinarianLastName" placeholder="Last Name" required >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="doctorAddress" class="form-label required">Address</label>
-                                                <input type="text" class="form-control" id="doctorAddress" placeholder="Address" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <label for="veterinarianAddress" class="form-label required">Address</label>
+                                                <input type="text" class="form-control" id="veterinarianAddress" placeholder="Address" required >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="doctorPhone" class="form-label required">Phone</label>
-                                                <input type="number" class="form-control" id="doctorPhone" placeholder="Number Phone" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <label for="veterinarianPhone" class="form-label required">Phone</label>
+                                                <input type="number" class="form-control" id="veterinarianPhone" placeholder="Number Phone" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="doctorEmail" class="form-label required">Email</label>
-                                                <input type="email" class="form-control" id="doctorEmail" placeholder="Email" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <label for="veterinarianEmail" class="form-label required">Email</label>
+                                                <input type="email" class="form-control" id="veterinarianEmail" placeholder="Email" required>
                                             </div>
                                             <p class="required-text">* Indicates a required field</p>
                                         </div>
@@ -192,23 +192,23 @@
                                         <div id="ownerForm" class="d-none">
                                             <div class="mb-3">
                                                 <label for="ownerName" class="form-label required">Owner Name</label>
-                                                <input type="text" class="form-control" id="ownerName" placeholder="Name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <input type="text" class="form-control" id="ownerName" placeholder="Name" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ownerLastName" class="form-label required">Owner Last Name</label>
-                                                <input type="text" class="form-control" id="ownerLastName" placeholder="Last Name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <input type="text" class="form-control" id="ownerLastName" placeholder="Last Name" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ownerAddress" class="form-label required">Address</label>
-                                                <input type="text" class="form-control" id="ownerAddress" placeholder="Address" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <input type="text" class="form-control" id="ownerAddress" placeholder="Address" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ownerPhone" class="form-label required">Phone</label>
-                                                <input type="number" class="form-control" id="ownerPhone" placeholder="Number Phone" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <input type="number" class="form-control" id="ownerPhone" placeholder="Number Phone" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ownerEmail" class="form-label required">Email</label>
-                                                <input type="email" class="form-control" id="ownerEmail" placeholder="Email" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <input type="email" class="form-control" id="ownerEmail" placeholder="Email" required>
                                             </div>
                                             <p class="required-text">* Indicates a required field</p>
                                         </div>
@@ -217,23 +217,23 @@
                                         <div id="petForm" class="d-none">
                                             <div class="mb-3">
                                                 <label for="petName" class="form-label required">Name pet</label>
-                                                <input type="text" class="form-control" id="petName" placeholder="Name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <input type="text" class="form-control" id="petName" placeholder="Name"required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="petType" class="form-label required">Type</label>
-                                                <input type="text" class="form-control" id="petType" placeholder="Type pet" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <input type="text" class="form-control" id="petType" placeholder="Type pet"required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="petBreed" class="form-label required">Breed</label>
-                                                <input type="text" class="form-control" id="petBreed" placeholder="Breed pet" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <input type="text" class="form-control" id="petBreed" placeholder="Breed pet"required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="petWeight" class="form-label required">Weight</label>
-                                                <input type="number" class="form-control" id="petWeight" placeholder="Weight" step="0.01" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <input type="number" class="form-control" id="petWeight" placeholder="Weight" step="0.01" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="petAge" class="form-label required">Age</label>
-                                                <input type="number" class="form-control" id="petAge" placeholder="Age" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                                                <input type="number" class="form-control" id="petAge" placeholder="Age" required >
                                             </div>
                                             <p class="required-text">* Indicates a required field</p>
                                         </div>
