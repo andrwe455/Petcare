@@ -28,7 +28,7 @@ async function crtappointment(req, res) {
         }
 
         const startOfAppointment = new Date(newDate.setSeconds(0, 0));
-        const endOfAppointment = new Date(newDate.getTime() + 30 * 60000); 
+        const endOfAppointment = new Date(newDate.getTime() + 30 * 60000);
 
         const conflictingAppointment = await appointmentSchema.findOne({
             veterinarian: { $regex: new RegExp(`^${veterinarian}$`, 'i') }, 
@@ -46,7 +46,7 @@ async function crtappointment(req, res) {
         }
 
         const newAppointment = new appointmentSchema(req.body);
-        newAppointment.veterinarian = veterinarian; 
+        newAppointment.veterinarian = veterinarian;
         newAppointment.date = startOfAppointment; 
         await newAppointment.save();
 
@@ -125,17 +125,26 @@ async function updateappointment(req, res) {
 
 async function deleteappointment(req, res) {
     try {
-        const { veterinarian, date } = req.body;
 
-        if (!veterinarian || !date) {
-            return res.status(400).json({ message: 'Veterinarian and date are required.' });
-        }
+        let veterinarian = req.body.veterinarian;
 
-        const appointmentDate = new Date(date);
+        const newDateStr = req.body.date;
+        const [month, day, yearAndTime] = newDateStr.split('/');
+        const [year, time] = yearAndTime.split(' ');
+        const [hours, minutes] = time.split(':');
 
-        const deletedAppointment = await appointmentSchema.findOneAndDelete({
-            veterinarian: veterinarian,
-            date: appointmentDate
+        const newDate = new Date(year, month - 1, day, hours, minutes, 0);
+
+        const startOfAppointment = new Date(newDate.setSeconds(0, 0));
+        const endOfAppointment = new Date(newDate.getTime() + 30 * 60000);
+
+        const deletedAppointment = await appointmentSchema.deleteOne({
+            _id: req.body.id ,
+            veterinarian: { $regex: new RegExp(`^${veterinarian}$`, 'i') },
+            date: {
+                $gte: startOfAppointment,
+                $lt: endOfAppointment
+            }
         });
 
         if (!deletedAppointment) {

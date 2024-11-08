@@ -45,6 +45,10 @@ router.get('/getPetsById/:id',petController.getPetsById);
 router.get('/searchMedicine', medicinesController.searchMedicine);
 router.get('/checkIdExists', medicinesController.checkIdExists);
 router.get('/getappointment',appointmentController.getappointment);
+router.get('/home/admin/appointments/Edit',sess.getUserId, pagesController.showAppointment);
+router.get('/home/admin/appointments/Crt',sess.getUserId, pagesController.showAppointmentCrt);
+router.get('/home/admin/appointments/Dlt', pagesController.showAppointmentDlt);
+
 router.get('/home/admin/appointments/Edit',sess.getUserId,sess.roleValidator, pagesController.showAppointment);
 router.get('/home/admin/appointments/Crt',sess.getUserId,sess.roleValidator, pagesController.showAppointmentCrt);
 router.get('/getSession', sess.getUserId);
@@ -53,8 +57,10 @@ router.get('/logout', loginController.Logout);
 router.post('/login', loginController.login);
 router.post('/crtOwner', petOwnerController.crtOwner);
 router.post('/crtPet', petController.crtPet);
+
 router.post('/crtappointment',appointmentController.crtappointment);
-router.put('/updateappointment',appointmentController.updateappointment)
+router.put('/updateappointment',appointmentController.updateappointment);
+router.post('/deleteappointment',appointmentController.deleteappointment);
 
 router.post('/updateVaccineRecord', petController.updateVaccineRecord);
 router.post('/updatePet', petController.updatePet);

@@ -127,10 +127,46 @@ function getAllPets(table,url){
   });
 }
 
-function getAllAppointments(table, url) {
-  fetch(url).then(response => response.json()).then(data => {
-    let i = 1;
+function getAllAppointments(table, url, action) {
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      let i = 1;
 
+
+      if (!data || data.length === 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No appointments found!',
+        });
+      } else {
+        data.forEach(element => {
+          let iconClass = action === 'edit' ? 'fas fa-edit' : 'fas fa-trash';
+          let actionTitle = action === 'edit' ? 'Edit' : 'Delete';
+
+          document.getElementById(table).innerHTML += `
+          <tr>
+            <td>${i}</td>
+            <td>${element.name}</td>
+            <td>${element.pet}</td>
+            <td>${element.veterinarian}</td>
+            <td>${element.date}</td>
+            <td>
+              <a class="${iconClass}" data-toggle="modal" data-target="#modal-default" 
+                 data-id="${element._id}" title="${actionTitle}"></a>
+            </td>
+          </tr>`;
+          i++;
+        });
+      }
+        });
+      }
+        $(function () {
+          $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+          })
+        });
     if (!data || data.length === 0) {
       Swal.fire({
         icon: 'error',
@@ -196,11 +232,17 @@ function getAllMedicines(table, url){
         i++;
       });
 
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
+      $(function () {
+        $("#example1").DataTable({
+          responsive: true,
+          lengthChange: false,
+          autoWidth: false,
+        });
       });
     });
+
+}
+
   });
 }
-      
+     

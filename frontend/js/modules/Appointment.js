@@ -25,16 +25,23 @@ function updateapp() {
         return response.json();
     })
     .then(data => {
-        console.log(data);
-        alert('Appointment updated successfully!');
-        window.location.reload(); 
+        Swal.fire({
+            icon: 'success',
+            title: 'Appointment Updated',
+            text: 'Appointment updated successfully!',
+        }).then(() => {
+            window.location.reload(); 
+        });
     })
     .catch(error => {
         console.error('Error:', error); 
-        alert(`There was an error updating the appointment: ${error.message}`);
+        Swal.fire({
+            icon: 'error',
+            title: 'Update Failed',
+            text: `There was an error updating the appointment: ${error.message}`,
+        });
     });
 }
-
 
 function createapp(event) {
     event.preventDefault(); 
@@ -61,26 +68,86 @@ function createapp(event) {
         body: JSON.stringify(jsonData) 
     })
     .then(response => {
+        return response.json().then(data => {
+            if (!response.ok) {
+                throw new Error(data.message || 'Error creating appointment');
+            }
+            return data; 
+        });
+    })
+    .then(data => {
+        if (data.success) { 
+            Swal.fire({
+                icon: 'success',
+                title: 'Appointment Created',
+                text: data.message,
+            }).then(() => {
+                window.location.reload(); 
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Creation Failed',
+                text: data.message,
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error); 
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.message,
+        });
+    });
+}
+
+function deleteapp(event) {
+    const form = document.getElementById('deleteAppointmentForm');
+    const formData = new FormData(form);
+
+    const jsonData = {};
+    formData.forEach((value, key) => {
+        jsonData[key] = value;
+    });
+
+    console.log("Data to delete:", jsonData); 
+
+    fetch("/deleteappointment", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+    })
+    .then(response => {
         if (!response.ok) {
             return response.json().then(data => {
-                throw new Error(data.message || 'Error creating appointment');
+                throw new Error(data.message || 'Error deleting appointment');
             });
         }
         return response.json();
     })
     .then(data => {
-        if (data.success) { 
-            alert(data.message);
-            window.location.reload(); 
-        } else {
-            alert(data.message);
-        }
+        Swal.fire({
+            icon: 'success',
+            title: 'Appointment Deleted',
+            text: 'The appointment has been deleted successfully!',
+        }).then(() => {
+            window.location.reload();
+        });
     })
     .catch(error => {
-        console.error('Error:', error); 
-        alert(error.message);
+        console.error('Error:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Deletion Failed',
+            text: `There was an error deleting the appointment: ${error.message}`,
+        });
     });
 }
+
+
 
 function preventNumbersInput(event) {
     const charCode = event.which ? event.which : event.keyCode;
@@ -97,11 +164,16 @@ function preventNumbersInput(event) {
     const date = document.querySelector('input[name="date"]').value.trim();
 
     if (!name || !pet || !veterinarian || !date) {
-        alert("All fields must be filled out before submitting.");
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing Fields',
+            text: 'Please fill out all the fields before submitting.',
+        });
         return false; 
     }
     return true; 
-  }
+}
+
 
   document.getElementById('name').addEventListener('keypress', preventNumbersInput);
   document.getElementById('pet').addEventListener('keypress', preventNumbersInput);
