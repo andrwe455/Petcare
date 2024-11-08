@@ -1,76 +1,204 @@
 let today = new Date();
 let year = today.getFullYear();
-let month = today.getMonth() + 1;
-let date = today.getDate();
-let dateStr = `${year}-${month}-${date}`;
+let month = String(today.getMonth() + 1).padStart(2, '0'); 
+let date = String(today.getDate()).padStart(2, '0'); 
+let dateStr = `${year}-${month}-${date}`; 
 let input = document.querySelector('[name=expiration_date]');
 
-input.setAttribute('min', dateStr);
+input.setAttribute('min', dateStr); 
 
 $(document).ready(function() {
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const medId = urlParams.get('medId');
+
+  console.log(medId);
+
+  if (medId) {
+    performSearchById(medId);
+  }
+
   let originalId = '';
   let originalCommercialName = '';
   let originalGenericName = '';
   let originalBaseId = '';
 
-  // When search button is clicked, fetch the medicine data
-  $('#searchButton').on('click', function() {
-    var searchQuery = $('#searchMedicine').val().trim();
+  function performSearch() {
+    const searchQuery = $('#searchMedicine').val().trim();
+    const deleteButton = $('#deleteButton');
+    const modifyButton = $('#modifyButton');
+    const searchResultsDiv = $('#searchResults');
 
+    $(document).on('click', function(event) {
+
+      if (!$(event.target).closest('#searchResults').length && !$(event.target).closest('#searchMedicine').length) {
+        searchResultsDiv.hide();
+      }
+    });
+  
     if (searchQuery) {
-      // Send AJAX request to search for the medicine
       $.ajax({
         url: '/searchMedicine',
         method: 'GET',
         data: { searchQuery: searchQuery },
         success: function(response) {
-          // Populate the form fields with the returned medicine data
-          $('#medCommercialName').val(response.commercial_name);
-          $('#medGenericName').val(response.generic_name);
-          $('#medDescription').val(response.description);
-          if (response.expiration_date) {
-            const expirationDate = new Date(response.expiration_date);
-            const formattedDate = expirationDate.toISOString().split('T')[0];
-            $('#medExpDate').val(formattedDate);
+
+          if (response.length > 1) {
+            searchResultsDiv.empty().show();
+  
+            response.forEach(medicine => {
+              const resultItem = $(`
+                <div class="result-item" data-id="${medicine.medId}">
+                  ${medicine.commercial_name} (${medicine.generic_name})
+                </div>
+              `);
+              
+              resultItem.on('click', function() {
+                
+                $('#medCommercialName').val(medicine.commercial_name).prop("disabled", false);
+                $('#medGenericName').val(medicine.generic_name).prop("disabled", false);
+                $('#medDescription').val(medicine.description).prop("disabled", false);
+                $('#medCategory').val(medicine.category).prop("disabled", false);
+                $('#medStock').val(medicine.stock).prop("disabled", false);
+                $('#medPrice').val(medicine.price).prop("disabled", false);
+                if (medicine.expiration_date) {
+                  const expirationDate = new Date(medicine.expiration_date);
+                  const formattedDate = expirationDate.toISOString().split('T')[0];
+                  $('#medExpDate').val(formattedDate).prop("disabled", false);
+                }
+                $('#medId').val(medicine.medId).prop("disabled", false);
+
+                originalId = medicine.medId;
+                originalCommercialName = medicine.commercial_name;
+                originalGenericName = medicine.generic_name;
+
+                searchResultsDiv.hide(); 
+                deleteButton.show();
+              });
+  
+              searchResultsDiv.append(resultItem); 
+            });
+          } else if (response.length === 1) {
+            
+            const medicine = response[0];
+            populateMedicineFields(medicine, deleteButton, searchResultsDiv, modifyButton);
           }
-          $('#medCategory').val(response.category);
-          $('#medStock').val(response.stock);
-          $('#medPrice').val(response.price);
-          $('#medId').val(response.medId);
-
-          // Store the original ID and commercial/generic names
-          originalId = response.medId;
-          originalCommercialName = response.commercial_name;
-          originalGenericName = response.generic_name;
-          originalBaseId = originalCommercialName.substring(0, 3).toUpperCase() + '_' + originalGenericName.substring(0, 3).toUpperCase();
-
-          $('#medCommercialName, #medGenericName, #medDescription, #medExpDate, #medCategory, #medStock, #medPrice, #medId').prop('disabled', false);
         },
         error: function(error) {
-          
-          $('#medicineForm')[0].reset();
-
-          Swal.fire({
-            title: error.status === 404 ? 'Not Found!' : 'Error!',
-            text: error.status === 404 ? 'Medicine not found' : 'An error occurred while fetching medicine data.',
-            icon: 'warning',
-            confirmButtonText: 'Okay'
-          })
-
-          $('#medCommercialName, #medGenericName, #medDescription, #medExpDate, #medCategory, #medStock, #medPrice, #medId').prop('disabled', true);
+          if (error.status === 404) {
+            handleNotFound(deleteButton, modifyButton);
+            disableFields();
+            searchResultsDiv.hide(); 
+          } else {
+            handleError(deleteButton,modifyButton);
+            disableFields();
+            searchResultsDiv.hide(); 
+          }
         }
       });
     } else {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Please enter a search term.',
-        icon: 'warning',
-        confirmButtonText: 'Okay'
-      });
+      handleNothingTyped();
+      searchResultsDiv.hide(); 
+    }
+  }
+
+  function performSearchById(medId) {
+    $.ajax({
+      url: '/searchMedicine',
+      method: 'GET',
+      data: { medId: medId },
+      success: function(response) {
+        if (response && response.length === 1) {
+          populateMedicineFields(response[0], $('#deleteButton'), $('#searchResults'), $('#modifyButton'));
+        } else {
+          Swal.fire('Error', 'Medicine not found or multiple results returned.', 'warning');
+        }
+      },
+      error: function() {
+        Swal.fire('Error', 'An error occurred while retrieving medicine data.', 'error');
+      }
+    });
+  }
+  
+  function populateMedicineFields(medicine, deleteButton, searchResultsDiv, modifyButton) {
+
+    $('#medCommercialName').val(medicine.commercial_name).prop("disabled", false);
+    $('#medGenericName').val(medicine.generic_name).prop("disabled", false);
+    $('#medDescription').val(medicine.description).prop("disabled", false);
+    $('#medCategory').val(medicine.category).prop("disabled", false);
+    $('#medStock').val(medicine.stock).prop("disabled", false);
+    $('#medPrice').val(medicine.price).prop("disabled", false);
+    if (medicine.expiration_date) {
+      const expirationDate = new Date(medicine.expiration_date);
+      const formattedDate = expirationDate.toISOString().split('T')[0];
+      $('#medExpDate').val(formattedDate).prop("disabled", false);
+    }
+    $('#medId').val(medicine.medId).prop("disabled", false);
+
+    originalId = medicine.medId;
+    originalCommercialName = medicine.commercial_name;
+    originalGenericName = medicine.generic_name;
+
+    if (searchResultsDiv) {
+      searchResultsDiv.hide();
+    }
+    
+    deleteButton.show();
+    modifyButton.show();
+    hidePlaceholder();
+  }
+
+  function disableFields() {
+    $('#medCommercialName, #medGenericName, #medDescription, #medCategory, #medStock, #medPrice, #medExpDate, #medId')   
+      .prop("disabled", true);  
+  }
+
+  function handleNotFound(deleteButton, modifyButton) {
+
+    Swal.fire({
+      title: 'Not Found!',
+      text: 'Medicine not found',
+      icon: 'warning',
+      confirmButtonText: 'Okay'
+    });
+
+    $('#medicineForm')[0].reset(); 
+    deleteButton.hide();
+    modifyButton.hide();
+  }
+
+  function handleError(deleteButton, modifyButton){
+
+    Swal.fire({
+      title: 'Error!',
+      text: 'An error occurred while fetching medicine data.',
+      icon: 'error',
+      confirmButtonText: 'Accept'
+    });
+
+    $('#medicineForm')[0].reset(); 
+    deleteButton.hide();
+    modifyButton.hide();
+  }
+
+  function handleNothingTyped(){
+    Swal.fire({
+      title: 'Error!',
+      text: 'Please enter a search term.',
+      icon: 'warning',
+      confirmButtonText: 'Okay'
+    });
+  }
+
+  $('#searchButton').on('click', performSearch);
+
+  $('#searchMedicine').on('keypress', function(event) {
+    if (event.which === 13) {
+      event.preventDefault();  
+      performSearch();         
     }
   });
 
-  // Handle form submission and potential ID update
   $('#medicineForm').on('submit', async function(event) {
     event.preventDefault();
 
@@ -80,10 +208,8 @@ $(document).ready(function() {
     let newId = originalId;
     let isNewIdNeeded = false;
 
-    // Check if the commercial name has changed
     if ((newCommercialName !== originalCommercialName || newGenericName !== originalGenericName) && newBaseId != originalBaseId) {
 
-      // AJAX request to check if the new ID already exists
       const checkIdExists = async (id) => {
         const checkResponse = await fetch(`/checkIdExists?id=${id}`);
         const exists = await checkResponse.json();
@@ -93,28 +219,25 @@ $(document).ready(function() {
       let counter = 1;
       let potentialId = `${newBaseId}_${String(counter).padStart(3, '0')}`;
 
-      // Keep incrementing the ID counter if it already exists
       while (await checkIdExists(potentialId)) {
         counter++;
         potentialId = `${newBaseId}_${String(counter).padStart(3, '0')}`;
       }
 
-      newId = potentialId; // Update the ID to the new unique ID
-      isNewIdNeeded = true; // Flag that a new ID is needed
-      $('#medId').val(newId); // Update the ID field with the new one
+      newId = potentialId; 
+      isNewIdNeeded = true; 
+      $('#medId').val(newId); 
       console.log(newId);
 
-      // **New check to see if the old ID still exists**
       if (!await checkIdExists(originalId)) {
-        // If the original ID does not exist, revert to the original ID
+        
         newId = originalId;
-        $('#medId').val(newId); // Revert the ID field to the original ID
-    }
+        $('#medId').val(newId); 
+      }
     }
 
-    // Collect data for submission
     const medicineData = {
-      medId: newId, // Always use the potentially new ID
+      medId: newId, 
       commercial_name: newCommercialName,
       generic_name: newGenericName,
       description: $('#medDescription').val(),
@@ -125,13 +248,13 @@ $(document).ready(function() {
     };
 
     try {
-      // Use the original ID to find the document, regardless of whether the ID changes
+      
       const response = await fetch('/modifyMedicine', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ...medicineData, originalId }) // Include originalId to find the document
+        body: JSON.stringify({ ...medicineData, originalId }) 
       });
 
       if (response.ok) {
@@ -149,4 +272,10 @@ $(document).ready(function() {
     originalId = newId; 
   });
 });
+
+function hidePlaceholder() {
+  const medCategorySelect = document.getElementById('medCategory');
+  const placeholderOption = medCategorySelect.querySelector('option[value=""]');
+  placeholderOption.style.display = 'none';
+}
 

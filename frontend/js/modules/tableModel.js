@@ -12,6 +12,9 @@ function dataTable(metodo,table,url){
   } else if(metodo == 'getAllAppointments'){
     getAllAppointments(table,url);
   }
+  else if(metodo == 'getAllMedicines'){
+    getAllMedicines(table,url);
+  }
 }
 
 async function getVaccineRecord(table,url){
@@ -38,7 +41,7 @@ async function getVaccineRecord(table,url){
       document.getElementById('id').value = data._id;
         petsName('pet-name',data.name); 
         if ($.fn.DataTable.isDataTable('#example1')) {
-          $('#example1').DataTable().clear().destroy(); // Limpiar y destruir la instancia existente
+          $('#example1').DataTable().clear().destroy(); 
         }
       if(data.vaccinationRecords.length == 0){
         Swal.fire({
@@ -156,6 +159,48 @@ function getAllAppointments(table, url, action) {
           i++;
         });
       }
+        });
+      }
+        $(function () {
+          $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+          })
+        });
+
+function getAllMedicines(table, url){
+
+  fetch(url).then(response => response.json()).then(data => {
+    let i = 1;
+      data.forEach(element => {
+
+        
+        const expirationDate = new Date(element.expiration_date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const formattedDate = expirationDate.toISOString().split('T')[0];
+        const isExpiredOrToday = expirationDate <= today;
+        const isOutOfStock = element.stock === 0;
+
+        document.getElementById(table).innerHTML += `
+          <tr>
+            <td>${i}</td>
+            <td>${element.medId}</td>
+            <td>${element.commercial_name}</td>
+            <td>${element.generic_name}</td>
+            <td>${element.description}</td>
+            <td class="${isExpiredOrToday ? 'expired' : ''}">
+              ${formattedDate} ${isExpiredOrToday ? '(EXPIRED)' : ''}
+            </td>
+            <td>${element.category}</td>
+            <td>${element.stock} ${isOutOfStock ? '(Pending stock)' : ''}</td>
+            <td>$${element.price}</td>
+            <td>
+              <a class="fas fa-edit" href="/home/admin/modifyMedicine?medId=${element.medId}"></a>
+              <a class="fas fa-trash deleteButton" style="color: red;" data-id="${element.medId}" href="#"></a>
+            </td>
+          </tr>`
+        i++;
+      });
 
       $(function () {
         $("#example1").DataTable({

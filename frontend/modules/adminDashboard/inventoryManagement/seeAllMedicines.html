@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add medicines to inventory</title>
+    <title>Inventory</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="../../../css/bootstrap-4.min.css">
     <link rel="stylesheet" href="../../../css/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="../../../css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../../css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../../css/adminlte.min.css">
     <link rel="stylesheet" href="../../../css/styles.css">
@@ -79,7 +80,7 @@
 
                 <ul class="nav-treeview">
                   <li class="nav-item">
-                    <a href="" class="nav-link active">
+                    <a href="/home/admin/createMedicine" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Add medicines</p>
                     </a>
@@ -93,7 +94,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="/home/admin/seeAllMedicines" class="nav-link">
+                    <a href="" class="nav-link active">
                       <i class="far fa-circle nav-icon"></i>
                       <p>See all medicines</p>
                     </a>
@@ -110,12 +111,12 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Add new medicines</h1>
+                <h1 class="m-0">Inventory</h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="/ ">Home</a></li>
-                  <li class="breadcrumb-item active">Add new medicines</li>
+                  <li class="breadcrumb-item active">See all medicines</li>
                 </ol>
               </div>
             </div>
@@ -125,86 +126,31 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-12">
-                <form action="/createMedicine" method="post" id="medicineForm">
-                  <div class="card card-primary card-outline">
-                    <div class="card-header">
-                      <h2 class="card-title">Medicine information</h2>
-                    </div>
-
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-3">
-                          <div class="form-group ">
-                            <label class="required" for="medCommercialName">Commercial name</label>
-                            <input type="text" id="medCommercialName" class="form-control" name="commercial_name" placeholder="Commercial medicine name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
-                          </div>
-                        </div>
-
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required" for="medGenericName">Generic name</label>
-                            <input type="text" id="medGenericName" class="form-control" name="generic_name" placeholder="Generic medicine name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
-                          </div>
-                        </div>
-
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required" for="medDescription">Description</label>
-                            <input type="text" id="medDescription" class="form-control" name="description" placeholder="Medicine used for..." required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
-                          </div>
-                        </div>
-
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required">Expiration date</label>
-                            <input type="date" id="medExpDate" class="form-control" name="expiration_date" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required" for="medCategory">Category</label>
-                            <select name="category" id="medCategory" class="form-control" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
-                              <option value="" disabled selected>Medicine category</option>
-                              <option>Antibiotic</option>
-                              <option>Vaccine</option>
-                              <option>Antiparasitic</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required" for="medStock">Quantity in stock</label>
-                            <input type="number" min="0" id="medStock" class="form-control" name="stock" placeholder="Available existences in stock" required oninvalid="this.setCustomValidity('Please enter a value greater or equal to 0')" oninput="setCustomValidity('')">
-                          </div>
-                        </div>
-
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required" for="medPrice">Price</label>
-                            <input type="number" min="0" id="medPrice" class="form-control" name="price" placeholder="Enter the price of the medicine (COP)" required oninvalid="this.setCustomValidity('Please enter a value greater or equal to 0')" oninput="setCustomValidity('')">
-                          </div>
-                        </div>
-
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label>Id</label>
-                            <input type="text" id="medId" class="form-control" name="medId" placeholder="Medicine's id (automatically generated)" readonly>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Add to inventory</button>
-                    </div>
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Medicines</h3>
                   </div>
-                </form>
-
-                <p class="required-text">* Indicates a required field</p>
+                  <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>ID</th>
+                          <th>Commercial name</th>
+                          <th>Generic name</th>
+                          <th>Description</th>
+                          <th>Expiration date</th>
+                          <th>Category</th>
+                          <th>Stock</th>
+                          <th>Price</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="medicines">
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>    
           </div>
@@ -224,7 +170,15 @@
     <script src="../../../js/jquerys/jquery-ui.min.js"></script>
     <script src="../../../js/jquerys/bootstrap.bundle.min.js"></script>
     <script src="../../../js/jquerys/adminlte.js"></script>
-    <script src="../../../js/modules/admin/addMedicine.js"></script>
     <script src="../../../js/jquerys/sweetalert2.min.js"></script>
+    <script src="../../../js/jquerys/jquery.dataTables.min.js"></script>
+    <script src="../../../js/jquerys/dataTables.bootstrap4.min.js"></script>
+    <script src="../../../js/modules/tableModel.js"></script>
+    <script src="../../../js/modules/admin/removeMedicine.js"></script>
+    <script>
+      window.onload = function (){
+        dataTable('getAllMedicines','medicines', '/getAllMedicines');
+      }
+    </script>
   </body>
 </html>
