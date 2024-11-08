@@ -153,15 +153,13 @@ function getAllAppointments(table, url) {
         i++;
       });
     }
-        });
-      }
-        $(function () {
-          $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-          })
-        });
-  })
-}
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+      })
+    });
+  });
+}       
 
 function getAllMedicines(table, url){
 
@@ -205,7 +203,4 @@ function getAllMedicines(table, url){
     });
   });
 }
-      })
-    });
-  });
-}
+      
