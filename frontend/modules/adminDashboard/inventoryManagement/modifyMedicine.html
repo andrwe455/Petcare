@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="../../../css/bootstrap-4.min.css">
-    <link rel="stylesheet" href="../../../css/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../../../css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../../../css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../../css/adminlte.min.css">
@@ -45,7 +44,7 @@
               <img src="../../../images/avatar.png" class="img-circle elevation-2 logo" alt="User avatar">
             </div>
             <div class="info">
-              <a href="#" class="d-block" id="username">Admin F. Kennedy</a>
+              <a href=" " class="d-block" id="username">Admin F. Kennedy</a>
             </div>
           </div>
 
@@ -66,17 +65,17 @@
               <li class="nav-item">
                 <a href="/home/admin" class="nav-link ">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>
-                    Dashboard
-                  </p>
+                  <p>Dashboard</p>
                 </a>
               </li>
+
               <li class="nav-item menu-open">
-                <a href="" class="nav-link">
-                  <i class="fa-solid fa-archive nav-icon active"></i>
+                <a href="" class="nav-link active">
+                  <i class="fa-solid fa-archive nav-icon"></i>
                   <p>Inventory</p>
                   <i class="fas fa-angle-left right"></i>
                 </a>
+
                 <ul class="nav-treeview">
                   <li class="nav-item">
                     <a href="/home/admin/createMedicine" class="nav-link">
@@ -100,51 +99,51 @@
                   </li>
                 </ul>
               </li>
+
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="nav-icon fas fa-calendar"></i>
-                  <p>
-                    Appointments
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
+                  <p>Appointments</p>
+                  <i class="right fas fa-angle-left"></i>
                 </a>
+
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="/home/admin/appointments/Crt" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>create appointment</p>
+                      <p>Create appointment</p>
                     </a>
                   </li>
+
                   <li class="nav-item">
                     <a href="/home/admin/appointments/Edit" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>modify appointment</p>
+                      <p>Modify appointment</p>
                     </a>
                   </li>
                 </ul>
               </li>
+
               <li class="nav-item">
                 <a href="" class="nav-link">
-                    <i class="fa-solid fa-archive nav-icon"></i>
-                    <p>
-                        Users
-                    </p>
-                    <i class="fas fa-angle-left right"></i>
+                  <i class="fa-solid fa-archive nav-icon"></i>
+                  <p>Users</p>
+                  <i class="fas fa-angle-left right"></i>
                 </a>
     
                 <ul class="nav-treeview">
-                    <li class="nav-item">
-                        <a href="/home/admin/addUser" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Add users</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="/home/admin/showUsers" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>View users</p>
-                      </a>
-                    </li>
+                  <li class="nav-item">
+                    <a href="/home/admin/addUser" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add users</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/home/admin/showUsers" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View users</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -161,7 +160,9 @@
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="/ ">Home</a></li>
+                  <li class="breadcrumb-item">
+                    <a href="/ ">Home</a>
+                  </li>
                   <li class="breadcrumb-item active">Modify medicines</li>
                 </ol>
               </div>
@@ -210,7 +211,7 @@
                         <div class="col-3">
                           <div class="form-group">
                             <label class="required">Expiration date</label>
-                            <input type="date" id="medExpDate" class="form-control" name="expiration_date" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')" disabled>
+                            <input type="date" id="medExpDate" class="form-control" name="expiration_date" required oninvalid="this.setCustomValidity('Please enter a date')" oninput="setCustomValidity('')" disabled>
                           </div>
                         </div>
                       </div>
