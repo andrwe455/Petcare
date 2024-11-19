@@ -31,6 +31,7 @@ router.get('/home/admin',sess.getUserId,sess.roleValidator, pagesController.admi
 router.get('/home/admin/addUser',sess.getUserId,sess.roleValidator, pagesController.addUser)
 router.post('/crtUser',registerController.register,userController.addUser)
 router.get('/home/admin/showUsers',sess.getUserId,sess.roleValidator, pagesController.showUsers);
+router.get('/getAllUsers', userController.getAllUsers);
 
 router.get('/home/admin/createMedicine',sess.getUserId,sess.roleValidator, pagesController.createMedicine);
 router.get('/home/admin/modifyMedicine',sess.getUserId,sess.roleValidator, pagesController.modifyMedicine);
