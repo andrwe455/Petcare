@@ -3,7 +3,6 @@ const usersSchema = require('../schemas/userSchema');
 
 async function login(req,res) {
   const {email, password} = req.body;
-  console.log(email);
   try {
       signIn(auth,email,password).then((user) => {
           usersSchema.findOne({email: email}).then((user) => {

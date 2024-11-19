@@ -8,6 +8,11 @@ const petSchema = new mongoose.Schema({
   weight: { type: Number, required: true },
   age: { type: Number, required: true },
   image: { type: String },
+  allergies: [
+    {
+      name: { type: String }
+    }
+  ],
   vaccinationRecords: 
   [
     {
