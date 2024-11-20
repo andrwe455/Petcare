@@ -1,0 +1,21 @@
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px; /* Distancia desde el borde inferior */
+    right: 20px; /* Distancia desde el borde derecho */
+    z-index: 1000; /* Para asegurarte de que esté encima de otros elementos */
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin bordes */
+    padding: 0; /* Sin relleno adicional */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    width: 60px; /* Ajusta el tamaño del botón */
+    height: 60px;
+    border-radius: 50%; /* Botón circular */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+  }
+  
+  .whatsapp-button img {
+    width: 100%; /* Imagen ajustada al tamaño del botón */
+    height: 100%;
+    border-radius: 50%; /* Imagen circular */
+  }
+  

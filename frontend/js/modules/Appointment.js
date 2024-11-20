@@ -1,47 +1,79 @@
 function updateapp() {
+    // Obtener el formulario y sus datos
     const form = document.getElementById('updatea');
     const formData = new FormData(form);
 
+    // Convertir los datos del formulario en un objeto JSON
     const jsonData = {};
     formData.forEach((value, key) => {
-        jsonData[key] = value;
+        if (key === 'veterinarian') {
+            const vetSelect = document.getElementById('veterinarian');
+            jsonData.veterinarian = vetSelect.options[vetSelect.selectedIndex]?.text || null; // Nombre del veterinario
+        } else {
+            jsonData[key] = value;
+        }
     });
 
-    console.log(JSON.stringify(jsonData));
-
-    fetch("/updateappointment", {
-        method: 'PUT', 
-        headers: {
-            'Content-Type': 'application/json' 
-        },
-        body: JSON.stringify(jsonData) 
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(data => { 
-                throw new Error(data.message || 'Error updating appointment');
-            });
-        }
-        return response.json();
-    })
-    .then(data => {
-        Swal.fire({
-            icon: 'success',
-            title: 'Appointment Updated',
-            text: 'Appointment updated successfully!',
-        }).then(() => {
-            window.location.reload(); 
-        });
-    })
-    .catch(error => {
-        console.error('Error:', error); 
+    // Validar si la mascota está seleccionada
+    const petSelect = document.getElementById('pet');
+    if (petSelect) {
+        jsonData.pet = petSelect.value; // ID de la mascota seleccionada
+    } else {
         Swal.fire({
             icon: 'error',
-            title: 'Update Failed',
-            text: `There was an error updating the appointment: ${error.message}`,
+            title: 'Validation Error',
+            text: 'Please select a pet before updating the appointment.',
         });
-    });
+        return;
+    }
+
+    // Validar si los campos obligatorios están completos
+    if (!jsonData.veterinarian || !jsonData.date || !jsonData.id) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing Information',
+            text: 'Please complete all required fields before updating the appointment.',
+        });
+        return;
+    }
+
+    console.log("Data to send:", JSON.stringify(jsonData)); // Para depuración
+
+    // Enviar datos al servidor
+    fetch("/updateappointment", {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jsonData),
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.message || 'Error updating appointment');
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Appointment Updated',
+                text: 'The appointment has been updated successfully!',
+            }).then(() => {
+                window.location.reload(); // Recargar la página después de actualizar
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Update Failed',
+                text: `There was an error updating the appointment: ${error.message}`,
+            });
+        });
 }
+
 
 function createapp(event) {
     event.preventDefault(); 
@@ -55,10 +87,23 @@ function createapp(event) {
 
     const jsonData = {};
     formData.forEach((value, key) => {
-        jsonData[key] = value;
+        if (key === 'name') {
+            const nameSelect = document.getElementById('name');
+            jsonData.name = nameSelect.options[nameSelect.selectedIndex].text;
+        } else if (key === 'pet') {
+            // Get the selected option text for the pet
+            const petSelect = document.getElementById('pet');
+            jsonData.pet = petSelect.options[petSelect.selectedIndex].text;
+        } else if (key === 'veterinarian') {
+            // Get the selected option text for the veterinarian
+            const vetSelect = document.getElementById('veterinarian');
+            jsonData.veterinarian = vetSelect.options[vetSelect.selectedIndex].text;
+        } else {
+            jsonData[key] = value; // For other fields, use the original value
+        }
     });
 
-    console.log(JSON.stringify(jsonData)); 
+    console.log(JSON.stringify(jsonData)); // Debugging: See the final payload
 
     fetch("/crtappointment", { 
         method: 'POST', 
@@ -174,6 +219,45 @@ function preventNumbersInput(event) {
     return true; 
 }
 
+
+$(document).ready(() => {
+    // Load clients and veterinarians
+    fetch('/crtappointmentusers?role=owner')
+        .then(res => res.json())
+        .then(data => {
+            const clientSelect = $('#name');
+            data.forEach(client => {
+                clientSelect.append(new Option(`${client.name} ${client.lastName}`, client._id));
+            });
+        });
+
+    fetch('/crtappointmentusers?role=veterinarian')
+        .then(res => res.json())
+        .then(data => {
+            const vetSelect = $('#veterinarian');
+            data.forEach(vet => {
+                vetSelect.append(new Option(`${vet.name} ${vet.lastName}`, vet._id));
+            });
+        });
+
+    // Load pets based on selected client
+    $('#name').on('change', function () {
+        const clientId = $(this).val();
+        if (clientId) {
+            fetch(`/crtappointmentpets?owner=${clientId}`)
+                .then(res => res.json())
+                .then(data => {
+                    const petSelect = $('#pet');
+                    petSelect.empty().append(new Option('Select a pet', ''));
+                    data.forEach(pet => {
+                        petSelect.append(new Option(pet.name, pet._id));
+                    });
+                });
+        } else {
+            $('#pet').empty().append(new Option('Select a pet', ''));
+        }
+    });
+});
 
   document.getElementById('name').addEventListener('keypress', preventNumbersInput);
   document.getElementById('pet').addEventListener('keypress', preventNumbersInput);

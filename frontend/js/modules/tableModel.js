@@ -137,39 +137,58 @@ function getAllPets(table,url,role){
   });
 }
 
-function getAllAppointments(table, url) {
-  fetch(url).then(response => response.json()).then(data => {
-    let i = 1;
+function getAllAppointments(table, url, action) {
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      let i = 1;
 
-    if (!data || data.length === 0) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'No appointments found!',
+      if (!data || data.length === 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No appointments found!',
+        });
+      } else {
+        data.forEach(element => {
+          let iconClass = action === 'edit' ? 'fas fa-edit' : 'fas fa-trash';
+          let actionTitle = action === 'edit' ? 'Edit' : 'Delete';
+          
+          const dateFormatted = new Date(element.date).toLocaleString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+          });
+
+          document.getElementById(table).innerHTML += `
+          <tr>
+            <td>${i}</td>
+            <td>${element.name}</td>
+            <td>${element.pet}</td>
+            <td>${element.veterinarian}</td>
+            <td>${dateFormatted}</td>
+            <td>
+              <a class="${iconClass}" data-toggle="modal" data-target="#modal-default" 
+                 data-id="${element._id}" title="${actionTitle}"></a>
+            </td>
+          </tr>`;
+          i++;
+        });
+      }
+
+      $(function () {
+        $("#example1").DataTable({
+          responsive: true,
+          lengthChange: false,
+          autoWidth: false,
+        });
       });
-    } else {
-      data.forEach(element => {
-        document.getElementById(table).innerHTML += `
-        <tr>
-          <td>${i}</td>
-          <td>${element.name}</td>
-          <td>${element.pet}</td>
-          <td>${element.veterinarian}</td>
-          <td>${element.date}</td>
-          <td>
-            <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-id="${element._id}"></a>
-          </td>
-        </tr>`;
-        i++;
-      });
-    }
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-      })
     });
-  });
-}       
+}
+
 
 function getAllMedicines(table, url){
 
