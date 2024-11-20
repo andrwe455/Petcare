@@ -9,6 +9,7 @@ const userController = require('../controller/userController')
 const appointmentController = require('../controller/appointmentController');
 const sess = require('../controller/sessionController');
 const registerController = require('../controller/registerController');
+const photoController = require('../controller/photosController');
 
 
 router.get('/login', pagesController.login);
@@ -57,6 +58,7 @@ router.get('/logout', loginController.Logout);
 
 router.post('/login', loginController.login);
 router.post('/crtOwner', petOwnerController.crtOwner);
+router.post('/createPet',photoController.crPet ,petController.crtPet);
 router.post('/crtPet', petController.crtPet);
 
 router.post('/crtappointment',appointmentController.crtappointment);
@@ -72,5 +74,6 @@ router.post('/updatePet', petController.updatePet);
 router.post('/createMedicine', medicinesController.createMedicine);
 router.post('/modifyMedicine', medicinesController.modifyMedicine);
 router.delete('/removeMedicine', medicinesController.removeMedicine);
+router.delete('/deletePet/:id/:name',photoController.deletePhoto, petController.deletePet);
 
 module.exports = router;

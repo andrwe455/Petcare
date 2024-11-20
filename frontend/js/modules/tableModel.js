@@ -119,11 +119,16 @@ function getAllPets(table,url,role){
         <td>${element.weight} Kg</td>
         <td>${element.breed}</td>
         <td>${element.type}</td>
+        <td class="w-25 text-center">
+          <img src="${element.image}" alt="Pet image" class="img-thumbnail w-25">
+          <a class="fas fa-trash deleteButton" style="color: red;" href="/deletePhoto/${element.name}"></a>
+        </td>
         <td>
           <a class="fas fa-eye" href="/home/${role}/vaccineRecords/${element._id}"></a>
           <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-name="${element.name}" 
           data-age="${element.age}" data-weigth="${element.weight}" data-breed="${element.breed}" 
           data-id="${element._id}" data-type="${element.type}"></a>
+          <a class="fas fa-trash deleteButton" style="color: red;" onclick="deletePet('${element._id}','${element.name}')" aria-hidden="false"></a>
         </td>
       </tr>`;
       i++;
