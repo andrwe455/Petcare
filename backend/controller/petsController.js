@@ -55,8 +55,13 @@ async function crtPet(req, res) {
   try{
     const ownerId = req.owner;
     const pet = await Pet.create(req.body);
-    return res.status(201).json(pet);
-  }catch{
+
+    if(req.session.user.role === 'owner'){
+      res.redirect('/home/owner/showOwnerPets?info=Pet created')
+    }else{
+      res.status(201).json(pet);
+    }
+  }catch (error) {
     return res.status(500).json({ message: error.message });
   } 
 }
@@ -113,6 +118,20 @@ async function updatePet(req, res) {
   }
 }
 
+async function deletePet(req, res) {
+  try {
+    const petId = req.params.id;
+    const pet = await Pet.findByIdAndDelete(petId);
+    if (!pet) {
+      return res.status(404).json({ message: 'Pet not found' });
+    }
+    res.status(200).json({ message: 'Pet deleted' });
+  }
+  catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
 module.exports = { 
   getPetVaccinationRecords,
   getVaccinationRecords,
@@ -121,5 +140,6 @@ module.exports = {
   crtPet,
   getPetsById,
   updateVaccineRecord,
-  updatePet
+  updatePet,
+  deletePet
 };

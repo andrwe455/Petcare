@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Pet care</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -26,6 +26,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../../css/adminlte.min.css">
   <script src="../../js/modules/tableModel.js"></script>
+  <script src="../../js/modules/modalModel.js"></script>
   <script>
     window.onload = function (){
       
@@ -37,10 +38,11 @@
       });
       switch (username) {
         case 'owner':
-          dataTable('getAllPets','pettsTableBody', '/getPetsByOwner','owner');
           document.getElementById('allpets').href = '/home/owner/showOwnerPets';
           document.getElementById('vaccine').href = '/home/owner/vaccineRecords';
           document.getElementById('home').href = '/home/owner';
+          dataTable('getAllPets','pettsTableBody', '/getPetsByOwner','owner');
+          createPetModal()
           break;
         case 'veterinarian':
           dataTable('getAllPets','pettsTableBody', '/getAllPets','veterinarian');
@@ -126,7 +128,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="" class="nav-link" id="home">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-file"></i>
               <p>
                 Dashboard
               </p>
@@ -134,7 +136,7 @@
           </li>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-chart-pie "></i>
+              <i class="nav-icon fas fa-paw "></i>
               <p>
                 Pets
                 <i class="right fas fa-angle-left"></i>
@@ -187,9 +189,10 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="card card-primary">
+            <div class="card card-primary card-outline">
               <div class="card-header">
                 <h3 class="card-title">My pets</h3>
+                <div class="float-sm-right" id="buttonCreate"></div>
               </div>
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped table-hover">
@@ -201,6 +204,7 @@
                         <th>Weight</th>
                         <th>Breed</th>
                         <th>Type</th>
+                        <th>Photo</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -245,6 +249,10 @@
                 <label for="type">type</label>
                 <input type="text" id="type" class="form-control" name="type">
               </div>
+              <div class="form-group">
+                <label for="photo">Photo</label>
+                <input type="file" id="photo" class="form-control" name="photo">
+              </div>
               <input type="hidden" id="id" name="id">
             </div>
             
@@ -256,6 +264,7 @@
         </form>
     </div>
   </div>
+  
     <!-- /.content-wrapper -->
     <footer class="main-footer">
 
@@ -272,8 +281,14 @@
 <script src="../../js/jquerys/jquery.dataTables.min.js"></script>
 <script src="../../js/jquerys/dataTables.bootstrap4.min.js"></script>
 <script src="../../js/jquerys/dataTables.responsive.min.js"></script>
+<script src="../../js/jquerys/bs-custom-file-input.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../js/jquerys/adminlte.js"></script>
+<script>
+  $(function () {
+    bsCustomFileInput.init();
+  });
+</script>
 <script>
   $('#modal-default').on('show.bs.modal',function (event){
     var button = $(event.relatedTarget)
