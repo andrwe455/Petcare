@@ -67,7 +67,6 @@ router.post('/deleteappointment',appointmentController.deleteappointment);
 router.get('/crtappointmentusers',appointmentController.crtappointmentusers);
 router.get('/crtappointmentpets',appointmentController.crtappointmentpets);
 
-
 router.post('/updateVaccineRecord', petController.updateVaccineRecord);
 router.post('/updatePet', petController.updatePet);
 

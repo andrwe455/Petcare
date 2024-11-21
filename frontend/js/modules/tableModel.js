@@ -142,10 +142,13 @@ function getAllPets(table,url,role){
   });
 }
 
+
 function getAllAppointments(table, url, action) {
   fetch(url)
     .then(response => response.json())
     .then(data => {
+      const tableBody = document.getElementById(table);
+      tableBody.innerHTML = ""; 
       let i = 1;
 
       if (!data || data.length === 0) {
@@ -154,42 +157,49 @@ function getAllAppointments(table, url, action) {
           title: 'Oops...',
           text: 'No appointments found!',
         });
-      } else {
-        data.forEach(element => {
-          let iconClass = action === 'edit' ? 'fas fa-edit' : 'fas fa-trash';
-          let actionTitle = action === 'edit' ? 'Edit' : 'Delete';
-          
-          const dateFormatted = new Date(element.date).toLocaleString('en-US', {
-            month: '2-digit',
-            day: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-          });
-
-          document.getElementById(table).innerHTML += `
-          <tr>
-            <td>${i}</td>
-            <td>${element.name}</td>
-            <td>${element.pet}</td>
-            <td>${element.veterinarian}</td>
-            <td>${dateFormatted}</td>
-            <td>
-              <a class="${iconClass}" data-toggle="modal" data-target="#modal-default" 
-                 data-id="${element._id}" title="${actionTitle}"></a>
-            </td>
-          </tr>`;
-          i++;
-        });
+        return;
       }
 
-      $(function () {
-        $("#example1").DataTable({
-          responsive: true,
-          lengthChange: false,
-          autoWidth: false,
+      const fragment = document.createDocumentFragment();
+      data.forEach(element => {
+        const dateFormatted = new Date(element.date).toLocaleString('en-US', {
+          month: '2-digit',
+          day: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
         });
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${i}</td>
+          <td>${element.name}</td>
+          <td>${element.pet}</td>
+          <td>${element.veterinarian}</td>
+          <td>${dateFormatted}</td>
+          <td>
+            <a class="${action === 'edit' ? 'fas fa-edit' : 'fas fa-trash'}"
+               data-toggle="modal" data-target="#modal-default" 
+               data-id="${element._id}" title="${action === 'edit' ? 'Edit' : 'Delete'}"></a>
+          </td>`;
+        fragment.appendChild(row);
+        i++;
+      });
+      tableBody.appendChild(fragment);
+
+      $("#example1").DataTable({
+        responsive: true,
+        lengthChange: false,
+        autoWidth: false,
+      });
+    })
+    .catch(error => {
+      console.error("Error fetching appointments:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Fetch Error',
+        text: 'Failed to fetch appointments. Please try again later.',
       });
     });
 }
