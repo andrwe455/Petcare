@@ -70,7 +70,6 @@ async function searchMedicine(req, res) {
   }
 }
 
-
 async function modifyMedicine(req, res) {
   const { medId, originalId, commercial_name, generic_name, description, expiration_date, category, stock, price } = req.body;
 
@@ -117,7 +116,8 @@ async function removeMedicine(req, res){
     }
 
     return res.status(200).json({ message: 'Medicine deleted successfully' });
-  } catch (error) {
+  } 
+  catch (error) {
     console.error("Error deleting medicine:", error);
     return res.status(500).json({ message: 'Error deleting medicine' });
   }
@@ -125,7 +125,7 @@ async function removeMedicine(req, res){
 
 async function getAllMedicines(req, res) {
   try {
-    const medicines = await medicineSchema .find();
+    const medicines = await medicineSchema.find();
     res.status(200).json(medicines);
   }
   catch (error) {
