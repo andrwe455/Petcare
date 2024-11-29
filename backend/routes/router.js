@@ -10,23 +10,23 @@ const appointmentController = require('../controller/appointmentController');
 const sess = require('../controller/sessionController');
 const registerController = require('../controller/registerController');
 const photoController = require('../controller/photosController');
-
+const recipesController = require('../controller/recipesController');
 
 router.get('/login', pagesController.login);
-
 
 router.get('/home/owner',sess.getUserId,sess.roleValidator, pagesController.owner);
 router.get('/home/owner/showOwnerPets',sess.getUserId,sess.roleValidator ,pagesController.showPets);
 router.get('/home/owner/vaccineRecords',sess.getUserId, sess.roleValidator,pagesController.showVaccineRecords);
 router.get('/home/owner/vaccineRecords/:id',sess.getUserId, sess.roleValidator,pagesController.showVaccineRecords);
 
-
 router.get('/home/veterinarian',sess.getUserId,sess.roleValidator, pagesController.veterinarian);
 router.get('/home/veterinarian/showPets',sess.getUserId,sess.roleValidator, pagesController.showPets);
 router.get('/home/veterinarian/vaccineRecords',sess.getUserId,sess.roleValidator, pagesController.showVaccineRecords);
 router.get('/home/veterinarian/vaccineRecords/:id',sess.getUserId, sess.roleValidator,pagesController.showVaccineRecords);
+router.get('/home/veterinarian/createRecipe', sess.getUserId,sess.roleValidator, pagesController.createRecipe);
 
 router.get('/getUserData',sess.getSession);
+router.get('/getAllUsers', userController.getAllUsers);
 
 router.get('/home/admin',sess.getUserId,sess.roleValidator, pagesController.admin);
 router.get('/home/admin/addUser',sess.getUserId,sess.roleValidator, pagesController.addUser)
@@ -72,5 +72,7 @@ router.post('/createMedicine', medicinesController.createMedicine);
 router.post('/modifyMedicine', medicinesController.modifyMedicine);
 router.delete('/removeMedicine', medicinesController.removeMedicine);
 router.delete('/deletePet/:id/:name',photoController.deletePhoto, petController.deletePet);
+
+router.post('/createRecipe', recipesController.createRecipe);
 
 module.exports = router;
