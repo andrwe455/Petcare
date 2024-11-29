@@ -6,7 +6,6 @@
     <title>Add medicines to inventory</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="../../../css/bootstrap-4.min.css">
     <link rel="stylesheet" href="../../../css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../../../css/responsive.bootstrap4.min.css">
@@ -35,7 +34,7 @@
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="/ " class="brand-link">
           <img src="../../../images/slider-img.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">PetCare</span>
+          <span class="brand-text font-weight-light">PETCARE</span>
         </a>
 
         <div class="sidebar">
@@ -76,6 +75,7 @@
                   <p>Inventory</p>
                   <i class="fas fa-angle-left right"></i>
                 </a>
+                
                 <ul class="nav-treeview">
                   <li class="nav-item">
                     <a href=" " class="nav-link active">
@@ -160,13 +160,16 @@
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="/ ">Home</a></li>
+                  <li class="breadcrumb-item">
+                    <a href="/ ">Home</a>
+                  </li>
                   <li class="breadcrumb-item active">Add new medicines</li>
                 </ol>
               </div>
             </div>
           </div>
         </div>
+        
         <section class="content">
           <div class="container-fluid">
             <div class="row">
@@ -212,7 +215,7 @@
                         <div class="col-3">
                           <div class="form-group">
                             <label class="required" for="medCategory">Category</label>
-                            <select name="category" id="medCategory" class="form-control" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                            <select name="category" id="medCategory" class="form-control" required oninvalid="this.setCustomValidity('Please select a category')" oninput="setCustomValidity('')">
                               <option value="" disabled selected>Medicine category</option>
                               <option>Antibiotic</option>
                               <option>Vaccine</option>
@@ -260,7 +263,7 @@
       <footer class="main-footer">
         <strong>
           Copyright &copy; 2024
-          <a href="/ ">PetCare</a>.
+          <a href="/ ">PETCARE</a>.
         </strong>
       </footer>
     </div>
