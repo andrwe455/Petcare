@@ -60,54 +60,60 @@ function addMedicine() {
   const medicineInput = document.getElementById('medicinesInfo');
 
   const medicineName = medicineInput.value;
+
+  if(!medicineName){
+    alert('Enter a medicine first');
+  }
   
-  const newRow = `
-    <div class="row mb-2" id="medicineRow${medicineCounter}">
-      <div class="col-6">
-        <div class="form-group">
-          <div class="input-group">
-            <input type="number" id="doseAmount${medicineCounter}" min="1" class="form-control" name="dose_amount" placeholder="amount" required oninvalid="this.setCustomValidity('Please enter a valid amount')" oninput="this.setCustomValidity('')">
+  else{
+    const newRow = `
+      <div class="row mb-2" id="medicineRow${medicineCounter}">
+        <div class="col-6">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="number" id="doseAmount${medicineCounter}" min="1" class="form-control" name="dose_amount" placeholder="amount" required oninvalid="this.setCustomValidity('Please enter a valid amount')" oninput="this.setCustomValidity('')">
+              
+              <div>
+                <select id="doseType${medicineCounter}" class="form-control hide-placeholder" name="dose_type" required oninvalid="this.setCustomValidity('Please select one')" oninput="setCustomValidity('')">
+                  <option value="" disabled selected>Pills/Drops</option>
+                  <option>Pills</option>
+                  <option>Drops</option>
+                </select>
+              </div>
+              
+              <div class="input-group-prepend">
+                <span class="input-group-text">per</span>
+              </div>
+              
+              <input type="number" id="doseDays${medicineCounter}" min="1" class="form-control" name="dose_time_amount" placeholder="time" required oninvalid="this.setCustomValidity('Please enter a valid number of days')" oninput="this.setCustomValidity('')">
+              
+              <div>
+                <select class="form-control hide-placeholder" name="dose_time_type" required oninvalid="this.setCustomValidity('Please select one')" oninput="setCustomValidity('')">
+                  <option value="" disabled selected>Hours/Days</option>
+                  <option>Hours</option>
+                  <option>Days</option>
+                </select>
+              </div>
             
-            <div>
-              <select id="doseType${medicineCounter}" class="form-control hide-placeholder" name="dose_type" required oninvalid="this.setCustomValidity('Please select one')" oninput="setCustomValidity('')">
-                <option value="" disabled selected>Pills/Drops</option>
-                <option>Pills</option>
-                <option>Drops</option>
-              </select>
+              <input type="text" title="${medicineName}" id="medicineName${medicineCounter}" class="form-control" name="medicines" placeholder="Medicine" value="${medicineName}" readonly>
+            
+              <button type="button" class="btn btn-outline-danger ml-2" onclick="this.closest('.row').remove(); medicineCounter--;">
+                <i class="fas fa-minus"></i>
+              </button>
             </div>
-            
-            <div class="input-group-prepend">
-              <span class="input-group-text">per</span>
-            </div>
-            
-            <input type="number" id="doseDays${medicineCounter}" min="1" class="form-control" name="dose_time_amount" placeholder="time" required oninvalid="this.setCustomValidity('Please enter a valid number of days')" oninput="this.setCustomValidity('')">
-            
-            <div>
-              <select class="form-control hide-placeholder" name="dose_time_type" required oninvalid="this.setCustomValidity('Please select one')" oninput="setCustomValidity('')">
-                <option value="" disabled selected>Hours/Days</option>
-                <option>Hours</option>
-                <option>Days</option>
-              </select>
-            </div>
-          
-            <input type="text" title="${medicineName}" id="medicineName${medicineCounter}" class="form-control" name="medicines" placeholder="Medicine" value="${medicineName}" readonly>
-          
-            <button type="button" class="btn btn-outline-danger ml-2" onclick="this.closest('.row').remove(); medicineCounter--;">
-              <i class="fas fa-minus"></i>
-            </button>
           </div>
         </div>
       </div>
-    </div>
-  `;
+    `;
 
-  medicinesGroup.insertAdjacentHTML('beforeend', newRow);
+    medicinesGroup.insertAdjacentHTML('beforeend', newRow);
 
-  medicineInput.value = '';
+    medicineInput.value = '';
 
-  medicineCounter++; 
+    medicineCounter++; 
 
-  hidePlaceholder();
+    hidePlaceholder();
+  }
 }
 
 function setAssigner(){
@@ -164,6 +170,7 @@ function getPets(){
 
       const option = document.createElement('option');
       option.textContent = 'No pets found';
+      option.value = 0;
       select.appendChild(option);
       select.setAttribute('disabled', true);
     }
@@ -217,8 +224,10 @@ $(document).ready(function() {
 
     const medicines = [];
     for (let i = 0; i < medicineCounter; i++) {
+
       const medicineInput = document.getElementById(`medicineName${i}`);
-      if (medicineInput) {
+
+      if (medicineInput && medicineInput.value.trim()) {
         medicines.push(medicineInput.value.trim());
       }
     }

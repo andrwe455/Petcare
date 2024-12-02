@@ -150,8 +150,7 @@ $(document).ready(function() {
   }
 
   function disableFields() {
-    $('#medCommercialName, #medGenericName, #medDescription, #medCategory, #medStock, #medPrice, #medExpDate, #medId')   
-      .prop("disabled", true);  
+    $('#medCommercialName, #medGenericName, #medDescription, #medCategory, #medStock, #medPrice, #medExpDate, #medId').prop("disabled", true);  
   }
 
   function handleNotFound(deleteButton, modifyButton) {

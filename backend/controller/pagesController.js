@@ -18,6 +18,12 @@ function createRecipe(req, res) {
   res.sendFile(path.join(proyectPath,'frontend','modules','veterinarian','recipesManagement', 'createRecipe.html'));
 }
 
+function searchRecipe(req, res){
+  res.setHeader('Cache-Control', 'no-store');
+  const proyectPath = path.resolve(__dirname, '../..');
+  res.sendFile(path.join(proyectPath,'frontend','modules','veterinarian','recipesManagement', 'searchRecipe.html'));
+}
+
 function addUser(req, res){
   res.setHeader('Cache-Control', 'no-store');
   const proyectPath = path.resolve(__dirname, '../..');
@@ -91,8 +97,9 @@ module.exports = {
   showPets,
   showVaccineRecords,
   addUser,
-  createMedicine,
   createRecipe,
+  searchRecipe,
+  createMedicine,
   modifyMedicine,
   seeAllMedicines,
   showAppointment,
