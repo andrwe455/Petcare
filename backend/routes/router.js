@@ -74,6 +74,7 @@ router.delete('/removeMedicine', medicinesController.removeMedicine);
 router.delete('/deletePet/:id/:name',photoController.deletePhoto, petController.deletePet);
 
 router.post('/createRecipe', recipesController.createRecipe);
+router.put('/updateRecipe/:id', recipesController.modifyRecipe);
 router.get('/getRecipes', recipesController.getRecipes);
 
 module.exports = router;

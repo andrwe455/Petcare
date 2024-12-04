@@ -58,8 +58,9 @@ function addMedicine() {
 
   const medicinesGroup = document.getElementById('medicinesGroup');
   const medicineInput = document.getElementById('medicinesInfo');
-
   const medicineName = medicineInput.value;
+
+  medicineCounter = countMedicines();
 
   if(!medicineName){
     alert('Enter a medicine first');
@@ -85,10 +86,10 @@ function addMedicine() {
                 <span class="input-group-text">per</span>
               </div>
               
-              <input type="number" id="doseDays${medicineCounter}" min="1" class="form-control" name="dose_time_amount" placeholder="time" required oninvalid="this.setCustomValidity('Please enter a valid number of days')" oninput="this.setCustomValidity('')">
+              <input type="number" id="doseTime${medicineCounter}" min="1" class="form-control" name="dose_time_amount" placeholder="time" required oninvalid="this.setCustomValidity('Please enter a valid number of days')" oninput="this.setCustomValidity('')">
               
               <div>
-                <select class="form-control hide-placeholder" name="dose_time_type" required oninvalid="this.setCustomValidity('Please select one')" oninput="setCustomValidity('')">
+                <select id="doseTimeType${medicineCounter}" class="form-control hide-placeholder" name="dose_time_type" required oninvalid="this.setCustomValidity('Please select one')" oninput="setCustomValidity('')">
                   <option value="" disabled selected>Hours/Days</option>
                   <option>Hours</option>
                   <option>Days</option>
@@ -290,6 +291,10 @@ $(document).ready(function() {
     }
   });
 });
+
+function countMedicines() {
+  return document.querySelectorAll('[id^="medicineRow"]').length;
+}  
 
 
 

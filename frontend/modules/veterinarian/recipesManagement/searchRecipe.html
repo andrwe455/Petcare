@@ -150,11 +150,10 @@
             </div>
             <div class="row">
               <div class="col-12">
-                <form action="/modifyMedicine" method="post" id="modifyRecipeForm">
+                <form id="modifyRecipeForm">
                   <div class="card card-primary card-outline">
-                    <div class="card-header recipe-title">
+                    <div class="card-header recipe-title" id="formHeader">
                       <h2 class="card-title">Recipe information</h2>
-                      <h2 class="card-title">Assigned by: </h2>
                     </div>
 
                     <div class="card-body">
@@ -233,6 +232,7 @@
                     <div class="card-footer">
                       <button type="submit" id="modifyButton" class="btn btn-primary" style="display: none;">Modify</button>
                       <button type="button" id="deleteButton" class="btn btn-danger" style="display: none;" disabled title="soon...">Delete</button>
+                      <button type="button" id="openRecipeModal" class="btn btn-warning" style="display: none;">Select a Recipe</button>
                     </div>
                   </div>
                 </form>

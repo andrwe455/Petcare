@@ -38,10 +38,10 @@ $('#deleteButton').on('click', async function() {
 });
 
 $(document).on('click', '.deleteButton', async function(event) {
+
   event.preventDefault(); 
 
   const medId = $(this).data('id'); 
-
   const result = await Swal.fire({
     title: 'Are you sure?',
     text: 'This will permanently delete the medicine record.',
@@ -68,8 +68,6 @@ $(document).on('click', '.deleteButton', async function(event) {
     }
   }
 });
-
-
 
 function disableFields() {
   $('#medCommercialName, #medGenericName, #medDescription, #medCategory, #medStock, #medPrice, #medExpDate, #medId')   
