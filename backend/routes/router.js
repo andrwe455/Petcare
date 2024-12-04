@@ -24,6 +24,7 @@ router.get('/home/veterinarian/showPets',sess.getUserId,sess.roleValidator, page
 router.get('/home/veterinarian/vaccineRecords',sess.getUserId,sess.roleValidator, pagesController.showVaccineRecords);
 router.get('/home/veterinarian/vaccineRecords/:id',sess.getUserId, sess.roleValidator,pagesController.showVaccineRecords);
 router.get('/home/veterinarian/createRecipe', sess.getUserId,sess.roleValidator, pagesController.createRecipe);
+router.get('/home/veterinarian/searchRecipe', sess.getUserId,sess.roleValidator, pagesController.searchRecipe);
 
 router.get('/getUserData',sess.getSession);
 router.get('/getAllUsers', userController.getAllUsers);
@@ -73,5 +74,7 @@ router.delete('/removeMedicine', medicinesController.removeMedicine);
 router.delete('/deletePet/:id/:name',photoController.deletePhoto, petController.deletePet);
 
 router.post('/createRecipe', recipesController.createRecipe);
+router.put('/updateRecipe/:id', recipesController.modifyRecipe);
+router.get('/getRecipes', recipesController.getRecipes);
 
 module.exports = router;
