@@ -117,3 +117,8 @@ body {
 #assigner{
   cursor: default;
 }
+
+.recipe-title{
+  display: flex;
+  justify-content: space-between;
+}

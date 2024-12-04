@@ -71,6 +71,7 @@ async function searchMedicine(req, res) {
 }
 
 async function modifyMedicine(req, res) {
+  
   const { medId, originalId, commercial_name, generic_name, description, expiration_date, category, stock, price } = req.body;
 
   try {
