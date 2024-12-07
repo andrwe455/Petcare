@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add medicines to inventory</title>
+    <title>Search recipe</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="../../../css/bootstrap-4.min.css">
@@ -40,10 +40,10 @@
         <div class="sidebar">
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-              <img src="../../../images/avatar.png" class="img-circle elevation-2 logo" alt="User avatar">
+              <img src="../../../images/avatar.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block" id="username">Admin F. Kennedy</a>
+              <a href="#" class="d-block" id="username"></a>
             </div>
           </div>
 
@@ -61,7 +61,7 @@
           <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <li class="nav-item">
-                <a href="/home/admin" class="nav-link ">
+                <a href="/home/admin" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
@@ -69,79 +69,53 @@
                 </a>
               </li>
 
-              <li class="nav-item menu-open">
-                <a href="" class="nav-link active">
-                  <i class="fa-solid fa-archive nav-icon"></i>
-                  <p>Inventory</p>
-                  <i class="fas fa-angle-left right"></i>
-                </a>
-                
-                <ul class="nav-treeview">
-                  <li class="nav-item">
-                    <a href=" " class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Add medicines</p>
-                    </a>
-                  </li>
-    
-                  <li class="nav-item">
-                    <a href="/home/admin/modifyMedicine" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Modify medicines</p>
-                    </a>
-                  </li>
-    
-                  <li class="nav-item">
-                    <a href="/home/admin/seeAllMedicines" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>See all medicines</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-
               <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="nav-icon fas fa-calendar"></i>
-                  <p>Appointments</p>
-                  <i class="right fas fa-angle-left"></i>
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-paw"></i>
+                  <p>
+                    Pets
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
                 </a>
 
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/home/admin/appointments/Crt" class="nav-link">
+                    <a href="/home/veterinarian/showPets" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Create appointment</p>
+                      <p>See all Pets</p>
                     </a>
                   </li>
 
                   <li class="nav-item">
-                    <a href="/home/admin/appointments/Edit" class="nav-link">
+                    <a href="/home/veterinarian/vaccineRecords" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Modify appointment</p>
+                      <p>Show vaccine history</p>
                     </a>
                   </li>
                 </ul>
               </li>
 
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="fa-solid fa-archive nav-icon"></i>
-                  <p>Users</p>
-                  <i class="fas fa-angle-left right"></i>
+              <li class="nav-item menu-open">
+                <a href="#" class="nav-link active">
+                  <i class="nav-icon fas fa-medkit"></i>
+                  <p>
+                    Recipes
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
                 </a>
-    
-                <ul class="nav-treeview">
+
+                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/home/admin/addUser" class="nav-link">
+                    <a href="/home/veterinarian/createRecipe" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Add users</p>
+                      <p>Create new recipe</p>
                     </a>
                   </li>
+
                   <li class="nav-item">
-                    <a href="/home/admin/showUsers" class="nav-link">
+                    <a href="/home/veterinarian/searchRecipe" class="nav-link active">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>View users</p>
+                      <p>Search recipe</p>
                     </a>
                   </li>
                 </ul>
@@ -156,57 +130,57 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Add new medicines</h1>
+                <h1 class="m-0">Search recipe information</h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item">
                     <a href="/ ">Home</a>
                   </li>
-                  <li class="breadcrumb-item active">Add new medicines</li>
+                  <li class="breadcrumb-item active">Search recipe</li>
                 </ol>
               </div>
             </div>
           </div>
         </div>
-        
         <section class="content">
           <div class="container-fluid">
+            <div class="form-group">
+              
+            </div>
             <div class="row">
               <div class="col-12">
-                <form action="/createMedicine" method="post" id="medicineForm">
+                <form id="modifyRecipeForm">
                   <div class="card card-primary card-outline">
-                    <div class="card-header">
-                      <h2 class="card-title">Medicine information</h2>
+                    <div class="card-header recipe-title" id="formHeader">
+                      <h2 class="card-title">Recipe information</h2>
                     </div>
 
                     <div class="card-body">
                       <div class="row">
                         <div class="col-3">
                           <div class="form-group ">
-                            <label class="required" for="medCommercialName">Commercial name</label>
-                            <input type="text" id="medCommercialName" class="form-control" name="commercial_name" placeholder="Commercial medicine name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                            <label class="required" for="ownerInfo">Owner</label>
+                            <select id="ownerInfo" class="form-control hide-placeholder" name="owner" required oninvalid="this.setCustomValidity('Please choose an owner')" oninput="setCustomValidity('')">
+                              <option value="" disabled selected>Select an owner</option>  
+                            </select>
                           </div>
                         </div>
 
                         <div class="col-3">
                           <div class="form-group">
-                            <label class="required" for="medGenericName">Generic name</label>
-                            <input type="text" id="medGenericName" class="form-control" name="generic_name" placeholder="Generic medicine name" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                            <label class="required" for="petInfo">Pet</label>
+                            <select id="petInfo" class="form-control hide-placeholder" name="pet" required disabled oninvalid="this.setCustomValidity('Please choose a pet')" oninput="setCustomValidity('')">
+                              <option value="" disabled selected>Select a pet</option>  
+                            </select>
                           </div>
                         </div>
 
                         <div class="col-3">
                           <div class="form-group">
-                            <label class="required" for="medDescription">Description</label>
-                            <input type="text" id="medDescription" class="form-control" name="description" placeholder="Medicine used for..." required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
-                          </div>
-                        </div>
-
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required">Expiration date</label>
-                            <input type="date" id="medExpDate" class="form-control" name="expiration_date" required oninvalid="this.setCustomValidity('Please enter a value')" oninput="setCustomValidity('')">
+                            <label class="required" for="assigner">Assigner</label>
+                            <input type="hidden" id="assignerId" name="assigner">
+                            <input type="text" id="assigner" class="form-control" readonly>
                           </div>
                         </div>
                       </div>
@@ -214,41 +188,51 @@
                       <div class="row">
                         <div class="col-3">
                           <div class="form-group">
-                            <label class="required" for="medCategory">Category</label>
-                            <select name="category" id="medCategory" class="form-control" required oninvalid="this.setCustomValidity('Please select a category')" oninput="setCustomValidity('')">
-                              <option value="" disabled selected>Medicine category</option>
-                              <option>Antibiotic</option>
-                              <option>Vaccine</option>
-                              <option>Antiparasitic</option>
-                            </select>
+                            <label class="required" for="initialDate">Initial date</label>
+                            <input type="date" id="initialDate" class="form-control" name="initial_date" required disabled oninvalid="this.setCustomValidity('Please enter a valid date')" oninput="setCustomValidity('')">
                           </div>
                         </div>
 
                         <div class="col-3">
                           <div class="form-group">
-                            <label class="required" for="medStock">Quantity in stock</label>
-                            <input type="number" min="0" id="medStock" class="form-control" name="stock" placeholder="Available existences in stock" required oninvalid="this.setCustomValidity('Please enter a value greater or equal to 0')" oninput="setCustomValidity('')">
+                            <label class="required" for="finalDate">Final date</label>
+                            <input type="date" id="finalDate" class="form-control" name="final_date" placeholder="dd/mm/yyyy" required disabled oninvalid="this.setCustomValidity('Please enter a valid date')" oninput="setCustomValidity('')">
                           </div>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-6">
                           <div class="form-group">
-                            <label class="required" for="medPrice">Price</label>
-                            <input type="number" min="0" id="medPrice" class="form-control" name="price" placeholder="Enter the price of the medicine (COP)" required oninvalid="this.setCustomValidity('Please enter a value greater or equal to 0')" oninput="setCustomValidity('')">
+                            <label for="recommendationsInfo">Recommendations</label>
+                            <textarea id="recommendationsInfo" class="form-control" name="recommendations" placeholder="Enter recommendations if needed" rows="1" disabled oninput="adjustHeight(this)"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="d-flex align-items-start col-2 mr-2">
+                          <div class="mb-0">
+                            <div class="form-group">
+                              <label class="required" for="medicinesInfo">Medicines</label>
+                              <div class="d-flex align-items-center">
+                                <input type="text" id="medicinesInfo" class="form-control" name="medicines" placeholder="Medicines required" disabled>
+                                <button type="button" id="addButton" class="btn btn-outline-primary ml-3" onclick="addMedicine()" disabled>
+                                  <i class="fas fa-plus"></i>
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
 
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label>Id</label>
-                            <input type="text" id="medId" class="form-control" name="medId" placeholder="Medicine's id (automatically generated)" readonly>
-                          </div>
+                        <div class="row d-flex flex-column col-10" id="medicinesGroup">
+                          <label class="required">Dose</label>
                         </div>
                       </div>
                     </div>
 
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Add to inventory</button>
+                      <button type="submit" id="modifyButton" class="btn btn-primary" style="display: none;">Modify</button>
+                      <button type="button" id="deleteButton" class="btn btn-danger" style="display: none;" disabled title="soon...">Delete</button>
+                      <button type="button" id="openRecipeModal" class="btn btn-warning" style="display: none;">Select a Recipe</button>
                     </div>
                   </div>
                 </form>
@@ -273,7 +257,8 @@
     <script src="../../../js/jquerys/jquery-ui.min.js"></script>
     <script src="../../../js/jquerys/bootstrap.bundle.min.js"></script>
     <script src="../../../js/jquerys/adminlte.js"></script>
-    <script src="../../../js/modules/admin/addMedicine.js"></script>
     <script src="../../../js/jquerys/sweetalert2.min.js"></script>
+    <script src="../../../js/modules/veterinarian/createRecipe.js"></script>
+    <script src="../../../js/modules/veterinarian/modifyRecipe.js"></script>
   </body>
 </html>

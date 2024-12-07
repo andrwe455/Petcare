@@ -104,3 +104,21 @@ body {
   color: red; 
   content: "(EXPIRED)";
 }
+
+#recommendationsInfo{
+  resize: none; 
+  overflow: hidden;
+}
+
+#medId{
+  cursor: default;
+}
+
+#assigner{
+  cursor: default;
+}
+
+.recipe-title{
+  display: flex;
+  justify-content: space-between;
+}
