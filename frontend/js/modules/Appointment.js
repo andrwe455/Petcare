@@ -1,47 +1,65 @@
 function updateapp() {
     const form = document.getElementById('updatea');
     const formData = new FormData(form);
-
-    const jsonData = {};
-    formData.forEach((value, key) => {
-        jsonData[key] = value;
-    });
-
-    console.log(JSON.stringify(jsonData));
-
+    const jsonData = Object.fromEntries(formData.entries());
+  
+    jsonData.veterinarian = document.getElementById('veterinarian').selectedOptions[0]?.text || null;
+  
+    if (!validateAppointmentForm(jsonData)) return;
+  
     fetch("/updateappointment", {
-        method: 'PUT', 
-        headers: {
-            'Content-Type': 'application/json' 
-        },
-        body: JSON.stringify(jsonData) 
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(jsonData),
     })
-    .then(response => {
+      .then(response => {
         if (!response.ok) {
-            return response.json().then(data => { 
-                throw new Error(data.message || 'Error updating appointment');
-            });
+          return response.json().then(data => {
+            throw new Error(data.message || 'Error updating appointment');
+          });
         }
         return response.json();
-    })
-    .then(data => {
+      })
+      .then(() => {
         Swal.fire({
-            icon: 'success',
-            title: 'Appointment Updated',
-            text: 'Appointment updated successfully!',
+          icon: 'success',
+          title: 'Appointment Updated',
+          text: 'The appointment has been updated successfully!',
         }).then(() => {
-            window.location.reload(); 
+          window.location.reload();
         });
-    })
-    .catch(error => {
-        console.error('Error:', error); 
+      })
+      .catch(error => {
+        console.error('Error:', error);
         Swal.fire({
-            icon: 'error',
-            title: 'Update Failed',
-            text: `There was an error updating the appointment: ${error.message}`,
+          icon: 'error',
+          title: 'Update Failed',
+          text: error.message,
         });
-    });
-}
+      });
+  }
+  
+  function validateAppointmentForm(data) {
+    if (!data.veterinarian || !data.date || !data.id) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Missing Information',
+        text: 'Please complete all required fields.',
+      });
+      return false;
+    }
+    if (!data.pet) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Validation Error',
+        text: 'Please select a pet.',
+      });
+      return false;
+    }
+    return true;
+  }
+  
+
 
 function createapp(event) {
     event.preventDefault(); 
@@ -55,7 +73,18 @@ function createapp(event) {
 
     const jsonData = {};
     formData.forEach((value, key) => {
-        jsonData[key] = value;
+        if (key === 'name') {
+            const nameSelect = document.getElementById('name');
+            jsonData.name = nameSelect.options[nameSelect.selectedIndex].text;
+        } else if (key === 'pet') {
+            const petSelect = document.getElementById('pet');
+            jsonData.pet = petSelect.options[petSelect.selectedIndex].text;
+        } else if (key === 'veterinarian') {
+            const vetSelect = document.getElementById('veterinarian');
+            jsonData.veterinarian = vetSelect.options[vetSelect.selectedIndex].text;
+        } else {
+            jsonData[key] = value; 
+        }
     });
 
     console.log(JSON.stringify(jsonData)); 
@@ -174,6 +203,43 @@ function preventNumbersInput(event) {
     return true; 
 }
 
+
+$(document).ready(() => {
+    fetch('/crtappointmentusers?role=owner')
+        .then(res => res.json())
+        .then(data => {
+            const clientSelect = $('#name');
+            data.forEach(client => {
+                clientSelect.append(new Option(`${client.name} ${client.lastName}`, client._id));
+            });
+        });
+
+    fetch('/crtappointmentusers?role=veterinarian')
+        .then(res => res.json())
+        .then(data => {
+            const vetSelect = $('#veterinarian');
+            data.forEach(vet => {
+                vetSelect.append(new Option(`${vet.name} ${vet.lastName}`, vet._id));
+            });
+        });
+
+    $('#name').on('change', function () {
+        const clientId = $(this).val();
+        if (clientId) {
+            fetch(`/crtappointmentpets?owner=${clientId}`)
+                .then(res => res.json())
+                .then(data => {
+                    const petSelect = $('#pet');
+                    petSelect.empty().append(new Option('Select a pet', ''));
+                    data.forEach(pet => {
+                        petSelect.append(new Option(pet.name, pet._id));
+                    });
+                });
+        } else {
+            $('#pet').empty().append(new Option('Select a pet', ''));
+        }
+    });
+});
 
   document.getElementById('name').addEventListener('keypress', preventNumbersInput);
   document.getElementById('pet').addEventListener('keypress', preventNumbersInput);

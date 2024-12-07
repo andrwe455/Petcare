@@ -46,6 +46,7 @@ router.get('/getPetsById/:id',petController.getPetsById);
 
 router.get('/searchMedicine', medicinesController.searchMedicine);
 router.get('/checkIdExists', medicinesController.checkIdExists);
+
 router.get('/getappointment',appointmentController.getappointment);
 router.get('/home/admin/appointments/Edit',sess.getUserId, pagesController.showAppointment);
 router.get('/home/admin/appointments/Crt',sess.getUserId, pagesController.showAppointmentCrt);
@@ -64,6 +65,8 @@ router.post('/crtPet', petController.crtPet);
 router.post('/crtappointment',appointmentController.crtappointment);
 router.put('/updateappointment',appointmentController.updateappointment);
 router.post('/deleteappointment',appointmentController.deleteappointment);
+router.get('/crtappointmentusers',appointmentController.crtappointmentusers);
+router.get('/crtappointmentpets',appointmentController.crtappointmentpets);
 
 router.post('/updateVaccineRecord', petController.updateVaccineRecord);
 router.post('/updatePet', petController.updatePet);
