@@ -23,7 +23,6 @@ async function crtappointment(req, res) {
         const startOfAppointment = new Date(newDate.setSeconds(0, 0));
         const endOfAppointment = new Date(newDate.getTime() + 30 * 60000);
 
-        // Verifica si el veterinario ya tiene una cita en el mismo horario
         const conflictingAppointmentVet = await appointmentSchema.findOne({
             veterinarian: { $regex: new RegExp(`^${veterinarian}$`, 'i') }, 
             date: {
@@ -39,7 +38,6 @@ async function crtappointment(req, res) {
             });
         }
 
-        // Verifica si la mascota ya tiene una cita en un intervalo de 24 horas
         const startOf24Hours = new Date(startOfAppointment.getTime() - 24 * 60 * 60 * 1000);
         const endOf24Hours = new Date(startOfAppointment.getTime() + 24 * 60 * 60 * 1000);
 
@@ -79,13 +77,11 @@ async function  updateappointment(req, res) {
     try {
         const { id, veterinarian, pet, owner, date } = req.body;
 
-        // Convertir la fecha ingresada en un objeto Date
         const [month, day, yearAndTime] = date.split('/');
         const [year, time] = yearAndTime.split(' ');
         const [hours, minutes] = time.split(':');
         const newDate = new Date(year, month - 1, day, hours, minutes, 0);
 
-        // Validar formato de la fecha y si es un intervalo de 30 minutos
         if (isNaN(newDate.getTime()) || (newDate.getMinutes() % 30 !== 0)) {
             return res.status(400).json({
                 success: false,
@@ -96,14 +92,13 @@ async function  updateappointment(req, res) {
         const startOfAppointment = new Date(newDate.setSeconds(0, 0));
         const endOfAppointment = new Date(startOfAppointment.getTime() + 30 * 60 * 1000);
 
-        // Validar si el veterinario ya tiene una cita en ese horario
         const conflictingAppointmentVet = await appointmentSchema.findOne({
             veterinarian: { $regex: new RegExp(`^${veterinarian}$`, 'i') },
             date: {
                 $gte: startOfAppointment,
                 $lt: endOfAppointment
             },
-            _id: { $ne: id } // Excluir la cita actual
+            _id: { $ne: id } 
         });
 
         if (conflictingAppointmentVet) {
@@ -113,7 +108,6 @@ async function  updateappointment(req, res) {
             });
         }
 
-        // Validar si la mascota ya tiene una cita en un intervalo de 24 horas
         const startOf24Hours = new Date(startOfAppointment.getTime() - 24 * 60 * 60 * 1000);
         const endOf24Hours = new Date(startOfAppointment.getTime() + 24 * 60 * 60 * 1000);
 
@@ -124,7 +118,7 @@ async function  updateappointment(req, res) {
                 $gte: startOf24Hours,
                 $lt: endOf24Hours
             },
-            _id: { $ne: id } // Excluir la cita actual
+            _id: { $ne: id } 
         });
 
         if (conflictingAppointmentPet) {
@@ -134,7 +128,6 @@ async function  updateappointment(req, res) {
             });
         }
 
-        // Actualizar la cita si no hay conflictos
         const updatedAppointment = await appointmentSchema.findByIdAndUpdate(
             id,
             { veterinarian, pet, owner, date: startOfAppointment },
@@ -148,7 +141,6 @@ async function  updateappointment(req, res) {
             });
         }
 
-        // Respuesta exitosa
         res.status(200).json({
             success: true,
             message: 'Appointment updated successfully.',
