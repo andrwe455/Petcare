@@ -11,6 +11,7 @@ const sess = require('../controller/sessionController');
 const registerController = require('../controller/registerController');
 const photoController = require('../controller/photosController');
 const recipesController = require('../controller/recipesController');
+const diagnosticController = require('../controller/diagnosticController');
 
 router.get('/login', pagesController.login);
 
@@ -25,6 +26,7 @@ router.get('/home/veterinarian/vaccineRecords',sess.getUserId,sess.roleValidator
 router.get('/home/veterinarian/vaccineRecords/:id',sess.getUserId, sess.roleValidator,pagesController.showVaccineRecords);
 router.get('/home/veterinarian/createRecipe', sess.getUserId,sess.roleValidator, pagesController.createRecipe);
 router.get('/home/veterinarian/searchRecipe', sess.getUserId,sess.roleValidator, pagesController.searchRecipe);
+router.get('/home/veterinarian/crtDiagnostic', sess.getUserId,sess.roleValidator, pagesController.showDiagnosticCrt);
 
 router.get('/getUserData',sess.getSession);
 router.get('/getAllUsers', userController.getAllUsers);
@@ -79,5 +81,8 @@ router.delete('/deletePet/:id/:name',photoController.deletePhoto, petController.
 router.post('/createRecipe', recipesController.createRecipe);
 router.put('/updateRecipe/:id', recipesController.modifyRecipe);
 router.get('/getRecipes', recipesController.getRecipes);
+
+router.post('/crtDiagnostic', diagnosticController.crtDiagnostic); 
+router.get('/getDiagnostic', diagnosticController.getDiagnostic); 
 
 module.exports = router;
