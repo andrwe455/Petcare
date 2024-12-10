@@ -1,259 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Create new recipe</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="../../../css/bootstrap-4.min.css">
-    <link rel="stylesheet" href="../../../css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="../../../css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../../css/adminlte.min.css">
-    <link rel="stylesheet" href="../../../css/styles.css">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create new recipe</title>
 
-  <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../../css/bootstrap-4.min.css">
+  <link rel="stylesheet" href="../../../css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="../../../css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../../css/adminlte.min.css">
+  <link rel="stylesheet" href="../../../css/styles.css">
+</head>
 
-      <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="../../../images/slider-img.png" alt="AdminLTELogo" >
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="../../../images/slider-img.png" alt="AdminLTELogo">
+    </div>
+
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="/ " class="nav-link">Home</a>
+        </li>
+      </ul>
+    </nav>
+
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <a href="" class="brand-link">
+        <img src="../../../images/slider-img.png" alt="PETCARE-LOGO" class="brand-image img-circle elevation-3"
+          style="opacity: .8">
+        <span class="brand-text font-weight-light">PETCARE</span>
+      </a>
+
+      <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="../../../images/avatar.png" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block" id="username"></a>
+          </div>
+        </div>
+
+        <div class="form-inline">
+          <div class="input-group" data-widget="sidebar-search">
+            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-sidebar">
+                <i class="fas fa-search fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="/home/admin" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Dashboard
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-paw"></i>
+                <p>
+                  Pets
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/home/veterinarian/showPets" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>See all Pets</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="/home/veterinarian/vaccineRecords" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Show vaccine history</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-medkit"></i>
+                <p>
+                  Recipes
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/home/veterinarian/createRecipe" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Create new recipe</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="/home/veterinarian/searchRecipe" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Search recipe</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link menu-open">
+                <i class="nav-icon fas fa-stethoscope"></i>
+                <p>Diagnostic<i class="right fas fa-angle-left"></i></p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item active">
+                  <a href="/home/veterinarian/crtDiagnostic" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Create new Diagnostic</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Create new recipe</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item">
+                  <a href="/ ">Home</a>
+                </li>
+                <li class="breadcrumb-item active">Create new recipe</li>
+              </ol>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-            <a href="/ " class="nav-link">Home</a>
-          </li>
-        </ul>
-      </nav>
-      
-      <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="" class="brand-link">
-          <img src="../../../images/slider-img.png" alt="PETCARE-LOGO" class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">PETCARE</span>
-        </a>
-    
-        <div class="sidebar">
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img src="../../../images/avatar.png" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-              <a href="#" class="d-block" id="username"></a>
-            </div>
-          </div>
-  
-          <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-              <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-    
-          <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              <li class="nav-item">
-                <a href="/home/admin" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>
-                    Dashboard
-                  </p>
-                </a>
-              </li>
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <form id="recipeForm">
+                <div class="card card-primary card-outline">
+                  <div class="card-header">
+                    <h2 class="card-title">Recipe information</h2>
+                  </div>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-paw"></i>
-                  <p>
-                    Pets
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group ">
+                          <label class="required" for="ownerInfo">Owner</label>
+                          <select id="ownerInfo" class="form-control hide-placeholder" name="owner" required
+                            oninvalid="this.setCustomValidity('Please choose an owner')"
+                            oninput="setCustomValidity('')">
+                            <option value="" disabled selected>Select an owner</option>
+                          </select>
+                        </div>
+                      </div>
 
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="/home/veterinarian/showPets" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>See all Pets</p>
-                    </a>
-                  </li>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label class="required" for="petInfo">Pet</label>
+                          <select id="petInfo" class="form-control hide-placeholder" name="pet" required disabled
+                            oninvalid="this.setCustomValidity('Please choose a pet')" oninput="setCustomValidity('')">
+                            <option value="" disabled selected>Select a pet</option>
+                          </select>
+                        </div>
+                      </div>
 
-                  <li class="nav-item">
-                    <a href="/home/veterinarian/vaccineRecords" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Show vaccine history</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="nav-item menu-open">
-                <a href="#" class="nav-link active">
-                  <i class="nav-icon fas fa-medkit"></i>
-                  <p>
-                    Recipes
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="/home/veterinarian/createRecipe" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Create new recipe</p>
-                    </a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="/home/veterinarian/searchRecipe" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Search recipe</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </aside>
-
-      <div class="content-wrapper">
-        <div class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0">Create new recipe</h1>
-              </div>
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item">
-                    <a href="/ ">Home</a>
-                  </li>
-                  <li class="breadcrumb-item active">Create new recipe</li>
-                </ol>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <section class="content">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-12">
-                <form id="recipeForm">
-                  <div class="card card-primary card-outline">
-                    <div class="card-header">
-                      <h2 class="card-title">Recipe information</h2>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label class="required" for="assigner">Assigner</label>
+                          <input type="hidden" id="assignerId" name="assigner">
+                          <input type="text" id="assigner" class="form-control" readonly>
+                        </div>
+                      </div>
                     </div>
 
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-3">
-                          <div class="form-group ">
-                            <label class="required" for="ownerInfo">Owner</label>
-                            <select id="ownerInfo" class="form-control hide-placeholder" name="owner" required oninvalid="this.setCustomValidity('Please choose an owner')" oninput="setCustomValidity('')">
-                              <option value="" disabled selected>Select an owner</option>  
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required" for="petInfo">Pet</label>
-                            <select id="petInfo" class="form-control hide-placeholder" name="pet" required disabled oninvalid="this.setCustomValidity('Please choose a pet')" oninput="setCustomValidity('')">
-                              <option value="" disabled selected>Select a pet</option>  
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required" for="assigner">Assigner</label>
-                            <input type="hidden" id="assignerId" name="assigner">
-                            <input type="text" id="assigner" class="form-control" readonly>
-                          </div>
+                    <div class="row">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label class="required" for="initialDate">Initial date</label>
+                          <input type="date" id="initialDate" class="form-control" name="initial_date" required
+                            oninvalid="this.setCustomValidity('Please enter a valid date')"
+                            oninput="setCustomValidity('')">
                         </div>
                       </div>
 
-                      <div class="row">
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required" for="initialDate">Initial date</label>
-                            <input type="date" id="initialDate" class="form-control" name="initial_date" required oninvalid="this.setCustomValidity('Please enter a valid date')" oninput="setCustomValidity('')">
-                          </div>
-                        </div>
-
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label class="required" for="finalDate">Final date</label>
-                            <input type="date" id="finalDate" class="form-control" name="final_date" placeholder="dd/mm/yyyy" required oninvalid="this.setCustomValidity('Please enter a valid date')" oninput="setCustomValidity('')">
-                          </div>
-                        </div>
-
-                        <div class="col-6">
-                          <div class="form-group">
-                            <label for="recommendationsInfo">Recommendations</label>
-                            <textarea id="recommendationsInfo" class="form-control" name="recommendations" placeholder="Enter recommendations if needed" rows="1" oninput="adjustHeight(this)"></textarea>
-                          </div>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label class="required" for="finalDate">Final date</label>
+                          <input type="date" id="finalDate" class="form-control" name="final_date"
+                            placeholder="dd/mm/yyyy" required
+                            oninvalid="this.setCustomValidity('Please enter a valid date')"
+                            oninput="setCustomValidity('')">
                         </div>
                       </div>
 
-                      <div class="row">
-                        <div class="d-flex align-items-start col-2 mr-2">
-                          <div class="mb-0">
-                            <div class="form-group">
-                              <label class="required" for="medicinesInfo">Medicines</label>
-                              <div class="d-flex align-items-center">
-                                <input type="text" id="medicinesInfo" class="form-control" placeholder="Medicines required">
-                                <button type="button" class="btn btn-outline-primary ml-3" onclick="addMedicine()">
-                                  <i class="fas fa-plus"></i>
-                                </button>
-                              </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label for="recommendationsInfo">Recommendations</label>
+                          <textarea id="recommendationsInfo" class="form-control" name="recommendations"
+                            placeholder="Enter recommendations if needed" rows="1"
+                            oninput="adjustHeight(this)"></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="d-flex align-items-start col-2 mr-2">
+                        <div class="mb-0">
+                          <div class="form-group">
+                            <label class="required" for="medicinesInfo">Medicines</label>
+                            <div class="d-flex align-items-center">
+                              <input type="text" id="medicinesInfo" class="form-control"
+                                placeholder="Medicines required">
+                              <button type="button" class="btn btn-outline-primary ml-3" onclick="addMedicine()">
+                                <i class="fas fa-plus"></i>
+                              </button>
                             </div>
                           </div>
                         </div>
+                      </div>
 
-                        <div class="row d-flex flex-column col-10" id="medicinesGroup">
-                          <label class="required">Dose</label>
-                        </div>
+                      <div class="row d-flex flex-column col-10" id="medicinesGroup">
+                        <label class="required">Dose</label>
                       </div>
                     </div>
-
-                    <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Create recipe</button>
-                    </div>
                   </div>
-                </form>
 
-                <p class="required-text">* Indicates a required field</p>
-              </div>
-            </div>    
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Create recipe</button>
+                  </div>
+                </div>
+              </form>
+
+              <p class="required-text">* Indicates a required field</p>
+            </div>
           </div>
-        </section>
-      </div>
-
-      <footer class="main-footer">
-        <strong>
-          Copyright &copy; 2024
-          <a href="/ ">PETCARE</a>.
-        </strong>
-      </footer>
+        </div>
+      </section>
     </div>
 
-    <script src="https://kit.fontawesome.com/48b7f93703.js" crossorigin="anonymous"></script>
-    <script src="../../../js/jquerys/jquery.min.js"></script>
-    <script src="../../../js/jquerys/jquery-ui.min.js"></script>
-    <script src="../../../js/jquerys/bootstrap.bundle.min.js"></script>
-    <script src="../../../js/jquerys/adminlte.js"></script>
-    <script src="../../../js/jquerys/sweetalert2.min.js"></script>
-    <script src="../../../js/modules/veterinarian/createRecipe.js"></script>
-  </body>
+    <footer class="main-footer">
+      <strong>
+        Copyright &copy; 2024
+        <a href="/ ">PETCARE</a>.
+      </strong>
+    </footer>
+  </div>
+
+  <script src="https://kit.fontawesome.com/48b7f93703.js" crossorigin="anonymous"></script>
+  <script src="../../../js/jquerys/jquery.min.js"></script>
+  <script src="../../../js/jquerys/jquery-ui.min.js"></script>
+  <script src="../../../js/jquerys/bootstrap.bundle.min.js"></script>
+  <script src="../../../js/jquerys/adminlte.js"></script>
+  <script src="../../../js/jquerys/sweetalert2.min.js"></script>
+  <script src="../../../js/modules/veterinarian/createRecipe.js"></script>
+</body>
+
 </html>

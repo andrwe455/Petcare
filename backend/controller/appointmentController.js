@@ -155,15 +155,6 @@ async function  updateappointment(req, res) {
     }
 }
 
-
-
-    
-
-
-
-
-
-
 async function deleteappointment(req, res) {
     try {
 
