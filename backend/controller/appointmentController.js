@@ -1,6 +1,4 @@
 const appointmentSchema = require ('../schemas/appointmentSchema')
-const express = require('express');
-const router = express.Router();
 const User = require('../schemas/userSchema');
 const Pet = require('../schemas/petSchema');
 
@@ -228,9 +226,6 @@ async function crtappointmentpets (req, res){
         res.status(500).send({ error: 'Internal Server Error' });
     }
 };
-
-module.exports = router;
-
 
 module.exports = {
     crtappointment,
