@@ -51,6 +51,7 @@ router.get('/getappointment',appointmentController.getappointment);
 router.get('/home/admin/appointments/Edit',sess.getUserId, pagesController.showAppointment);
 router.get('/home/admin/appointments/Crt',sess.getUserId, pagesController.showAppointmentCrt);
 router.get('/home/admin/appointments/Dlt', pagesController.showAppointmentDlt);
+router.get('/home/admin/doctorSchedule',sess.getUserId,sess.roleValidator, pagesController.showdoctorsSchedule);
 
 router.get('/home/admin/appointments/Edit',sess.getUserId,sess.roleValidator, pagesController.showAppointment);
 router.get('/home/admin/appointments/Crt',sess.getUserId,sess.roleValidator, pagesController.showAppointmentCrt);
@@ -80,4 +81,6 @@ router.post('/createRecipe', recipesController.createRecipe);
 router.put('/updateRecipe/:id', recipesController.modifyRecipe);
 router.get('/getRecipes', recipesController.getRecipes);
 
+router.get('/veterinarians', userController.getVeterinarians);
+router.get('/getSchedule/:id', appointmentController.getappointmentByVeterinarian);
 module.exports = router;
