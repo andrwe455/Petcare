@@ -18,7 +18,19 @@ async function getAllUsers(req, res){
   }
 }
 
+async function getVeterinarians(req,res){
+  try{
+    const veterinarians = await User.find({role: 'veterinarian'});
+    res.status(200).json(veterinarians);
+  }
+  catch(error){
+    console.error("Error finding veterinarians ", error);
+    res.status(500).json({message: 'Error finding veterinarians ', error}); 
+  }
+}
+
 module.exports = {
   addUser,
-  getAllUsers
+  getAllUsers,
+  getVeterinarians
 };
