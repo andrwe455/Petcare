@@ -271,31 +271,32 @@
 
 
 <script>
-  $(function () {
-    $('.select2').select2();
-    
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    });
-    $('#timepicker').datetimepicker({
-      format: 'LT'
-    });
-    $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' },
-      minDate: new Date(),stepping: 30, });
-    $('#reservationdatetime').on('change.datetimepicker', function (e) {
+$('#reservationdatetime').datetimepicker({ 
+    icons: { time: 'far fa-clock' },
+    minDate: new Date(), 
+    stepping: 30,
+    enabledHours: [8, 9, 10, 11, 12, 13, 14, 15] 
+});
+
+$('#reservationdatetime').on('change.datetimepicker', function (e) {
     const selectedDate = e.date;
     if (selectedDate) {
-      const minutes = selectedDate.minutes();
-      if (minutes !== 0 && minutes !== 30) {
-        const adjustedDate = selectedDate.clone().minutes(minutes < 30 ? 0 : 30);
-        $('#reservationdatetime').datetimepicker('date', adjustedDate);
-        alert('Only minutes allowed at 00 or 30. Set automatically.');
-      }
+        const hour = selectedDate.hours();
+        const minutes = selectedDate.minutes();
+
+        if (hour < 8 || (hour === 15 && minutes > 30) || hour > 15 || (minutes !== 0 && minutes !== 30)) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Invalid Time',
+                text: 'Appointments can only be scheduled between 8:00 AM and 4:00 PM at 30-minute intervals.',
+            });
+
+            const adjustedDate = selectedDate.clone().hours(8).minutes(0);
+            $('#reservationdatetime').datetimepicker('date', adjustedDate);
+        }
     }
-    });
-  });
+});
 
 </script>
-
 </body>
 </html>

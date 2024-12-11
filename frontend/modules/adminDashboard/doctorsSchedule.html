@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Doctor's Schedules</title>
 
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -23,6 +23,9 @@
   <link rel="stylesheet" href="../../css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../../css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../../css/toastr.min.css">
+  <link rel="stylesheet" href="../../css/select2.min.css">
+  <link rel="stylesheet" href="../../css/select2-bootstrap4.min.css">
+  <link rel="stylesheet" href="../../css/calendar.css">
   
   <link rel="stylesheet" href="../../css/adminlte.min.css">
   <script src="../../js/modules/tableModel.js"></script>
@@ -94,7 +97,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="" class="nav-link active">
+            <a href="" class="nav-link">
               <i class="nav-icon "></i>
               <p>
                 Dashboard
@@ -191,8 +194,8 @@
                 </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fa-solid fa-user-doctor"></i>
               <p>
                 Doctors
@@ -202,7 +205,7 @@
             </a>
             <ul class="nav-treeview">
               <li class="nav-item">
-                <a href="/home/admin/doctorSchedule" class="nav-link">
+                <a href="/home/admin/doctorSchedule" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Doctor schedule</p>
                 </a>
@@ -223,12 +226,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Admin Dashboard</h1>
+            <h1 class="m-0">Doctors Schedules</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/home/admin">Home</a></li>
-              <li class="breadcrumb-item active">Admin dashboar</li>
+              <li class="breadcrumb-item"><a href="/home/owner">Home</a></li>
+              <li class="breadcrumb-item active">Schedules</li>
             </ol>
           </div>
         </div>
@@ -237,40 +240,27 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-4 col-6">
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3 id="petsCount">0</h3>
-                <p >Pets registered</p>
+          <div class="col-3 sticky-top mb-3">
+            <form action="">
+              <div class="card card-outline card-primary">
+                <div class="card-header">
+                  <h1 class="card-title">Doctor's list</h1>
+                </div>
+                <div class="card-body">
+                  <label for="doctor">Select a doctor</label>
+                  <select name="doctor" id="doctor" class="select2 form-control" onchange="showSchedule(this)">
+                    <option value="">Select one</option>
+                  </select>
+                </div>
               </div>
-              <div class="icon">
-                <i class="fas fa-paw"></i>
-              </div>
-              <a href="/home/owner/showOwnerPets" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+            </form>
           </div>
-          <div class="col-lg-4 col 6">
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3 id="pendingAppointments">0</h3>
-
-                <p >Pending appointment's</p>
+          <div class="col-9">
+            <div class="card card-outline card-info">
+              <div class="card-header" id="head"></div>
+              <div class="card-body p-0">
+                <div id="calendar"></div>
               </div>
-              <div class="icon">
-                <i class="fas fa-calendar"></i>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-6">
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3 id="doctorsSchedule">0</h3>
-                <p>Doctors Schedule</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-user-md"></i>
-              </div>
-              <a href="/home/admin/doctorSchedule" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>
@@ -291,8 +281,21 @@
 
 <script src="../../js/jquerys/bootstrap.bundle.min.js"></script>
 
-
+<script src="../../js/jquerys/select2.full.min.js"></script>
 <script src="../../js/jquerys/adminlte.js"></script>
+<script src="../../js/jquerys/moment.min.js"></script>
+<script src="../../js/jquerys/calendar.js"></script>
+<script src="../../js/modules/admin/showSchedules.js"></script>
+<script>
+ $(function () {
+
+  $('.select2').select2({
+  })
+
+})
+
+  
+</script>
 
 </body>
 </html>

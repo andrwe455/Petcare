@@ -1,6 +1,4 @@
 const appointmentSchema = require ('../schemas/appointmentSchema')
-const express = require('express');
-const router = express.Router();
 const User = require('../schemas/userSchema');
 const Pet = require('../schemas/petSchema');
 
@@ -190,7 +188,6 @@ async function deleteappointment(req, res) {
     }
 }
 
-
 async function getappointment(req,res){
 
     try{
@@ -229,7 +226,16 @@ async function crtappointmentpets (req, res){
     }
 };
 
-module.exports = router;
+async function getappointmentByVeterinarian(req,res) {
+    try {
+        const veterinarian = req.params.id
+        const appointments = await appointmentSchema.find({veterinarian: veterinarian})
+        res.status(200).json(appointments)
+    } catch (error) {
+        console.error('Error fetching appointments:', error);
+        res.status(500).send({ error: 'Internal Server Error' });
+    }
+}
 
 
 module.exports = {
@@ -239,4 +245,5 @@ module.exports = {
     getappointment,
     crtappointmentusers,
     crtappointmentpets,
+    getappointmentByVeterinarian
 }
