@@ -93,6 +93,13 @@ function showUsers(req,res){
   res.sendFile(path.join(proyectPath,'frontend','modules','admin','viewUsers.html'));
 }
 
+
+function showDiagnosticCrt(req, res) {
+  res.setHeader('Cache-Control', 'no-store');
+  const proyectPath = path.resolve(__dirname, '../..');
+  res.sendFile(path.join(proyectPath,'frontend','modules','veterinarian','DiagnosticManagement','createDiagnostic.html'));
+}
+
 function showdoctorsSchedule(req,res){
   res.setHeader('Cache-Control', 'no-store');
   const proyectPath = path.resolve(__dirname, '../..');
@@ -116,5 +123,6 @@ module.exports = {
   veterinarian,
   admin,
   showUsers,
-  showdoctorsSchedule
+  showdoctorsSchedule,
+  showDiagnosticCrt
 };
