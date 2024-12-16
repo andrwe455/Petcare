@@ -55,9 +55,11 @@ Once you have that set up, we recommend you to follow this guide using [Visual S
 4. You will see `http://localhost:3001` on the terminal. **Click** on it while also holding down **CTRL**.
 
 ## Usage
-These are the e-mails for each role respectively. The password for each one of them is **123456**.
+These are *some* the e-mails for each role respectively. The password for each one of them is **123456**.
 
-*Pending e-mails*
+**Admin**: admin@example.com
+**Veterinarian**: david@examople.com
+**Owner**: andrwe455@gmail.com
 
 Upon logging in with any of the e-mails, you will be received with the respective dashboard and set of functionalities available for that specific role in the sidebar to the left.
 
