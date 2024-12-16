@@ -4,6 +4,17 @@
 
 The **official** web platform for Petcare
 
+## Table of contents
+
+1. [About the project](#about-the-project)  
+   1.1. [Built with](#built-with)
+2. [Getting started](#getting-started)  
+  2.1. [Installing Node.js](#installing-nodejs)  
+  2.2. [Making a local repository of this project in your machine](#making-a-local-repository-of-this-project-in-your-machine)  
+  2.3. [Running the project](#running-the-project)
+3. [Usage](#usage)
+4. [Contributors](#contributors)
+
 ## About the project
 
 This project aims to help the owners of pets associated to Petcare to take care of the health of their beloved pets, also helpful for the veterinarians and administrators to accomplish their job on a satisfactory way for everyone involved.
