@@ -72,7 +72,7 @@ router.get('/crtappointmentusers',appointmentController.crtappointmentusers);
 router.get('/crtappointmentpets',appointmentController.crtappointmentpets);
 
 router.post('/updateVaccineRecord', petController.updateVaccineRecord);
-router.post('/updatePet', petController.updatePet);
+router.post('/updatePet',photoController.crPet, petController.updatePet);
 
 router.post('/createMedicine', medicinesController.createMedicine);
 router.post('/modifyMedicine', medicinesController.modifyMedicine);
