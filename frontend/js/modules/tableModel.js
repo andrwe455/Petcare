@@ -109,7 +109,7 @@ async function getVaccineRecord(table,url){
 function getAllPets(table,url,role){
   fetch(url).then(response => response.json()).then(data => {
     let i = 1;
-
+    document.getElementById(table).innerHTML = "";
     data.forEach(element => {
       document.getElementById(table).innerHTML += `
       <tr>

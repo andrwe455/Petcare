@@ -34,6 +34,21 @@ async function crPet(req,res,next){
 
 async function deletePhoto(req, res,next) {
   const ownerId = req.owner ?? req.body.owner ?? req.session.user._id;
+
+  cloudinary.v2.api.delete_resources_by_prefix(`${ownerId}/pets/${req.params.name}`, async function (error, result) {
+    if (error) {
+      next();
+    }
+    if (result.deleted && !req.params.id) {
+      return res.status(200).json({ message: 'Photo deleted' });
+    }
+    await cloudinary.v2.api.delete_folder(`${ownerId}/pets/${req.params.name}`);
+    next();
+  });
+}
+
+async function deletePhoto(req, res) {
+  const ownerId = req.owner ?? req.body.owner ?? req.session.user._id;
   cloudinary.v2.api.delete_resources_by_prefix(`${ownerId}/pets/${req.params.name}`, async function (error, result) {
     if (error) {
       return res.status(500).json({ message: error.message });
@@ -42,8 +57,8 @@ async function deletePhoto(req, res,next) {
       return res.status(200).json({ message: 'Photo deleted' });
     }
     await cloudinary.v2.api.delete_folder(`${ownerId}/pets/${req.params.name}`);
-    next();
   });
+  res.redirect('/home/owner/showPets');
 }
 
 async function updatePhoto(req, res,next) {
