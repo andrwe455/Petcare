@@ -199,17 +199,16 @@
                                     <div class="form-group">
                                         <label for="userRole" class="form-label">Select role</label>
                                         <select class="form-control" id="tableFilter"
-                                            onchange="changes(this.value,'petTable','http://localhost:3000/getAllPets')">
+                                            onchange="changes(this.value)">
                                             <option value="">Select one</option>
-                                            <option value="veterinarian">Veterinarian</option>
-                                            <option value="owner">Owner</option>
-                                            <option value="getAllPets">Pet</option>
+                                            <option value="usersTable">Users</option>
+                                            <option value="getAllPets">Pets</option>
                                         </select>
                                     </div>
 
-                                    <!-- Tabla 1 -->
-                                    <div id="veterinarian" class="table-container">
-                                        <table id="" class="table table-bordered table-striped">
+                                    <!-- Table 1 -->
+                                    <div id="userContainer" class="table-container" style="display: none;">
+                                        <table id="usersTable" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
@@ -217,51 +216,31 @@
                                                     <th>Address</th>
                                                     <th>Phone</th>
                                                     <th>Email</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="veterinarianTable">
-                                                <!-- Filas de la Tabla 1 -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <!-- Tabla 2 -->
-                                    <div id="owner" class="table-container" style="display: none;">
-                                        <table id="" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>LastName</th>
-                                                    <th>Address</th>
-                                                    <th>Phone</th>
-                                                    <th>Email</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="ownerTable">
-                                                <!-- Filas de la Tabla 2 -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <!-- Tabla 3 -->
-                                    <div id="getAllPets" class="table-container" style="display: none;">
-                                        <table id="" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Name</th>
-                                                    <th>Age</th>
-                                                    <th>Weight</th>
-                                                    <th>Breed</th>
-                                                    <th>Type</th>
+                                                    <th>Role</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="petTable">
-                                                <!-- Filas de la Tabla 3 -->
+                                            <tbody id="usersTableBody">
                                             </tbody>
                                         </table>
                                     </div>
+
+                                    <div id="petContainer" class="table-container" style="display: none;">
+                                        <table id="getAllPets" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Type</th>
+                                                    <th>Breed</th>
+                                                    <th>Weight</th>
+                                                    <th>Age</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="petsTableBody">
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -282,6 +261,7 @@
     <script src="../../js/jquerys/jquery.dataTables.min.js"></script>
     <script src="../../js/jquerys/dataTables.bootstrap4.min.js"></script>
     <script src="../../js/jquerys/dataTables.responsive.min.js"></script>
+    <script src="../../js/modules/tableModel.js"></script>
 
 </body>
 

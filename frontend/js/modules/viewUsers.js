@@ -1,93 +1,156 @@
-// JavaScript actualizado
-function dataTable(metodo, tableId, url, role) {
-  if (metodo === 'getAllPets') {
-    getAllPets(tableId, url, role);
-  } else if (metodo === 'getAllUsers') {
-    getAllUsers(tableId, url, role);
+function changes(value) {
+  const usersTable = document.getElementById('usersTableBody');
+  let url = '/getAllUsers';
+  if(value == 'usersTable'){
+    usersTable.innerHTML = '';
+    getAllUsers(usersTable, url);
+    document.getElementById('petContainer').style.display = 'none';
+    document.getElementById('userContainer').style.display = 'block';
+  }else
+  {
+    url = '/getAllPets';
+    const petsTable = document.getElementById('petsTableBody');
+    petsTable.innerHTML = '';
+    getAllPet(petsTable, url);
+    document.getElementById('userContainer').style.display = 'none';
+    document.getElementById('petContainer').style.display = 'block';
   }
 }
 
-function changes(metodo, tableId, url) {
-  const tables = {
-    veterinarian: document.getElementById("veterinarian"),
-    owner: document.getElementById("owner"),
-    getAllPets: document.getElementById("getAllPets")
-  };
-
-  // Ocultar todas las tablas
-  Object.values(tables).forEach(table => table.style.display = "none");
-
-  // Mostrar la tabla seleccionada
-  const selectedTable = tables[metodo];
-  if (selectedTable) {
-    selectedTable.style.display = "block";
-    const tableElement = selectedTable.querySelector("table");
-    tableElement.setAttribute("id", "example1");
-
-    // Llamar a la función de datos
-    const role = metodo === 'veterinarian' || metodo === 'owner' ? metodo : 'admin';
-    dataTable(metodo, tableId, url, role);
-  }
-}
-
-function getAllPets(tableId, url, role) {
+function getAllPet(table, url){
   fetch(url).then(response => response.json()).then(data => {
-    const tableBody = document.getElementById(tableId);
-    tableBody.innerHTML = '';
-    data.forEach((element, index) => {
-      tableBody.innerHTML += `
-        <tr>
-          <td>${index + 1}</td>
-          <td>${element.name}</td>
-          <td>${element.age} years</td>
-          <td>${element.weight} Kg</td>
-          <td>${element.breed}</td>
-          <td>${element.type}</td>
-          <td class="w-25 text-center">
-            <img src="${element.image}" alt="Pet image" class="img-thumbnail w-25">
-            <a class="fas fa-trash deleteButton" style="color: red;" href="/deletePhoto/${element.name}"></a>
-          </td>
-          <td>
-            <a class="fas fa-eye" href="/home/${role}/vaccineRecords/${element._id}"></a>
-            <a class="fas fa-edit" data-toggle="modal" data-target="#modal-default" data-name="${element.name}"
-            data-age="${element.age}" data-weight="${element.weight}" data-breed="${element.breed}"
-            data-id="${element._id}" data-type="${element.type}"></a>
-            <a class="fas fa-trash deleteButton" style="color: red;" onclick="deletePet('${element._id}', '${element.name}')" aria-hidden="false"></a>
-          </td>
-        </tr>`;
-    });
 
-    // Inicializar DataTable
-    $("#example1").DataTable({
-      responsive: true, lengthChange: false, autoWidth: false,
+    data.forEach(pet => {
+      const row = document.createElement('tr');
+      const id = document.createElement('td');
+      const name = document.createElement('td');
+      const type = document.createElement('td');
+      const breed = document.createElement('td');
+      const age = document.createElement('td');
+      const weight = document.createElement('td');
+
+      id.textContent = pet._id;
+      name.textContent = pet.name;
+      type.textContent = pet.type;
+      breed.textContent = pet.breed;
+      age.textContent = pet.age;
+      weight.textContent = pet.weight;
+
+      row.appendChild(name);
+      row.appendChild(type);
+      row.appendChild(breed);
+      row.appendChild(weight);
+      row.appendChild(age);
+
+      table.appendChild(row);
     });
+    $(function () {
+      if ($.fn.DataTable.isDataTable('#getAllPets')) {
+        $('#getAllPets').DataTable().destroy();
+      }
+
+      $(`#getAllPets`).DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+      })
+    });
+  });
+
+}
+
+function getAllUsers(table, url){
+  fetch(url).then(response => response.json()).then(data => {
+
+    data.forEach(user => {
+      const row = document.createElement('tr');
+      const id = document.createElement('td');
+      const name = document.createElement('td');
+      const lastName = document.createElement('td');
+      const address = document.createElement('td');
+      const phone = document.createElement('td');
+      const email = document.createElement('td');
+      const role = document.createElement('td');
+      const actions = document.createElement('td');
+
+      id.textContent = user._id;
+      name.textContent = user.name;
+      lastName.textContent = user.lastName;
+      address.textContent = user.address
+      phone.textContent = user.phone;
+      email.textContent = user.email;
+      role.textContent = user.role;
+      actions.innerHTML = `<button class="btn btn-danger" onclick="deleteUser('${user._id}')"><i class="fas fa-trash"></i></button>`;
+
+
+      row.appendChild(name);
+      row.appendChild(lastName);
+      row.appendChild(address);
+      row.appendChild(phone);
+      row.appendChild(email);
+      row.appendChild(role);
+      row.appendChild(actions);
+
+      table.appendChild(row);
+    });
+    $(function () {
+      if ($.fn.DataTable.isDataTable('#usersTable')) {
+        $('#usersTable').DataTable().destroy();
+      }
+    
+      $('#usersTable').DataTable({
+        "responsive": true, 
+        "lengthChange": false, 
+        "autoWidth": false,
+      });
+    });
+    
   });
 }
 
-function getAllUsers(tableId, url, role) {
-  fetch(url).then(response => response.json()).then(data => {
-    const tableBody = document.getElementById(tableId);
-    tableBody.innerHTML = '';
-    data.filter(user => user.role === role).forEach((element, index) => {
-      tableBody.innerHTML += `
-        <tr>
-          <td>${index + 1}</td>
-          <td>${element.name}</td>
-          <td>${element.lastName}</td>
-          <td>${element.address}</td>
-          <td>${element.phone}</td>
-          <td>${element.email}</td>
-          <td>${element.role}</td>
-          <td>
-            <a class="fas fa-eye"></a>
-            <a class="fas fa-edit"></a>
-          </td>
-        </tr>`;
-    });
-
-    // Inicializar DataTable
-    $("#example1").DataTable({
-      responsive: true, lengthChange: false, autoWidth: false,
-    });
+function deleteUser(userId) {
+  // Mostrar el cuadro de confirmación con SweetAlert2
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'This action will permanently delete the user.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6', // Color del botón "Confirmar"
+    cancelButtonColor: '#d33', // Color del botón "Cancelar"
+    confirmButtonText: 'Yes, delete',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Realizar la solicitud DELETE
+      fetch(`/deleteUser/${userId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to delete user');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Mostrar mensaje de éxito con SweetAlert2
+        Swal.fire(
+          'Deleted!',
+          data.message,
+          'success'
+        ).then(() => {
+          // Recargar la página después de confirmar la alerta de éxito
+          window.location.reload();
+        });
+      })
+      .catch(error => {
+        // Mostrar mensaje de error con SweetAlert2
+        Swal.fire(
+          'Error',
+          error.message,
+          'error'
+        );
+      });
+    }
   });
 }
