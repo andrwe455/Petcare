@@ -14,9 +14,13 @@
     <link rel="stylesheet" href="../../css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../../css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../css/adminlte.min.css">
-    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../../css/styles.css">
     <link rel="stylesheet" href="../../css/dataTables.bootstrap4.min.css">
-    
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,19 +51,15 @@
             </ul>
         </nav>
 
-
-
+        <!-- Sidebar -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
             <a href="" class="brand-link">
                 <img src="../../images/slider-img.png" alt="PETCARE-LOGO" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">PETCARE</span>
             </a>
 
-            <!-- Sidebar -->
             <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
                         <img src="../../images/team2.jpg" class="img-circle elevation-2" alt="User Image">
@@ -69,105 +69,108 @@
                     </div>
                 </div>
 
-                <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                      <!-- Add icons to the links using the .nav-icon class
-                           with font-awesome or any other icon font library -->
-                      <li class="nav-item">
-                        <a href="/home/admin" class="nav-link">
-                          <i class="nav-icon fas fa-tachometer-alt"></i>
-                          <p>
-                            Dashboard
-                          </p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="" class="nav-link">
-                          <i class="fa-solid fa-archive nav-icon"></i>
-                          <p>Inventory</p>
-                          <i class="fas fa-angle-left right"></i>
-                        </a>
-                        <ul class="nav-treeview">
-                          <li class="nav-item">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <li class="nav-item">
+                            <a href="/home/admin" class="nav-link">
+                                <i class="nav-icon"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>Add medicines</p>
+                                <i class="fa-solid fa-archive nav-icon"></i>
+                                <p>Inventory</p>
+                                <i class="fas fa-angle-left right"></i>
                             </a>
-                          </li>
-            
-                          <li class="nav-item">
-                            <a href="/home/admin/modifyMedicine" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>Modify medicines</p>
+                            <ul class="nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add medicines</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/home/admin/modifyMedicine" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Modify medicines</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/home/admin/seeAllMedicines" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>See all medicines</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fas fa-calendar"></i>
+                                <p>Appointments</p>
+                                <i class="right fas fa-angle-left"></i>
                             </a>
-                          </li>
-            
-                          <li class="nav-item">
-                            <a href="/home/admin/seeAllMedicines" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>See all medicines</p>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/home/admin/appointments/Crt" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Create appointment</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/home/admin/appointments/Edit" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Modify appointment</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/home/admin/appointments/Dlt" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Delete appointment</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="" class="nav-link active">
+                                <i class="fa-solid fa-users nav-icon"></i>
+                                <p>Users</p>
+                                <i class="fas fa-angle-left right"></i>
                             </a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-calendar"></i>
-                            <p>Appointments</p>
-                            <i class="right fas fa-angle-left"></i>
-                          </a>
-          
-                          <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                              <a href="/home/admin/appointments/Crt" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Create appointment</p>
-                              </a>
-                            </li>
-          
-                            <li class="nav-item">
-                              <a href="/home/admin/appointments/Edit" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Modify appointment</p>
-                              </a>
-                            </li>
-        
-                            <li class="nav-item">
-                              <a href="/home/admin/appointments/Dlt" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Delete appointment</p>
-                              </a>
-                            </li>
-                        </ul>
-                      </li>
-                      <li class="nav-item menu-open">
-                        <a href="" class="nav-link active">
-                            <i class="fa-solid fa-archive nav-icon"></i>
-                            <p>
-                                Users
-                            </p>
-                            <i class="fas fa-angle-left right"></i>
-                        </a>
-            
-                        <ul class="nav-treeview">
-                            <li class="nav-item">
-                                <a href="/home/admin/addUser" class="nav-link ">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Add users</p>
-                                </a>
-                            </li>
-                
-                            <li class="nav-item">
-                              <a href="/home/admin/showUsers" class="nav-link active">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>View users</p>
-                              </a>
-                            </li>
-                        </ul>
-                      </li>
+                            <ul class="nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/home/admin/addUser" class="nav-link ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add users</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/home/admin/showUsers" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View users</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fa-solid fa-user-doctor"></i>
+                                        <p>Doctors
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/home/admin/doctorSchedule" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Doctor schedule</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
-                  </nav>
+                </nav>
             </div>
         </aside>
 
@@ -188,6 +191,7 @@
                     </div>
                 </div>
             </div>
+
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -199,17 +203,16 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="userRole" class="form-label">Select role</label>
-                                        <select class="form-control" id="tableFilter" onchange="changes(this.value,'petTable','http://localhost:3000/getAllPets')">   
+                                        <select class="form-control" id="tableFilter" onchange="changes(this.value)">
                                             <option value="">Select one</option>
-                                            <option value="doctor">Doctor</option>
-                                            <option value="owner">Owner</option>
-                                            <option value="getAllPets">Pet</option>
+                                            <option value="usersTable">Users</option>
+                                            <option value="getAllPets">Pets</option>
                                         </select>
                                     </div>
 
-                                    <!-- Tabla 1 -->
-                                    <div id="doctor" class="table-container">
-                                        <table id="" class="table table-bordered table-striped">
+                                    <!-- Table 1 -->
+                                    <div id="userContainer" class="table-container" style="display: none;">
+                                        <table id="usersTable" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
@@ -217,61 +220,104 @@
                                                     <th>Address</th>
                                                     <th>Phone</th>
                                                     <th>Email</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- Filas de la Tabla 1 -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <!-- Tabla 2 -->
-                                    <div id="owner" class="table-container" style="display: none;">
-                                        <table id="" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>LastName</th>
-                                                    <th>Address</th>
-                                                    <th>Phone</th>
-                                                    <th>Email</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- Filas de la Tabla 2 -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <!-- Tabla 3 -->
-                                    <div id="getAllPets" class="table-container" style="display: none;">
-                                        <table id="" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Name</th>
-                                                    <th>Age</th>
-                                                    <th>Weight</th>
-                                                    <th>Breed</th>
-                                                    <th>Type</th>
+                                                    <th>Role</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="petTable" >
-                                                <!-- Filas de la Tabla 3 -->
+                                            <tbody id="usersTableBody">
                                             </tbody>
                                         </table>
                                     </div>
+
+                                    <div id="petContainer" class="table-container" style="display: none;">
+                                        <table id="getAllPets" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Type</th>
+                                                    <th>Breed</th>
+                                                    <th>Weight</th>
+                                                    <th>Age</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="petsTableBody">
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
             </section>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUserModalLabel">Modificar Usuario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info">
+                            Please fill in all the required fields marked with <span class="text-danger">*</span>.
+                        </div>
+                        <form id="editUserForm">
+                            <input type="hidden" id="editUserId">
+                            <div class="form-group">
+                                <label for="editUserName">Name <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="editUserName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editUserLastName">LastName <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="editUserLastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editUserAddress">Address <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control" id="editUserAddress" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editUserPhone">Phone <span style="color: red;">*</span></label>
+                                <input type="number" class="form-control" id="editUserPhone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editUserEmail">Email <span style="color: red;">*</span></label>
+                                <input type="email" class="form-control" id="editUserEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editUserRole">Rol <span style="color: red;">*</span></label>
+                                <select class="form-control" id="editUserRole" required>
+                                    <option value="veterinarian">Veterinarian</option>
+                                    <option value="owner">Owner</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="updateUser()">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="main-footer">
+            <strong>
+                Copyright &copy; 2024
+                <a href="/index">PetCare</a>.
+            </strong>
+        </footer>
+
+        <aside class="control-sidebar control-sidebar-dark">
+        </aside>
+
     </div>
 
     <script src="https://kit.fontawesome.com/48b7f93703.js" crossorigin="anonymous"></script>
@@ -281,7 +327,6 @@
     <script src="../../js/jquerys/adminlte.js"></script>
     <script src="../../js/jquerys/sweetalert2.min.js"></script>
     <script src="../../js/modules/viewUsers.js"></script>
-    
     <script src="../../js/jquerys/jquery.dataTables.min.js"></script>
     <script src="../../js/jquerys/dataTables.bootstrap4.min.js"></script>
     <script src="../../js/jquerys/dataTables.responsive.min.js"></script>
