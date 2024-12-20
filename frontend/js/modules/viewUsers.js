@@ -1,13 +1,12 @@
 function changes(value) {
   const usersTable = document.getElementById('usersTableBody');
   let url = '/getAllUsers';
-  if(value == 'usersTable'){
+  if (value == 'usersTable') {
     usersTable.innerHTML = '';
     getAllUsers(usersTable, url);
     document.getElementById('petContainer').style.display = 'none';
     document.getElementById('userContainer').style.display = 'block';
-  }else
-  {
+  } else {
     url = '/getAllPets';
     const petsTable = document.getElementById('petsTableBody');
     petsTable.innerHTML = '';
@@ -17,7 +16,7 @@ function changes(value) {
   }
 }
 
-function getAllPet(table, url){
+function getAllPet(table, url) {
   fetch(url).then(response => response.json()).then(data => {
 
     data.forEach(pet => {
@@ -57,7 +56,7 @@ function getAllPet(table, url){
 
 }
 
-function getAllUsers(table, url){
+function getAllUsers(table, url) {
   fetch(url).then(response => response.json()).then(data => {
 
     data.forEach(user => {
@@ -78,7 +77,9 @@ function getAllUsers(table, url){
       phone.textContent = user.phone;
       email.textContent = user.email;
       role.textContent = user.role;
-      actions.innerHTML = `<button class="btn btn-danger" onclick="deleteUser('${user._id}')"><i class="fas fa-trash"></i></button>`;
+      actions.innerHTML = `
+      <button class="btn btn-danger" onclick="deleteUser('${user._id}')"><i class="fas fa-trash"></i></button>
+      <button class="btn btn-warning" onclick="editUser('${user._id}')"><i class="fas fa-edit"></i></button>`;
 
 
       row.appendChild(name);
@@ -95,14 +96,14 @@ function getAllUsers(table, url){
       if ($.fn.DataTable.isDataTable('#usersTable')) {
         $('#usersTable').DataTable().destroy();
       }
-    
+
       $('#usersTable').DataTable({
-        "responsive": true, 
-        "lengthChange": false, 
+        "responsive": true,
+        "lengthChange": false,
         "autoWidth": false,
       });
     });
-    
+
   });
 }
 
@@ -126,31 +127,124 @@ function deleteUser(userId) {
           'Content-Type': 'application/json'
         }
       })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to delete user');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Mostrar mensaje de éxito con SweetAlert2
-        Swal.fire(
-          'Deleted!',
-          data.message,
-          'success'
-        ).then(() => {
-          // Recargar la página después de confirmar la alerta de éxito
-          window.location.reload();
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to delete user');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Mostrar mensaje de éxito con SweetAlert2
+          Swal.fire(
+            'Deleted!',
+            data.message,
+            'success'
+          ).then(() => {
+            // Recargar la página después de confirmar la alerta de éxito
+            window.location.reload();
+          });
+        })
+        .catch(error => {
+          // Mostrar mensaje de error con SweetAlert2
+          Swal.fire(
+            'Error',
+            error.message,
+            'error'
+          );
         });
-      })
-      .catch(error => {
-        // Mostrar mensaje de error con SweetAlert2
-        Swal.fire(
-          'Error',
-          error.message,
-          'error'
-        );
-      });
     }
   });
+}
+
+function editUser(userId) {
+  fetch(`/getUserId/${userId}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(user => {
+      // Rellenar los campos del formulario en el modal
+      document.getElementById('editUserId').value = user._id;
+      document.getElementById('editUserName').value = user.name;
+      document.getElementById('editUserLastName').value = user.lastName;
+      document.getElementById('editUserAddress').value = user.address;
+      document.getElementById('editUserPhone').value = user.phone;
+      document.getElementById('editUserEmail').value = user.email;
+      document.getElementById('editUserRole').value = user.role;
+
+      // Mostrar el modal
+      $('#editUserModal').modal('show');
+    })
+    .catch(error => console.error('Error loading user data:', error));
+}
+
+function updateUser() {
+
+  const requiredFields = [
+    'editUserName',
+    'editUserLastName',
+    'editUserAddress',
+    'editUserPhone',
+    'editUserEmail',
+    'editUserRole'
+  ];
+
+  for (let fieldId of requiredFields) {
+    const field = document.getElementById(fieldId);
+    if (!field.value.trim()) {
+      // Usar SweetAlert2 en lugar de toastr
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Please complete all required fields.',
+      });
+      return; // Detiene la ejecución de la función si algún campo está vacío
+    }
+  }
+  
+  const userId = document.getElementById('editUserId').value; // Obtener el ID del usuario
+  const updatedUser = {
+    name: document.getElementById('editUserName').value,
+    lastName: document.getElementById('editUserLastName').value,
+    address: document.getElementById('editUserAddress').value,
+    phone: document.getElementById('editUserPhone').value,
+    email: document.getElementById('editUserEmail').value,
+    role: document.getElementById('editUserRole').value,
+  };
+
+  // Asegurarse de que se haga la solicitud PUT a la URL con el ID del usuario
+  fetch(`/updateUser/${userId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedUser),
+  })
+  .then(response => {
+    console.log('Server response:', response);
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Updated user:', data);
+    // Cerrar el modal y recargar la tabla
+    $('#editUserModal').modal('hide');
+    Swal.fire(
+      'User updated!',
+      data.message,
+      'success'
+    ).then(() => {
+      // Recargar la página después de confirmar la alerta de éxito
+      window.location.reload();
+    });
+  
+  })
+  .catch(error => {
+    console.error('Error updating user:', error);
+    alert('Error updating user');
+  });  
 }
